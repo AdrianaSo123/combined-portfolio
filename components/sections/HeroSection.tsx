@@ -20,26 +20,14 @@ export function HeroSection() {
       />
       <WireframeGlobe className="pointer-events-none absolute -right-24 top-10 h-[42rem] w-[42rem] text-accent/[0.10] lg:-right-10" />
       <CornerMarks />
-      <span
-        aria-hidden="true"
-        className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 rotate-90 font-mono text-[0.6rem] uppercase tracking-[0.5em] text-accent/30 lg:block"
-      >
-        Cybercore · Build 2026.4
-      </span>
-
       <div className="relative mx-auto mb-10 max-w-[1400px] px-5 sm:px-8">
         <div
           aria-hidden="true"
           className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-y border-line py-2 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted"
         >
-          <span className="text-accent">[ Portfolio.OS ]</span>
+          <span className="text-accent">Adriana So</span>
+          <span>Product × AI × HCI</span>
           <span>Lat 39.36° / Lon -74.42°</span>
-          <span>Mode · Product × AI × HCI</span>
-          <span className="flex items-center gap-1.5">
-            Status
-            <span className="inline-block h-1.5 w-1.5 animate-none rounded-full bg-accent" />
-            Online
-          </span>
         </div>
       </div>
 

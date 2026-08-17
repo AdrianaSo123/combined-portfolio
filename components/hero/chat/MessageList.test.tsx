@@ -12,7 +12,7 @@ describe("MessageList", () => {
     render(
       <MessageList messages={[]} pending={false} started={false} listRef={createRef()} />
     );
-    expect(screen.getByText(/what would you like to explore/i)).toBeDefined();
+    expect(screen.getByText(/ask about the work/i)).toBeDefined();
   });
 
   it("renders a portfolio answer with its destination chips", () => {

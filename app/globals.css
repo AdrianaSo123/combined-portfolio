@@ -196,6 +196,30 @@ body {
   filter: blur(28px);
 }
 
+/* photographed CRT: the live glass well + a glare streak over the UI */
+.crt-screen-well {
+  border-radius: 1.15rem / 1.45rem;
+  background: radial-gradient(130% 120% at 50% -8%, #1a2244 0%, #07080f 72%);
+  box-shadow:
+    inset 0 0 40px 10px rgba(0, 0, 0, 0.55),
+    inset 0 0 8px rgba(174, 188, 255, 0.2);
+  color: var(--color-screen);
+  text-shadow: 0 0 10px rgba(174, 188, 255, 0.28);
+}
+.crt-glass-glare {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background: linear-gradient(
+    118deg,
+    rgba(255, 255, 255, 0.16) 0%,
+    rgba(255, 255, 255, 0.04) 28%,
+    transparent 46%
+  );
+  mix-blend-mode: screen;
+}
+
 /* =========================================================
    Reduced motion (spec §15 / §17)
    ========================================================= */
