@@ -6,6 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/lib/site";
 import { about } from "@/content/about";
+import { isPlaceholderHref } from "@/lib/placeholders";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -50,10 +51,10 @@ export default function RootLayout({
     name: siteConfig.name,
     description: about.headline,
     url: siteConfig.url,
-    email: about.contactEmail,
+    ...(isPlaceholderHref(about.contactEmail) ? {} : { email: about.contactEmail }),
     knowsAbout: about.focus,
     sameAs: about.socials
-      .filter((s) => s.href.startsWith("http"))
+      .filter((s) => s.href.startsWith("http") && !isPlaceholderHref(s.href))
       .map((s) => s.href),
   };
 

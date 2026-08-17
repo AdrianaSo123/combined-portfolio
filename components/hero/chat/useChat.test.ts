@@ -97,4 +97,19 @@ describe("useChat", () => {
     });
     await waitFor(() => expect(result.current.pending).toBe(false));
   });
+
+  it("maps a typed 1 to the first menu prompt", async () => {
+    askPortfolio.mockResolvedValue(answer);
+    const { result } = renderHook(() => useChat());
+
+    await act(async () => {
+      await result.current.send("1");
+    });
+
+    expect(askPortfolio).toHaveBeenCalledWith("What have you shipped?");
+    expect(result.current.messages[0]).toMatchObject({
+      role: "user",
+      text: "What have you shipped?",
+    });
+  });
 });

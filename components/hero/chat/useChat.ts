@@ -4,6 +4,7 @@ import { useCallback, useRef, useState } from "react";
 import type { Destination } from "@/content/types";
 import { askPortfolio } from "@/lib/ai/client";
 import { OFFLINE_ANSWER } from "@/lib/ai/constants";
+import { promptFromInput } from "./copy";
 
 export type ChatMessage =
   | { id: string; role: "user"; text: string }
@@ -29,15 +30,15 @@ export function useChat() {
 
   const send = useCallback(
     async (text: string) => {
-      const trimmed = text.trim();
-      if (!trimmed || pending) return;
+      const resolved = promptFromInput(text);
+      if (!resolved || pending) return;
 
       setInput("");
-      setMessages((prev) => [...prev, { id: nextId(), role: "user", text: trimmed }]);
+      setMessages((prev) => [...prev, { id: nextId(), role: "user", text: resolved }]);
       setPending(true);
 
       try {
-        const answer = await askPortfolio(trimmed);
+        const answer = await askPortfolio(resolved);
         setMessages((prev) => [
           ...prev,
           {
@@ -68,12 +69,19 @@ export function useChat() {
     [pending, scrollToEnd, nextId]
   );
 
+  const reset = useCallback(() => {
+    setMessages([]);
+    setInput("");
+    setPending(false);
+  }, []);
+
   return {
     messages,
     input,
     setInput,
     pending,
     send,
+    reset,
     listRef,
     started: messages.length > 0,
   };

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { SectionLabel } from "@/components/system/TechnicalRule";
 import { about } from "@/content/about";
 import { routes } from "@/lib/routes";
+import { isPlaceholderHref, isPlaceholderText } from "@/lib/placeholders";
 
 export const metadata: Metadata = {
   title: "About",
@@ -10,6 +11,15 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
+  const bio = about.bio.filter((p) => !isPlaceholderText(p));
+  const experience = about.experience.filter(
+    (e) => !isPlaceholderText(e.org) && !isPlaceholderText(e.summary)
+  );
+  const education = (about.education ?? []).filter(
+    (ed) => !isPlaceholderText(ed.credential) && !isPlaceholderText(ed.org)
+  );
+  const email = isPlaceholderHref(about.contactEmail) ? null : about.contactEmail;
+
   return (
     <section className="min-h-[100svh] bg-cream text-ink">
       <div className="mx-auto max-w-[1000px] px-5 pt-32 pb-20 sm:px-8">
@@ -20,7 +30,7 @@ export default function AboutPage() {
 
         <div className="mt-10 grid gap-12 lg:grid-cols-12">
           <div className="space-y-4 text-lg leading-relaxed text-ink/85 lg:col-span-7">
-            {about.bio.map((p) => (
+            {bio.map((p) => (
               <p key={p}>{p}</p>
             ))}
           </div>
@@ -56,11 +66,11 @@ export default function AboutPage() {
           </div>
         </div>
 
-        {/* experience */}
-        <div className="mt-16">
-          <SectionLabel label="Experience" className="text-ink" />
-          <div className="mt-6 space-y-6">
-            {about.experience.map((e) => (
+        {experience.length > 0 && (
+          <div className="mt-16">
+            <SectionLabel label="Experience" className="text-ink" />
+            <div className="mt-6 space-y-6">
+              {experience.map((e) => (
               <div key={`${e.role}-${e.org}`} className="border-t border-line-ink pt-4">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <p className="font-display text-xl">
@@ -75,13 +85,13 @@ export default function AboutPage() {
             ))}
           </div>
         </div>
+        )}
 
-        {/* education */}
-        {about.education && about.education.length > 0 && (
+        {education.length > 0 && (
           <div className="mt-16">
             <SectionLabel label="Education" className="text-ink" />
             <div className="mt-6 space-y-6">
-              {about.education.map((ed) => (
+              {education.map((ed) => (
                 <div
                   key={`${ed.credential}-${ed.org}`}
                   className="border-t border-line-ink pt-4"
@@ -100,14 +110,16 @@ export default function AboutPage() {
           </div>
         )}
 
-        <div className="mt-16 border-t border-line-ink pt-8">
-          <Link
-            href={routes.mailto(about.contactEmail)}
-            className="font-display text-2xl underline-offset-4 hover:underline sm:text-3xl"
-          >
-            {about.contactEmail}
-          </Link>
-        </div>
+        {email && (
+          <div className="mt-16 border-t border-line-ink pt-8">
+            <Link
+              href={routes.mailto(email)}
+              className="font-display text-2xl underline-offset-4 hover:underline sm:text-3xl"
+            >
+              {email}
+            </Link>
+          </div>
+        )}
       </div>
     </section>
   );

@@ -25,8 +25,7 @@ export function HeroSection() {
           aria-hidden="true"
           className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-y border-line py-2 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted"
         >
-          <span className="text-accent">Adriana So</span>
-          <span>Product × AI × HCI</span>
+          <span className="text-accent">Product × AI × HCI</span>
           <span>Lat 39.36° / Lon -74.42°</span>
         </div>
       </div>

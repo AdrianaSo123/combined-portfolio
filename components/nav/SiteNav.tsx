@@ -1,27 +1,32 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 import { routes } from "@/lib/routes";
 
-// `match` is the path prefix that marks this link as the current page. Work is
-// a scroll target on the home page, so it has no standalone "you are here".
 const links = [
-  { href: routes.workSection, label: "Work", match: null },
+  { href: routes.workSection, label: "Work", match: "/work" },
   { href: routes.experiments, label: "Lab", match: "/experiments" },
   { href: routes.about, label: "About", match: "/about" },
 ];
 
 export function SiteNav() {
   const pathname = usePathname();
+  const [hash, setHash] = useState("");
+
+  useEffect(() => {
+    const sync = () => setHash(window.location.hash);
+    sync();
+    window.addEventListener("hashchange", sync);
+    return () => window.removeEventListener("hashchange", sync);
+  }, []);
 
   return (
     <header className="fixed inset-x-0 top-0 z-50">
-      {/* Dark scrim keeps the fixed nav legible over both the dark hero and the
-          cream sections below (replaces an unpredictable mix-blend effect). */}
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-20 bg-gradient-to-b from-bg/85 via-bg/45 to-transparent"
+        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-bg via-bg/70 to-transparent"
       />
       <nav
         aria-label="Primary"
@@ -35,7 +40,9 @@ export function SiteNav() {
         </Link>
         <ul className="flex items-center gap-5 font-mono text-xs uppercase tracking-[0.16em] sm:gap-7">
           {links.map((l) => {
-            const active = l.match ? pathname.startsWith(l.match) : false;
+            const active =
+              pathname.startsWith(l.match) ||
+              (l.match === "/work" && pathname === "/" && hash === "#work");
             return (
               <li key={l.href}>
                 <Link

@@ -8,13 +8,20 @@ type MessageListProps = {
   pending: boolean;
   started: boolean;
   listRef: RefObject<HTMLDivElement | null>;
+  onReset?: () => void;
 };
 
-export function MessageList({ messages, pending, started, listRef }: MessageListProps) {
+export function MessageList({
+  messages,
+  pending,
+  started,
+  listRef,
+  onReset,
+}: MessageListProps) {
   return (
     <div
       ref={listRef}
-      className="flex-1 overflow-y-auto pr-1 text-xs leading-relaxed sm:text-sm"
+      className="flex-1 overflow-y-auto pr-1 text-sm leading-relaxed"
       aria-live="polite"
     >
       {!started ? (
@@ -23,7 +30,7 @@ export function MessageList({ messages, pending, started, listRef }: MessageList
           <p className="mt-1 text-xs opacity-75">{CHAT_COPY.emptySubtitle}</p>
         </div>
       ) : (
-        <ul className="space-y-4">
+        <ul className="space-y-3">
           {messages.map((m) => (
             <li key={m.id}>
               {m.role === "user" ? (
@@ -45,6 +52,15 @@ export function MessageList({ messages, pending, started, listRef }: MessageList
             </li>
           )}
         </ul>
+      )}
+      {onReset && (
+        <button
+          type="button"
+          onClick={onReset}
+          className="mt-3 text-[0.65rem] uppercase tracking-[0.14em] text-[color:var(--color-screen)]/70 hover:text-[color:var(--color-screen)]"
+        >
+          {CHAT_COPY.reset}
+        </button>
       )}
     </div>
   );

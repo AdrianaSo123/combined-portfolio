@@ -3,10 +3,12 @@
 
 export const CHAT_COPY = {
   emptyTitle: "Ask about the work.",
-  emptySubtitle: "Shipped product, research, and things from the lab. Pick a number or type.",
+  emptySubtitle: "Press 1–4, click a line, or type a question.",
   inputLabel: "Ask something about Adriana's portfolio",
-  placeholder: "Type a question…",
+  placeholder: "1–4 or a question…",
   send: "Send",
+  emptyHint: "Type a question, or 1–4 to pick a line.",
+  reset: "New question",
 } as const;
 
 export const SUGGESTIONS = [
@@ -15,3 +17,16 @@ export const SUGGESTIONS = [
   "What are you researching about AI?",
   "Show me something technical.",
 ] as const;
+
+const MENU_PICK = /^[1-4]$/;
+
+// Maps a typed "1"–"4" to that menu line so keyboard, click, and submit
+// all produce the same prompt. Anything else is sent as written.
+export function promptFromInput(raw: string): string | null {
+  const trimmed = raw.trim();
+  if (!trimmed) return null;
+  if (MENU_PICK.test(trimmed)) {
+    return SUGGESTIONS[Number(trimmed) - 1] ?? trimmed;
+  }
+  return trimmed;
+}
