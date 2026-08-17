@@ -18,7 +18,7 @@ export default function OgImage() {
           justifyContent: "space-between",
           padding: "72px",
           background: BRAND.bg,
-          color: "#f4f2ea",
+          color: BRAND.fg,
           fontFamily: "monospace",
         }}
       >

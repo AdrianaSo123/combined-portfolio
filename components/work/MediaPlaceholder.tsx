@@ -36,7 +36,7 @@ export function Media({
         <div
           className="crt-noise flex h-full w-full items-center justify-center"
           style={{
-            background: `linear-gradient(135deg, ${accent ?? BRAND.accent}22, #16141c14)`,
+            background: `linear-gradient(135deg, ${accent ?? BRAND.accent}22, ${BRAND.ink}14)`,
             border: "1px solid var(--color-line-ink)",
           }}
           aria-hidden="true"

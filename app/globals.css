@@ -103,14 +103,6 @@ body {
   border-radius: inherit;
 }
 
-/* phosphor glow */
-.crt-glow {
-  box-shadow:
-    0 0 1px rgba(174, 188, 255, 0.4),
-    inset 0 0 60px rgba(79, 102, 255, 0.12),
-    inset 0 0 4px rgba(174, 188, 255, 0.25);
-}
-
 /* blinking terminal cursor */
 .blink {
   animation: blink 1.1s steps(1) infinite;
@@ -163,34 +155,12 @@ body {
   to   { opacity: 1; transform: none; }
 }
 
-/* stronger phosphor glow for the old-computer screen */
-.crt-glow-strong {
-  box-shadow:
-    0 0 2px rgba(174, 188, 255, 0.5),
-    inset 0 0 90px rgba(79, 102, 255, 0.18),
-    inset 0 0 6px rgba(174, 188, 255, 0.35),
-    inset 0 -40px 80px rgba(0, 0, 0, 0.55);
-}
-
-/* curved CRT corners + edge vignette */
-.crt-curve {
-  border-radius: 2rem / 2.6rem;
-}
-.crt-curve::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  box-shadow: inset 0 0 60px 12px rgba(0, 0, 0, 0.6);
-}
-
 /* ambient blue glow behind the monitor */
 .ambient-glow {
   background: radial-gradient(
     45% 45% at 50% 42%,
-    rgba(79, 102, 255, 0.35) 0%,
-    rgba(59, 79, 214, 0.12) 45%,
+    color-mix(in srgb, var(--color-accent) 35%, transparent) 0%,
+    color-mix(in srgb, var(--color-accent-dim) 12%, transparent) 45%,
     transparent 72%
   );
   filter: blur(28px);
@@ -201,7 +171,7 @@ body {
   background: radial-gradient(130% 120% at 50% -8%, #1a2244 0%, #07080f 72%);
   box-shadow: inset 0 0 40px 10px rgba(0, 0, 0, 0.45);
   color: var(--color-screen);
-  text-shadow: 0 0 10px rgba(174, 188, 255, 0.28);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--color-screen) 28%, transparent);
 }
 .crt-glass-glare {
   position: absolute;

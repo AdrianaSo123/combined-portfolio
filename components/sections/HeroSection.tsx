@@ -3,6 +3,7 @@ import { CrtScreen } from "@/components/hero/CrtScreen";
 import { WireframeGlobe } from "@/components/system/WireframeGlobe";
 import { CornerMarks } from "@/components/system/CornerMarks";
 import { routes } from "@/lib/routes";
+import { BRAND_RGB, rgba } from "@/lib/theme";
 
 // Near-black cybercore hero: intro copy on the left, the interactive CRT
 // assistant on the right, over a faint coordinate grid + wireframe globe.
@@ -13,8 +14,7 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage:
-            "linear-gradient(rgba(79,102,255,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(79,102,255,0.16) 1px, transparent 1px)",
+          backgroundImage: `linear-gradient(${rgba(BRAND_RGB.accent, 0.16)} 1px, transparent 1px), linear-gradient(90deg, ${rgba(BRAND_RGB.accent, 0.16)} 1px, transparent 1px)`,
           backgroundSize: "56px 56px",
         }}
       />

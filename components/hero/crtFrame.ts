@@ -1,3 +1,6 @@
+import type { CSSProperties } from "react";
+import { BRAND_RGB, rgba } from "@/lib/theme";
+
 // Measured glass well for public/images/crt-frame.png.
 // Percentages are of the image box — keep the frame at this aspect ratio so
 // the well stays registered to the bezel. Recompute if the photo is replaced.
@@ -7,9 +10,22 @@ export const CRT_FRAME = {
   width: 1103,
   height: 1022,
   well: {
-    left: "10.6613%",
-    top: "13.7385%",
-    width: "77.7417%",
-    height: "60.5802%",
+    left: 10.6613,
+    top: 13.7385,
+    width: 77.7417,
+    height: 60.5802,
   },
+  glassPad: { x: "6%", y: "7%" },
+  glow: rgba(BRAND_RGB.accent, 0.4),
 } as const;
+
+export function wellStyle(
+  well: typeof CRT_FRAME.well = CRT_FRAME.well
+): CSSProperties {
+  return {
+    left: `${well.left}%`,
+    top: `${well.top}%`,
+    width: `${well.width}%`,
+    height: `${well.height}%`,
+  };
+}

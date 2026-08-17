@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { ChatInterface } from "./ChatInterface";
 import { TerminalBoot } from "./TerminalBoot";
-import { CRT_FRAME } from "./crtFrame";
+import { CRT_FRAME, wellStyle } from "./crtFrame";
 
 // Bezel sits on top of the live glass. The PNG has a punched-out screen, so
 // the inner lip of the plastic crops the UI instead of a guessed rectangle.
@@ -18,8 +18,14 @@ export function CrtScreen() {
         className="relative w-full"
         style={{ aspectRatio: `${CRT_FRAME.width} / ${CRT_FRAME.height}` }}
       >
-        <div className="crt-screen-well crt-scanlines absolute overflow-hidden" style={CRT_FRAME.well}>
-          <div className="relative z-[1] flex h-full min-h-0 flex-col px-[6%] py-[7%]">
+        <div className="crt-screen-well crt-scanlines absolute overflow-hidden" style={wellStyle()}>
+          <div
+            className="relative z-[1] flex h-full min-h-0 flex-col"
+            style={{
+              paddingInline: CRT_FRAME.glassPad.x,
+              paddingBlock: CRT_FRAME.glassPad.y,
+            }}
+          >
             <TerminalBoot />
             <div className="mt-2 min-h-0 flex-1">
               <ChatInterface />
@@ -28,7 +34,10 @@ export function CrtScreen() {
           <div aria-hidden="true" className="crt-glass-glare" />
         </div>
 
-        <div className="pointer-events-none absolute inset-0 [filter:drop-shadow(0_0_48px_rgba(79,102,255,0.4))]">
+        <div
+          className="pointer-events-none absolute inset-0"
+          style={{ filter: `drop-shadow(0 0 48px ${CRT_FRAME.glow})` }}
+        >
           <Image
             src={CRT_FRAME.src}
             alt=""

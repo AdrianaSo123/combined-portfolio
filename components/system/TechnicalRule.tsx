@@ -23,17 +23,3 @@ export function SectionLabel({
     </div>
   );
 }
-
-export function Bracket({ children }: { children: React.ReactNode }) {
-  return (
-    <span className="font-mono">
-      <span aria-hidden="true" className="opacity-50">
-        [
-      </span>
-      {children}
-      <span aria-hidden="true" className="opacity-50">
-        ]
-      </span>
-    </span>
-  );
-}
