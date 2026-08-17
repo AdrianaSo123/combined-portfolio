@@ -1,5 +1,4 @@
 import Link from "next/link";
-import { BootSequence } from "@/components/hero/BootSequence";
 import { CrtScreen } from "@/components/hero/CrtScreen";
 import { ProjectFeature } from "@/components/work/ProjectFeature";
 import { ExperimentCard } from "@/components/lab/ExperimentCard";
@@ -12,8 +11,6 @@ import { routes } from "@/lib/routes";
 export default function Home() {
   return (
     <>
-      <BootSequence />
-
       {/* ============ HERO (near-black cybercore) ============ */}
       <section className="relative min-h-[100svh] overflow-hidden bg-bg pb-24 pt-28">
         {/* faint grid / coordinate backdrop */}

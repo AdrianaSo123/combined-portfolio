@@ -153,12 +153,57 @@ body {
   99% { opacity: 0.9; }
 }
 
+/* staggered terminal boot-log reveal (per-line animation-delay set inline) */
+.term-line {
+  opacity: 0;
+  animation: term-in 260ms var(--ease-out) forwards;
+}
+@keyframes term-in {
+  from { opacity: 0; transform: translateY(3px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* stronger phosphor glow for the old-computer screen */
+.crt-glow-strong {
+  box-shadow:
+    0 0 2px rgba(199, 191, 251, 0.5),
+    inset 0 0 90px rgba(111, 95, 214, 0.18),
+    inset 0 0 6px rgba(199, 191, 251, 0.35),
+    inset 0 -40px 80px rgba(0, 0, 0, 0.55);
+}
+
+/* curved CRT corners + edge vignette */
+.crt-curve {
+  border-radius: 2rem / 2.6rem;
+}
+.crt-curve::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  box-shadow: inset 0 0 60px 12px rgba(0, 0, 0, 0.6);
+}
+
+/* ambient lavender glow behind the monitor */
+.ambient-glow {
+  background: radial-gradient(
+    45% 45% at 50% 42%,
+    rgba(179, 161, 255, 0.35) 0%,
+    rgba(111, 95, 214, 0.12) 45%,
+    transparent 72%
+  );
+  filter: blur(28px);
+}
+
 /* =========================================================
    Reduced motion (spec §15 / §17)
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   .blink, .flicker { animation: none !important; }
+  /* boot log must remain visible without animation */
+  .term-line { opacity: 1 !important; transform: none !important; animation: none !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
