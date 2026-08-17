@@ -12,8 +12,12 @@ export function SectionLabel({
     <div
       className={`flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] ${className}`}
     >
-      {index && <span className="text-accent">{index}</span>}
-      <span className="opacity-70">/</span>
+      {index && (
+        <>
+          <span className="text-accent">{index}</span>
+          <span className="opacity-70">/</span>
+        </>
+      )}
       <span>{label}</span>
       <span className="ml-2 h-px flex-1 bg-current opacity-20" aria-hidden="true" />
     </div>

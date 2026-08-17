@@ -76,6 +76,30 @@ export default function AboutPage() {
           </div>
         </div>
 
+        {/* education */}
+        {about.education && about.education.length > 0 && (
+          <div className="mt-16">
+            <SectionLabel label="Education" className="text-ink" />
+            <div className="mt-6 space-y-6">
+              {about.education.map((ed) => (
+                <div
+                  key={`${ed.credential}-${ed.org}`}
+                  className="border-t border-line-ink pt-4"
+                >
+                  <div className="flex flex-wrap items-baseline justify-between gap-2">
+                    <p className="font-display text-xl">
+                      {ed.credential} · {ed.org}
+                    </p>
+                    <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-muted-ink">
+                      {ed.period}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
         <div className="mt-16 border-t border-line-ink pt-8">
           <Link
             href={routes.mailto(about.contactEmail)}

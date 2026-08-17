@@ -57,8 +57,8 @@ const byId: Record<string, KBEntry> = Object.fromEntries(
   knowledgeBase.map((entry) => [entry.id, entry])
 );
 
-// Loud lookup (audit finding #2): fails with the offending id instead of a
-// silent non-null assertion far from the cause.
+// Loud lookup: fails with the offending id instead of a silent non-null
+// assertion far from the cause.
 export function getKBEntry(id: string): KBEntry {
   const entry = byId[id];
   if (!entry) throw new Error(`Unknown KB id: ${id}`);

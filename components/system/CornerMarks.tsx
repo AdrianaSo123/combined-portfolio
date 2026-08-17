@@ -8,8 +8,8 @@ export function CornerMarks() {
   ];
   return (
     <div aria-hidden="true" className="pointer-events-none absolute inset-0 text-accent/40">
-      {corners.map((c, i) => (
-        <div key={i} className={`absolute ${c.pos}`}>
+      {corners.map((c) => (
+        <div key={c.label} className={`absolute ${c.pos}`}>
           <div className={`h-4 w-4 ${c.h} border-accent/40`} />
           <span className={`absolute ${c.tx} font-mono text-[0.55rem] tracking-[0.15em] text-accent/50`}>
             {c.label}
