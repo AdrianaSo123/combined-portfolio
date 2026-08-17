@@ -3,6 +3,8 @@ import { CrtScreen } from "@/components/hero/CrtScreen";
 import { ProjectFeature } from "@/components/work/ProjectFeature";
 import { ExperimentCard } from "@/components/lab/ExperimentCard";
 import { SectionLabel } from "@/components/system/TechnicalRule";
+import { WireframeGlobe } from "@/components/system/WireframeGlobe";
+import { CornerMarks } from "@/components/system/CornerMarks";
 import { featuredProjects } from "@/content/projects";
 import { experiments } from "@/content/experiments";
 import { about } from "@/content/about";
@@ -12,21 +14,52 @@ export default function Home() {
   return (
     <>
       {/* ============ HERO (near-black cybercore) ============ */}
-      <section className="relative min-h-[100svh] overflow-hidden bg-bg pb-24 pt-28">
+      <section className="crt-scanlines relative min-h-[100svh] overflow-hidden bg-bg pb-24 pt-24">
         {/* faint grid / coordinate backdrop */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-0 opacity-[0.06]"
+          className="pointer-events-none absolute inset-0 opacity-[0.05]"
           style={{
             backgroundImage:
               "linear-gradient(var(--color-fg) 1px, transparent 1px), linear-gradient(90deg, var(--color-fg) 1px, transparent 1px)",
-            backgroundSize: "64px 64px",
+            backgroundSize: "56px 56px",
           }}
         />
+        {/* wireframe globe motif behind the CRT */}
+        <WireframeGlobe
+          className="pointer-events-none absolute -right-24 top-10 h-[42rem] w-[42rem] text-accent/[0.10] lg:-right-10"
+        />
+        {/* registration / crop marks */}
+        <CornerMarks />
+        {/* vertical system tag */}
+        <span
+          aria-hidden="true"
+          className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 rotate-90 font-mono text-[0.6rem] uppercase tracking-[0.5em] text-accent/30 lg:block"
+        >
+          Cybercore · Build 2026.4
+        </span>
+
+        {/* system readout strip */}
+        <div className="relative mx-auto mb-10 max-w-[1400px] px-5 sm:px-8">
+          <div
+            aria-hidden="true"
+            className="flex flex-wrap items-center justify-between gap-x-6 gap-y-1 border-y border-line py-2 font-mono text-[0.6rem] uppercase tracking-[0.2em] text-muted"
+          >
+            <span className="text-accent">[ Portfolio.OS ]</span>
+            <span>Lat 39.36° / Lon -74.42°</span>
+            <span>Mode · Product × AI × HCI</span>
+            <span className="flex items-center gap-1.5">
+              Status
+              <span className="inline-block h-1.5 w-1.5 animate-none rounded-full bg-accent" />
+              Online
+            </span>
+          </div>
+        </div>
+
         <div className="relative mx-auto grid max-w-[1400px] items-center gap-12 px-5 sm:px-8 lg:grid-cols-12">
           <div className="lg:col-span-4">
             <p className="font-mono text-[0.7rem] uppercase tracking-[0.22em] text-accent">
-              [ 00 / Adriana So ]
+              &gt; 00 / Adriana_So
             </p>
             <h1 className="mt-5 font-display text-4xl leading-[1.02] tracking-tight sm:text-5xl">
               Designer &amp; builder across{" "}
