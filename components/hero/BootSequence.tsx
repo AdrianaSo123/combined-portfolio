@@ -8,12 +8,11 @@ export function BootSequence() {
 
   useEffect(() => {
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduce) {
-      setDone(true);
-      return;
-    }
-    const t = setTimeout(() => setDone(true), 1100);
-    return () => clearTimeout(t);
+    // Reduced motion skips the sequence (near-zero delay); both paths defer the
+    // state update through the timer to avoid a synchronous set inside the effect.
+    const delay = reduce ? 0 : 1100;
+    const timer = setTimeout(() => setDone(true), delay);
+    return () => clearTimeout(timer);
   }, []);
 
   if (done) return null;
