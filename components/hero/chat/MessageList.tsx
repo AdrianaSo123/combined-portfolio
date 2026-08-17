@@ -14,7 +14,7 @@ export function MessageList({ messages, pending, started, listRef }: MessageList
   return (
     <div
       ref={listRef}
-      className="flex-1 overflow-y-auto pr-1 text-sm leading-relaxed"
+      className="flex-1 overflow-y-auto pr-1 text-xs leading-relaxed sm:text-sm"
       aria-live="polite"
     >
       {!started ? (

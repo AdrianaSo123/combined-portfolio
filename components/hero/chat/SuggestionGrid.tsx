@@ -6,13 +6,13 @@ import { SUGGESTIONS } from "./copy";
 // the scripted fallback table.
 export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => void }) {
   return (
-    <ul className="mt-3 space-y-0.5">
+    <ul className="mt-2 space-y-0">
       {SUGGESTIONS.map((s, i) => (
         <li key={s}>
           <button
             type="button"
             onClick={() => onSelect(s)}
-            className="group flex w-full items-center gap-3 rounded-sm px-2 py-2 text-left text-xs text-[color:var(--color-screen)]/85 transition-colors hover:bg-[color:var(--color-screen)]/12 hover:text-[color:var(--color-screen)]"
+            className="group flex w-full items-center gap-2 rounded-sm px-1 py-1 text-left text-[0.7rem] leading-snug text-[color:var(--color-screen)]/85 transition-colors hover:bg-[color:var(--color-screen)]/12 hover:text-[color:var(--color-screen)] sm:text-xs"
           >
             <span className="w-4 shrink-0 font-mono tabular-nums text-[color:var(--color-screen)]/70">
               {i + 1}

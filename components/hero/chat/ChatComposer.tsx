@@ -15,7 +15,7 @@ export function ChatComposer({ value, pending, onChange, onSubmit }: ChatCompose
         e.preventDefault();
         onSubmit();
       }}
-      className="mt-4 flex items-center gap-2 border-t border-[color:var(--color-screen)]/25 pt-3"
+      className="mt-2 flex items-center gap-2 border-t border-[color:var(--color-screen)]/25 pt-2"
     >
       <label htmlFor="chat-input" className="sr-only">
         {CHAT_COPY.inputLabel}
@@ -38,7 +38,7 @@ export function ChatComposer({ value, pending, onChange, onSubmit }: ChatCompose
         placeholder={CHAT_COPY.placeholder}
         maxLength={MAX_MESSAGE_LENGTH}
         autoComplete="off"
-        className="flex-1 bg-transparent text-sm text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/45 focus:outline-none"
+        className="flex-1 bg-transparent text-xs text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/45 focus:outline-none sm:text-sm"
       />
       <button
         type="submit"
