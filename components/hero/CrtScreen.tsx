@@ -18,7 +18,7 @@ export function CrtScreen() {
         className="relative w-full"
         style={{ aspectRatio: `${CRT_FRAME.width} / ${CRT_FRAME.height}` }}
       >
-        <div className="crt-screen-well crt-scanlines crt-noise absolute overflow-hidden" style={CRT_FRAME.well}>
+        <div className="crt-screen-well crt-scanlines absolute overflow-hidden" style={CRT_FRAME.well}>
           <div className="relative z-[1] flex h-full min-h-0 flex-col px-[6%] py-[7%]">
             <TerminalBoot />
             <div className="mt-2 min-h-0 flex-1">
@@ -28,7 +28,7 @@ export function CrtScreen() {
           <div aria-hidden="true" className="crt-glass-glare" />
         </div>
 
-        <div className="pointer-events-none absolute inset-0">
+        <div className="pointer-events-none absolute inset-0 [filter:drop-shadow(0_0_48px_rgba(79,102,255,0.4))]">
           <Image
             src={CRT_FRAME.src}
             alt=""

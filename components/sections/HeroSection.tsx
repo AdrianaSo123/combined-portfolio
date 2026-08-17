@@ -8,13 +8,13 @@ import { routes } from "@/lib/routes";
 // assistant on the right, over a faint coordinate grid + wireframe globe.
 export function HeroSection() {
   return (
-    <section className="crt-scanlines relative min-h-[100svh] overflow-hidden bg-bg pb-24 pt-24">
+    <section className="relative min-h-[100svh] overflow-hidden bg-bg pb-24 pt-24">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-[0.05]"
+        className="pointer-events-none absolute inset-0"
         style={{
           backgroundImage:
-            "linear-gradient(var(--color-fg) 1px, transparent 1px), linear-gradient(90deg, var(--color-fg) 1px, transparent 1px)",
+            "linear-gradient(rgba(79,102,255,0.16) 1px, transparent 1px), linear-gradient(90deg, rgba(79,102,255,0.16) 1px, transparent 1px)",
           backgroundSize: "56px 56px",
         }}
       />

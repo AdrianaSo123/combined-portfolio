@@ -8,7 +8,7 @@ describe("CRT_FRAME", () => {
     const top = parseFloat(well.top);
     const w = parseFloat(well.width);
     const h = parseFloat(well.height);
-    expect(width / height).toBeCloseTo(1536 / 1024, 5);
+    expect(width / height).toBeCloseTo(1103 / 1022, 5);
     expect(left).toBeGreaterThan(0);
     expect(top).toBeGreaterThan(0);
     expect(left + w).toBeLessThan(100);
