@@ -21,7 +21,7 @@ export default function OgImage() {
           fontFamily: "monospace",
         }}
       >
-        <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: "#b3a1ff" }}>
+        <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: "#4f66ff" }}>
           [ 00 / ADRIANA SO ]
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>

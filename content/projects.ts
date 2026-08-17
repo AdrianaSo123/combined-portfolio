@@ -126,7 +126,7 @@ export const projects: Project[] = [
     status: "research",
     role: "Design Research",
     demonstrates: "This is where I'm going.",
-    brand: { accent: "#b3a1ff" },
+    brand: { accent: "#4f66ff" },
     cover: placeholderCover("AI + Chat Research"),
     gallery: [],
     sections: [

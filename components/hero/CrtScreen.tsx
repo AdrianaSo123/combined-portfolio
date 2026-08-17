@@ -23,7 +23,7 @@ function extrude(depth: number = DEPTH): string {
 
 const BODY_SHADOW = [
   extrude(),
-  "0 60px 120px -30px rgba(111,95,214,0.45)", // phosphor glow
+  "0 60px 120px -30px rgba(79,102,255,0.45)", // phosphor glow
   "0 44px 60px -30px rgba(0,0,0,0.7)", // ground shadow
   "inset 0 3px 0 rgba(255,255,255,0.6)", // top highlight
   "inset -10px -14px 26px rgba(0,0,0,0.22)", // interior falloff

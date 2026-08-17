@@ -10,9 +10,9 @@ export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => voi
           <button
             type="button"
             onClick={() => onSelect(s)}
-            className="group flex w-full items-baseline gap-3 rounded-sm px-2 py-1.5 text-left text-xs text-[color:var(--color-fg)] transition-colors hover:bg-[color:var(--color-screen)]/12"
+            className="group flex w-full items-baseline gap-3 rounded-sm px-2 py-1.5 text-left text-xs text-[color:var(--color-screen)]/85 transition-colors hover:bg-[color:var(--color-screen)]/12 hover:text-[color:var(--color-screen)]"
           >
-            <span className="w-4 shrink-0 font-mono text-[color:var(--color-screen)] tabular-nums">
+            <span className="w-4 shrink-0 font-mono tabular-nums text-[color:var(--color-screen)]/60">
               {i + 1}
             </span>
             <span className="flex-1">{s}</span>

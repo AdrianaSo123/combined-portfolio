@@ -30,12 +30,12 @@ export function ChatComposer({ value, pending, onChange, onSubmit }: ChatCompose
         placeholder={CHAT_COPY.placeholder}
         maxLength={MAX_MESSAGE_LENGTH}
         autoComplete="off"
-        className="flex-1 bg-transparent text-sm text-[color:var(--color-fg)] placeholder:text-[color:var(--color-screen)]/50 focus:outline-none"
+        className="flex-1 bg-transparent text-sm text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/50 focus:outline-none"
       />
       <button
         type="submit"
         disabled={pending}
-        className="text-xs uppercase tracking-[0.12em] text-[color:var(--color-fg)] opacity-80 hover:opacity-100 disabled:opacity-40"
+        className="text-xs uppercase tracking-[0.12em] text-[color:var(--color-screen)] opacity-80 hover:opacity-100 disabled:opacity-40"
       >
         {CHAT_COPY.send}
       </button>

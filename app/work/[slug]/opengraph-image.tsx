@@ -12,7 +12,7 @@ export function generateStaticParams() {
 export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProject(slug);
-  const accent = project?.brand.accent ?? "#b3a1ff";
+  const accent = project?.brand.accent ?? "#4f66ff";
 
   return new ImageResponse(
     (
@@ -36,7 +36,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           <div style={{ fontSize: 84, lineHeight: 1, maxWidth: 1000 }}>
             {project?.name ?? "Work"}
           </div>
-          <div style={{ fontSize: 34, color: "#c7bffb" }}>
+          <div style={{ fontSize: 34, color: "#aebcff" }}>
             {project?.subtitle ?? ""}
           </div>
         </div>

@@ -16,9 +16,9 @@
   --color-line: rgba(255, 255, 255, 0.14);  /* rules on dark */
   --color-line-ink: rgba(22, 20, 28, 0.16); /* rules on cream */
   --color-metal: #b9bcc2;       /* muted metallic */
-  --color-accent: #b3a1ff;      /* single lavender accent */
-  --color-accent-dim: #6f5fd6;
-  --color-screen: #c7bffb;      /* CRT phosphor glow */
+  --color-accent: #4f66ff;      /* electric cornflower blue (cyberworld) */
+  --color-accent-dim: #3b4fd6;
+  --color-screen: #aebcff;      /* periwinkle CRT phosphor */
 
   --font-display: var(--font-display-face), "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono-face), "JetBrains Mono", ui-monospace, "SFMono-Regular", monospace;
@@ -106,9 +106,9 @@ body {
 /* phosphor glow */
 .crt-glow {
   box-shadow:
-    0 0 1px rgba(199, 191, 251, 0.4),
-    inset 0 0 60px rgba(111, 95, 214, 0.12),
-    inset 0 0 4px rgba(199, 191, 251, 0.25);
+    0 0 1px rgba(174, 188, 255, 0.4),
+    inset 0 0 60px rgba(79, 102, 255, 0.12),
+    inset 0 0 4px rgba(174, 188, 255, 0.25);
 }
 
 /* blinking terminal cursor */
@@ -166,9 +166,9 @@ body {
 /* stronger phosphor glow for the old-computer screen */
 .crt-glow-strong {
   box-shadow:
-    0 0 2px rgba(199, 191, 251, 0.5),
-    inset 0 0 90px rgba(111, 95, 214, 0.18),
-    inset 0 0 6px rgba(199, 191, 251, 0.35),
+    0 0 2px rgba(174, 188, 255, 0.5),
+    inset 0 0 90px rgba(79, 102, 255, 0.18),
+    inset 0 0 6px rgba(174, 188, 255, 0.35),
     inset 0 -40px 80px rgba(0, 0, 0, 0.55);
 }
 
@@ -185,12 +185,12 @@ body {
   box-shadow: inset 0 0 60px 12px rgba(0, 0, 0, 0.6);
 }
 
-/* ambient lavender glow behind the monitor */
+/* ambient blue glow behind the monitor */
 .ambient-glow {
   background: radial-gradient(
     45% 45% at 50% 42%,
-    rgba(179, 161, 255, 0.35) 0%,
-    rgba(111, 95, 214, 0.12) 45%,
+    rgba(79, 102, 255, 0.35) 0%,
+    rgba(59, 79, 214, 0.12) 45%,
     transparent 72%
   );
   filter: blur(28px);

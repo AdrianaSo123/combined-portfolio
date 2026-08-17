@@ -11,7 +11,7 @@ export function DestinationChips({ destinations }: { destinations: Destination[]
         <li key={d.href + d.label}>
           <Link
             href={d.href}
-            className="inline-block rounded-sm border border-[color:var(--color-screen)]/40 px-2 py-1 text-[0.7rem] uppercase tracking-[0.12em] text-[color:var(--color-fg)] transition-colors hover:bg-[color:var(--color-screen)]/15"
+            className="inline-block rounded-sm border border-[color:var(--color-screen)]/40 px-2 py-1 text-[0.7rem] uppercase tracking-[0.12em] text-[color:var(--color-screen)]/85 transition-colors hover:bg-[color:var(--color-screen)]/15 hover:text-[color:var(--color-screen)]"
           >
             {d.label} →
           </Link>
