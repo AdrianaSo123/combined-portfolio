@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { scriptedAnswer } from "@/lib/ai/fallback";
 import { RateLimiter } from "@/lib/ai/rate-limit";
 import { MAX_MESSAGE_LENGTH } from "@/lib/ai/constants";
+import type { ChatRequest } from "@/lib/ai/types";
 
 export const runtime = "nodejs";
 
@@ -13,7 +14,7 @@ function clientKey(req: Request): string {
 
 async function parseMessage(req: Request): Promise<string | null> {
   try {
-    const body = (await req.json()) as { message?: unknown };
+    const body = (await req.json()) as Partial<ChatRequest>;
     if (typeof body.message !== "string") return null;
     const message = body.message.slice(0, MAX_MESSAGE_LENGTH).trim();
     return message.length > 0 ? message : null;

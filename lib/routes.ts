@@ -11,3 +11,9 @@ export const routes = {
   chatApi: "/api/chat",
   mailto: (email: string) => `mailto:${email}`,
 } as const;
+
+// True for links that leave the site (so we can open them in a new tab with a
+// safe rel). Internal routes and mailto:/anchor links stay in the same tab.
+export function isExternal(href: string): boolean {
+  return /^https?:\/\//.test(href);
+}

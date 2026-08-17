@@ -161,3 +161,8 @@ export const featuredProjects = projects.filter((p) => p.featured);
 export function getProject(slug: string): Project | undefined {
   return projects.find((p) => p.slug === slug);
 }
+
+// Static params for the /work/[slug] route and its OG image (one owner).
+export function projectParams(): { slug: string }[] {
+  return projects.map((p) => ({ slug: p.slug }));
+}

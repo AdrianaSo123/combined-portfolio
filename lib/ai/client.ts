@@ -1,6 +1,6 @@
 import { routes } from "@/lib/routes";
 import type { Destination } from "@/content/types";
-import type { PortfolioAnswer } from "./types";
+import type { ChatRequest, PortfolioAnswer } from "./types";
 
 // Transport boundary: the view calls this; it owns the wire format and
 // validates the response instead of blindly casting.
@@ -24,10 +24,11 @@ function isPortfolioAnswer(value: unknown): value is PortfolioAnswer {
 }
 
 export async function askPortfolio(message: string): Promise<PortfolioAnswer> {
+  const body: ChatRequest = { message };
   const res = await fetch(routes.chatApi, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ message }),
+    body: JSON.stringify(body),
   });
 
   if (!res.ok) {

@@ -1,5 +1,5 @@
 import { ImageResponse } from "next/og";
-import { getProject, projects } from "@/content/projects";
+import { getProject, projectParams } from "@/content/projects";
 import { siteConfig } from "@/lib/site";
 import { BRAND } from "@/lib/theme";
 
@@ -7,7 +7,7 @@ export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projectParams();
 }
 
 export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {

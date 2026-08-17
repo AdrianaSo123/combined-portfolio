@@ -20,8 +20,8 @@ export default function AboutPage() {
 
         <div className="mt-10 grid gap-12 lg:grid-cols-12">
           <div className="space-y-4 text-lg leading-relaxed text-ink/85 lg:col-span-7">
-            {about.bio.map((p, i) => (
-              <p key={i}>{p}</p>
+            {about.bio.map((p) => (
+              <p key={p}>{p}</p>
             ))}
           </div>
 
@@ -60,8 +60,8 @@ export default function AboutPage() {
         <div className="mt-16">
           <SectionLabel label="Experience" className="text-ink" />
           <div className="mt-6 space-y-6">
-            {about.experience.map((e, i) => (
-              <div key={i} className="border-t border-line-ink pt-4">
+            {about.experience.map((e) => (
+              <div key={`${e.role}-${e.org}`} className="border-t border-line-ink pt-4">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <p className="font-display text-xl">
                     {e.role} · {e.org}

@@ -71,22 +71,22 @@ export function CaseStudy({ project }: { project: Project }) {
       {/* narrative sections */}
       <div className="mx-auto max-w-[760px] px-5 py-16 sm:px-8">
         {project.sections.map((s, i) => (
-          <section key={i} className="mb-14">
+          <section key={s.heading ?? s.kind} className="mb-14">
             {s.heading && (
               <h2 className="mb-4 font-mono text-xs uppercase tracking-[0.2em] text-muted-ink">
-                <span style={{ color: project.brand.accent }}>
+                <span className="text-[color:var(--color-accent-dim)]">
                   {String(i + 1).padStart(2, "0")}
                 </span>{" "}
                 / {s.heading}
               </h2>
             )}
             <div className="space-y-4 text-lg leading-relaxed text-ink/90">
-              {s.body.map((p, j) => (
-                <p key={j}>{p}</p>
+              {s.body.map((p) => (
+                <p key={p}>{p}</p>
               ))}
             </div>
-            {s.media?.map((m, k) => (
-              <div key={k} className="mt-6">
+            {s.media?.map((m) => (
+              <div key={m.src} className="mt-6">
                 <Media media={m} label={project.name} accent={project.brand.accent} />
               </div>
             ))}

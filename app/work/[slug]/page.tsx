@@ -2,12 +2,12 @@ import { notFound } from "next/navigation";
 import type { Metadata } from "next";
 import { CaseStudy } from "@/components/work/CaseStudy";
 import { JsonLd } from "@/components/seo/JsonLd";
-import { getProject, projects } from "@/content/projects";
+import { getProject, projectParams } from "@/content/projects";
 import { siteConfig } from "@/lib/site";
 import { routes } from "@/lib/routes";
 
 export function generateStaticParams() {
-  return projects.map((p) => ({ slug: p.slug }));
+  return projectParams();
 }
 
 export async function generateMetadata({

@@ -1,5 +1,6 @@
 import Link from "next/link";
 import type { Experiment } from "@/content/types";
+import { isExternal } from "@/lib/routes";
 
 // Compact Lab entry (spec §10). Intentionally subordinate to Selected Work.
 export function ExperimentCard({ experiment }: { experiment: Experiment }) {
@@ -17,13 +18,24 @@ export function ExperimentCard({ experiment }: { experiment: Experiment }) {
       </p>
       {linkEntries.length > 0 && (
         <ul className="mt-3 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-[0.14em]">
-          {linkEntries.map(([label, href]) => (
-            <li key={label}>
-              <Link href={href as string} className="text-accent-dim hover:underline">
-                {label} ↗
-              </Link>
-            </li>
-          ))}
+          {linkEntries.map(([label, href]) => {
+            const url = href as string;
+            const external = isExternal(url);
+            return (
+              <li key={label}>
+                <Link
+                  href={url}
+                  className="text-accent-dim hover:underline"
+                  {...(external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                >
+                  {label}
+                  {external && " ↗"}
+                </Link>
+              </li>
+            );
+          })}
         </ul>
       )}
     </article>

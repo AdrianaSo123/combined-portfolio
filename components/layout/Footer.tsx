@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { about } from "@/content/about";
-import { routes } from "@/lib/routes";
+import { routes, isExternal } from "@/lib/routes";
 
 export function Footer() {
   const year = new Date().getFullYear();
@@ -20,13 +20,23 @@ export function Footer() {
         </div>
         <div className="flex flex-col gap-3 sm:items-end">
           <ul className="flex gap-5 font-mono text-xs uppercase tracking-[0.16em]">
-            {about.socials.map((s) => (
-              <li key={s.label}>
-                <Link href={s.href} className="opacity-80 hover:opacity-100">
-                  {s.label} ↗
-                </Link>
-              </li>
-            ))}
+            {about.socials.map((s) => {
+              const external = isExternal(s.href);
+              return (
+                <li key={s.label}>
+                  <Link
+                    href={s.href}
+                    className="opacity-80 hover:opacity-100"
+                    {...(external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                  >
+                    {s.label}
+                    {external && " ↗"}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
           <p className="font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-ink">
             © {year} Adriana So · Portfolio online
