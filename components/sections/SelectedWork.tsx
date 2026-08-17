@@ -6,7 +6,7 @@ import { featuredProjects } from "@/content/projects";
 export function SelectedWork() {
   return (
     <div className="mx-auto max-w-[1400px] px-5 py-20 sm:px-8">
-      <SectionLabel index="01" label="Selected work" className="text-ink" />
+      <SectionLabel index="01" label="Selected work" />
       <div className="mt-6">
         {featuredProjects.map((p, i) => (
           <ProjectFeature key={p.slug} project={p} reversed={i % 2 === 1} />

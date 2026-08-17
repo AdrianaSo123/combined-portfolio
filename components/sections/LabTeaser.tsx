@@ -9,7 +9,7 @@ import { routes } from "@/lib/routes";
 export function LabTeaser() {
   return (
     <div className="mx-auto max-w-[1400px] px-5 pb-20 sm:px-8">
-      <SectionLabel index="02" label="Lab" className="text-ink" />
+      <SectionLabel index="02" label="Lab" />
       <div className="mt-6 grid gap-8 lg:grid-cols-12">
         <div className="lg:col-span-4">
           <p className="max-w-xs text-sm leading-relaxed text-ink/75">

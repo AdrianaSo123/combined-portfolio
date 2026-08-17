@@ -14,12 +14,12 @@ export function ProjectFeature({
   const meta = `${project.disciplines.join(" · ")} · ${project.year}`;
 
   return (
-    <article className="group grid gap-6 border-t border-line-ink py-12 sm:py-16 lg:grid-cols-12 lg:gap-10">
+    <article className="grid gap-6 border-t border-line-ink py-12 sm:py-16 lg:grid-cols-12 lg:gap-10">
       <div
         className={`lg:col-span-4 ${reversed ? "lg:order-2 lg:col-start-9" : ""}`}
       >
-        <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-ink">
-          {project.index} / Selected work
+        <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
+          {project.index}
         </p>
         <h3 className="mt-4 font-display text-4xl leading-none tracking-tight text-ink sm:text-5xl">
           {project.name}
@@ -43,7 +43,7 @@ export function ProjectFeature({
         <Link
           href={routes.work(project.slug)}
           aria-label={`View ${project.name} case study`}
-          className="block transition-transform duration-500 will-change-transform group-hover:-translate-y-1"
+          className="block"
         >
           <Media
             media={project.cover}

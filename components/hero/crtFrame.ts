@@ -16,7 +16,7 @@ export const CRT_FRAME = {
     height: 60.5802,
   },
   glassPad: { x: "6%", y: "7%" },
-  glow: rgba(BRAND_RGB.accent, 0.4),
+  glow: rgba(BRAND_RGB.accent, 0.22),
 } as const;
 
 export function wellStyle(

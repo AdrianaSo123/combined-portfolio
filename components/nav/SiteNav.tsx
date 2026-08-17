@@ -23,22 +23,15 @@ export function SiteNav() {
   }, []);
 
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 -z-10 h-24 bg-gradient-to-b from-bg via-bg/70 to-transparent"
-      />
+    <header className="fixed inset-x-0 top-0 z-50 border-b border-line bg-bg">
       <nav
         aria-label="Primary"
         className="mx-auto flex max-w-[1400px] items-center justify-between px-5 py-4 text-fg sm:px-8"
       >
-        <Link
-          href={routes.home}
-          className="font-mono text-xs uppercase tracking-[0.2em]"
-        >
-          Adriana&nbsp;So
+        <Link href={routes.home} className="font-display text-[0.95rem] tracking-tight">
+          Adriana So
         </Link>
-        <ul className="flex items-center gap-5 font-mono text-xs uppercase tracking-[0.16em] sm:gap-7">
+        <ul className="flex items-center gap-6 font-mono text-[0.65rem] uppercase tracking-[0.18em] sm:gap-8">
           {links.map((l) => {
             const active =
               pathname.startsWith(l.match) ||
@@ -50,8 +43,8 @@ export function SiteNav() {
                   aria-current={active ? "page" : undefined}
                   className={
                     active
-                      ? "underline decoration-accent underline-offset-4 opacity-100"
-                      : "opacity-80 transition-opacity hover:opacity-100"
+                      ? "text-fg"
+                      : "text-muted transition-colors hover:text-fg"
                   }
                 >
                   {l.label}

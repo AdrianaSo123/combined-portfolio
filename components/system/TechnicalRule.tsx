@@ -1,4 +1,4 @@
-// Thin technical rule with a mono label + coordinate, e.g. "01 / SELECTED WORK"
+// Quiet section index, e.g. "01 / Selected work"
 export function SectionLabel({
   index,
   label,
@@ -9,17 +9,10 @@ export function SectionLabel({
   className?: string;
 }) {
   return (
-    <div
-      className={`flex items-center gap-3 font-mono text-[0.7rem] uppercase tracking-[0.18em] ${className}`}
+    <p
+      className={`font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink ${className}`}
     >
-      {index && (
-        <>
-          <span className="text-accent">{index}</span>
-          <span className="opacity-70">/</span>
-        </>
-      )}
-      <span>{label}</span>
-      <span className="ml-2 h-px flex-1 bg-current opacity-20" aria-hidden="true" />
-    </div>
+      {index ? `${index} / ${label}` : label}
+    </p>
   );
 }

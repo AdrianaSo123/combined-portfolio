@@ -18,7 +18,7 @@ export default function AboutPage() {
   return (
     <section className="min-h-[100svh] bg-cream text-ink">
       <div className="mx-auto max-w-[1000px] px-5 pt-32 pb-20 sm:px-8">
-        <SectionLabel label="About" className="text-ink" />
+        <SectionLabel label="About" />
         <h1 className="mt-6 max-w-3xl font-display text-4xl leading-tight tracking-tight sm:text-5xl">
           {headline}
         </h1>
@@ -44,7 +44,7 @@ export default function AboutPage() {
 
         {/* skills */}
         <div className="mt-16">
-          <SectionLabel label="Skills" className="text-ink" />
+          <SectionLabel label="Skills" />
           <div className="mt-6 grid gap-8 sm:grid-cols-3">
             {skills.map((g) => (
               <div key={g.group}>
@@ -63,7 +63,7 @@ export default function AboutPage() {
 
         {experience.length > 0 && (
           <div className="mt-16">
-            <SectionLabel label="Experience" className="text-ink" />
+            <SectionLabel label="Experience" />
             <div className="mt-6 space-y-6">
               {experience.map((e) => (
               <div key={`${e.role}-${e.org}`} className="border-t border-line-ink pt-4">
@@ -84,7 +84,7 @@ export default function AboutPage() {
 
         {education.length > 0 && (
           <div className="mt-16">
-            <SectionLabel label="Education" className="text-ink" />
+            <SectionLabel label="Education" />
             <div className="mt-6 space-y-6">
               {education.map((ed) => (
                 <div

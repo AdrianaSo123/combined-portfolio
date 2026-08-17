@@ -13,7 +13,7 @@ export default function ExperimentsPage() {
   return (
     <section className="min-h-[100svh] bg-cream text-ink">
       <div className="mx-auto max-w-[1100px] px-5 pt-32 pb-20 sm:px-8">
-        <SectionLabel label="Lab" className="text-ink" />
+        <SectionLabel label="Lab" />
         <h1 className="mt-6 font-display text-5xl tracking-tight sm:text-6xl">
           The Lab
         </h1>

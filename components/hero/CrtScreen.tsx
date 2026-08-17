@@ -39,7 +39,7 @@ export function CrtScreen() {
           unoptimized
           priority
           className="pointer-events-none relative z-[2] h-auto w-full bg-transparent"
-          style={{ filter: `drop-shadow(0 0 36px ${CRT_FRAME.glow})` }}
+          style={{ filter: `drop-shadow(0 0 22px ${CRT_FRAME.glow})` }}
         />
       </div>
     </div>
