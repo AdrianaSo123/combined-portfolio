@@ -14,7 +14,7 @@ export function HeroSection() {
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
-          backgroundImage: `linear-gradient(${rgba(BRAND_RGB.accent, 0.16)} 1px, transparent 1px), linear-gradient(90deg, ${rgba(BRAND_RGB.accent, 0.16)} 1px, transparent 1px)`,
+          backgroundImage: `linear-gradient(${rgba(BRAND_RGB.accent, 0.22)} 1px, transparent 1px), linear-gradient(90deg, ${rgba(BRAND_RGB.accent, 0.22)} 1px, transparent 1px)`,
           backgroundSize: "56px 56px",
         }}
       />
