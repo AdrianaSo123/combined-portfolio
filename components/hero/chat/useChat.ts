@@ -9,16 +9,17 @@ export type ChatMessage =
   | { id: string; role: "user"; text: string }
   | { id: string; role: "portfolio"; text: string; destinations: Destination[] };
 
-let messageCounter = 0;
-const nextId = () => `m${messageCounter++}`;
-
-// Owns chat state + transport (audit finding #3), keeping the view components
-// presentational and testable.
+// Owns chat state + transport, keeping the view components presentational.
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [input, setInput] = useState("");
   const [pending, setPending] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
+
+  // Message-id counter scoped to this hook instance so mounted chats never
+  // share a sequence (a module-level counter leaked across instances/tests).
+  const idCounter = useRef(0);
+  const nextId = useCallback(() => `m${idCounter.current++}`, []);
 
   const scrollToEnd = useCallback(() => {
     requestAnimationFrame(() => {
@@ -46,7 +47,10 @@ export function useChat() {
             destinations: answer.suggestedDestinations,
           },
         ]);
-      } catch {
+      } catch (error) {
+        if (process.env.NODE_ENV !== "production") {
+          console.error("askPortfolio failed; using offline answer", error);
+        }
         setMessages((prev) => [
           ...prev,
           {
@@ -61,7 +65,7 @@ export function useChat() {
         scrollToEnd();
       }
     },
-    [pending, scrollToEnd]
+    [pending, scrollToEnd, nextId]
   );
 
   return {

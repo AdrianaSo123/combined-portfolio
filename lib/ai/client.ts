@@ -2,8 +2,8 @@ import { routes } from "@/lib/routes";
 import type { Destination } from "@/content/types";
 import type { PortfolioAnswer } from "./types";
 
-// Transport boundary (audit finding #7/#8). The view calls this; it owns the
-// wire format and validates the response instead of blindly casting.
+// Transport boundary: the view calls this; it owns the wire format and
+// validates the response instead of blindly casting.
 
 function isDestination(value: unknown): value is Destination {
   if (typeof value !== "object" || value === null) return false;
