@@ -1,6 +1,5 @@
 import { kbText, kbDestinations } from "@/content/kb";
-import type { Destination } from "@/content/types";
-import { routes } from "@/lib/routes";
+import { TOP_DESTINATIONS, UNKNOWN_ANSWER } from "./constants";
 import type { PortfolioAnswer } from "./types";
 
 // Deterministic intent table (spec §19.5). Guarantees the conversational
@@ -48,15 +47,6 @@ const intents: Intent[] = [
     answer: kbText("wakefern-1"),
     destinationsFrom: ["wakefern-1"],
   },
-];
-
-const UNKNOWN_ANSWER =
-  "I don't have anything about that in this portfolio — but you can explore my work below.";
-
-const TOP_DESTINATIONS: Destination[] = [
-  { label: "SELECTED WORK", href: routes.workSection, kind: "work" },
-  { label: "LAB", href: routes.experiments, kind: "experiment" },
-  { label: "ABOUT", href: routes.about, kind: "about" },
 ];
 
 function matchIntent(message: string): Intent | undefined {
