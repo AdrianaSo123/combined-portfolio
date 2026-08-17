@@ -1,25 +1,26 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionLabel } from "@/components/system/TechnicalRule";
-import { about } from "@/content/about";
+import { HEADLINE, about } from "@/content/about";
 import { publishedAbout } from "@/content/published";
 import { routes } from "@/lib/routes";
 
 export const metadata: Metadata = {
   title: "About",
-  description: about.headline,
+  description: HEADLINE,
 };
 
 export default function AboutPage() {
   const published = publishedAbout(about);
-  const { bio, experience, education, contactEmail } = published;
+  const { headline, bio, focus, skills, experience, education, contactEmail } =
+    published;
 
   return (
     <section className="min-h-[100svh] bg-cream text-ink">
       <div className="mx-auto max-w-[1000px] px-5 pt-32 pb-20 sm:px-8">
         <SectionLabel label="About" className="text-ink" />
         <h1 className="mt-6 max-w-3xl font-display text-4xl leading-tight tracking-tight sm:text-5xl">
-          {about.headline}
+          {headline}
         </h1>
 
         <div className="mt-10 grid gap-12 lg:grid-cols-12">
@@ -34,7 +35,7 @@ export default function AboutPage() {
               Focus
             </p>
             <ul className="mt-2 space-y-1 text-sm">
-              {about.focus.map((f) => (
+              {focus.map((f) => (
                 <li key={f}>{f}</li>
               ))}
             </ul>
@@ -45,7 +46,7 @@ export default function AboutPage() {
         <div className="mt-16">
           <SectionLabel label="Skills" className="text-ink" />
           <div className="mt-6 grid gap-8 sm:grid-cols-3">
-            {about.skills.map((g) => (
+            {skills.map((g) => (
               <div key={g.group}>
                 <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent-dim">
                   {g.group}

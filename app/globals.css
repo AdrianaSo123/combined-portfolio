@@ -126,35 +126,6 @@ body {
   transform: translateY(-0.28em);
 }
 
-/* thin technical rule with end brackets */
-.rule-bracket {
-  position: relative;
-  height: 1px;
-  background: currentColor;
-  opacity: 0.3;
-}
-
-/* faint flicker (reduced-motion safe below) */
-.flicker {
-  animation: flicker 6s infinite;
-}
-@keyframes flicker {
-  0%, 96%, 100% { opacity: 1; }
-  97% { opacity: 0.86; }
-  98% { opacity: 0.97; }
-  99% { opacity: 0.9; }
-}
-
-/* staggered terminal boot-log reveal (per-line animation-delay set inline) */
-.term-line {
-  opacity: 0;
-  animation: term-in 260ms var(--ease-out) forwards;
-}
-@keyframes term-in {
-  from { opacity: 0; transform: translateY(3px); }
-  to   { opacity: 1; transform: none; }
-}
-
 /* ambient blue glow behind the monitor */
 .ambient-glow {
   background: radial-gradient(
@@ -192,9 +163,7 @@ body {
    ========================================================= */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .blink, .flicker { animation: none !important; }
-  /* boot log must remain visible without animation */
-  .term-line { opacity: 1 !important; transform: none !important; animation: none !important; }
+  .blink { animation: none !important; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;

@@ -1,4 +1,5 @@
 import type { Destination } from "./types";
+import { HEADLINE } from "./about";
 import { routes } from "@/lib/routes";
 
 // Approved knowledge base (spec §24.3). The assistant may only state facts that
@@ -41,7 +42,7 @@ export const knowledgeBase: KBEntry[] = [
     id: "about-1",
     topic: "about",
     kind: "about",
-    text: "Adriana So is a product experience designer working across product, AI, and human-computer interaction — a designer who researches emerging interactions and builds with technology.",
+    text: HEADLINE,
     destinations: [{ label: "ABOUT", href: routes.about, kind: "about" }],
   },
   {

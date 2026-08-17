@@ -1,9 +1,13 @@
 import type { About } from "./types";
 
+// Positioning line (spec §3). Hero, About, metadata, OG, and the KB about
+// answer all import this so a rewrite cannot drift.
+export const HEADLINE =
+  "Designer and builder working across product, AI, and human-computer interaction.";
+
 // Placeholder about/résumé (spec §24.4). Final headline copy TBD by Adriana.
 export const about: About = {
-  headline:
-    "Designer and builder working across product, AI, and human-computer interaction.",
+  headline: HEADLINE,
   bio: [
     "Placeholder bio paragraph one. Adriana is a product experience designer working with emerging technology.",
     "Placeholder bio paragraph two. She moves between designing, researching, and building intelligent systems.",

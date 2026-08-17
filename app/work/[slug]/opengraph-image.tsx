@@ -25,8 +25,8 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "#0d0d12",
-          color: "#f4f2ea",
+          background: BRAND.bg,
+          color: BRAND.fg,
           fontFamily: "monospace",
         }}
       >
@@ -41,7 +41,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
             {project?.subtitle ?? ""}
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 22, letterSpacing: 3, color: "#8b8b97" }}>
+        <div style={{ display: "flex", fontSize: 22, letterSpacing: 3, color: BRAND.muted }}>
           {project ? project.disciplines.join("  ·  ").toUpperCase() : siteConfig.name}
         </div>
       </div>

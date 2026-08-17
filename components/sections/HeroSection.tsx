@@ -2,8 +2,28 @@ import Link from "next/link";
 import { CrtScreen } from "@/components/hero/CrtScreen";
 import { WireframeGlobe } from "@/components/system/WireframeGlobe";
 import { CornerMarks } from "@/components/system/CornerMarks";
+import { HEADLINE } from "@/content/about";
 import { routes } from "@/lib/routes";
 import { BRAND_RGB, rgba } from "@/lib/theme";
+
+const HEADLINE_ACCENTS = ["product", "AI", "human-computer interaction"] as const;
+
+function HeadlineWithAccents({ text }: { text: string }) {
+  const pattern = new RegExp(`(${HEADLINE_ACCENTS.join("|")})`);
+  return (
+    <>
+      {text.split(pattern).map((part, i) =>
+        (HEADLINE_ACCENTS as readonly string[]).includes(part) ? (
+          <span key={i} className="text-accent">
+            {part}
+          </span>
+        ) : (
+          part
+        )
+      )}
+    </>
+  );
+}
 
 // Near-black cybercore hero: intro copy on the left, the interactive CRT
 // assistant on the right, over a faint coordinate grid + wireframe globe.
@@ -36,10 +56,7 @@ export function HeroSection() {
             &gt; 00 / Adriana_So
           </p>
           <h1 className="mt-5 font-display text-4xl leading-[1.02] tracking-tight sm:text-5xl">
-            Designer &amp; builder across{" "}
-            <span className="text-accent">product</span>,{" "}
-            <span className="text-accent">AI</span>, and{" "}
-            <span className="text-accent">human-computer interaction</span>.
+            <HeadlineWithAccents text={HEADLINE} />
           </h1>
           <p className="mt-6 max-w-sm text-sm leading-relaxed text-muted">
             Product experience designer working with emerging technology —

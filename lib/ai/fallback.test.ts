@@ -1,4 +1,5 @@
 import { describe, it, expect } from "vitest";
+import { SUGGESTIONS } from "../../components/hero/chat/copy";
 import { scriptedAnswer } from "./fallback";
 
 describe("scriptedAnswer", () => {
@@ -44,6 +45,19 @@ describe("scriptedAnswer", () => {
       "/experiments",
       "/about",
     ]);
+  });
+
+  it("maps each SUGGESTIONS line to the expected KB citations", () => {
+    const expected = [
+      ["wakefern-1"],
+      ["wakefern-1", "lyra-1", "ai-research-1"],
+      ["ai-research-1"],
+      ["lab-1"],
+    ];
+    expect(SUGGESTIONS).toHaveLength(expected.length);
+    SUGGESTIONS.forEach((prompt, i) => {
+      expect(scriptedAnswer(prompt).citations).toEqual(expected[i]);
+    });
   });
 
   it("never fabricates: every returned destination href is internal", () => {

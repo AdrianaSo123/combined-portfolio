@@ -1,6 +1,8 @@
 import { describe, it, expect } from "vitest";
-import { about } from "./about";
-import { publishedAbout } from "./published";
+import { about, HEADLINE } from "./about";
+import { kbText } from "./kb";
+import { publishedAbout, publishedLinks } from "./published";
+import { siteConfig } from "../lib/site";
 
 describe("publishedAbout", () => {
   it("strips placeholder bio, experience, email, and hash socials", () => {
@@ -25,5 +27,21 @@ describe("publishedAbout", () => {
     expect(published.socials).toEqual([
       { label: "LinkedIn", href: "https://linkedin.com/in/real" },
     ]);
+  });
+});
+
+describe("publishedLinks", () => {
+  it("drops hash and empty experiment hrefs", () => {
+    expect(
+      publishedLinks({ demo: "#", github: "https://github.com/real", notes: "" })
+    ).toEqual([["github", "https://github.com/real"]]);
+  });
+});
+
+describe("HEADLINE", () => {
+  it("is the single positioning string for about, metadata, and KB", () => {
+    expect(about.headline).toBe(HEADLINE);
+    expect(siteConfig.description).toBe(HEADLINE);
+    expect(kbText("about-1")).toBe(HEADLINE);
   });
 });

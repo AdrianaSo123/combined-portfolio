@@ -10,6 +10,7 @@ export const BRAND = {
   bg: "#0d0d12", // near-black hero ground
   ink: "#16141c", // near-black text on cream
   fg: "#f4f2ea", // off-white text on dark
+  muted: "#8b8b97", // gray/silver secondary text
 } as const;
 
 function hexToRgb(hex: string): string {

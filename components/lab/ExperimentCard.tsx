@@ -1,10 +1,11 @@
 import Link from "next/link";
 import type { Experiment } from "@/content/types";
+import { publishedLinks } from "@/content/published";
 import { isExternal } from "@/lib/routes";
 
 // Compact Lab entry (spec §10). Intentionally subordinate to Selected Work.
 export function ExperimentCard({ experiment }: { experiment: Experiment }) {
-  const linkEntries = Object.entries(experiment.links).filter(([, v]) => v);
+  const linkEntries = publishedLinks(experiment.links);
 
   return (
     <article className="border-t border-line-ink py-6">
@@ -19,12 +20,11 @@ export function ExperimentCard({ experiment }: { experiment: Experiment }) {
       {linkEntries.length > 0 && (
         <ul className="mt-3 flex flex-wrap gap-4 font-mono text-xs uppercase tracking-[0.14em]">
           {linkEntries.map(([label, href]) => {
-            const url = href as string;
-            const external = isExternal(url);
+            const external = isExternal(href);
             return (
               <li key={label}>
                 <Link
-                  href={url}
+                  href={href}
                   className="text-accent-dim hover:underline"
                   {...(external
                     ? { target: "_blank", rel: "noopener noreferrer" }

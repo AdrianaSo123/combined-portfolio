@@ -1,4 +1,5 @@
 import { ImageResponse } from "next/og";
+import { HEADLINE } from "@/content/about";
 import { siteConfig } from "@/lib/site";
 import { BRAND } from "@/lib/theme";
 
@@ -27,11 +28,11 @@ export default function OgImage() {
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
           <div style={{ fontSize: 68, lineHeight: 1.05, maxWidth: 900 }}>
-            Designer &amp; builder across product, AI, and human-computer interaction.
+            {HEADLINE}
           </div>
         </div>
-        <div style={{ display: "flex", fontSize: 24, letterSpacing: 4, color: "#8b8b97" }}>
-          PORTFOLIO.OS — ONLINE
+        <div style={{ display: "flex", fontSize: 24, letterSpacing: 4, color: BRAND.muted }}>
+          {siteConfig.name.toUpperCase()}
         </div>
       </div>
     ),

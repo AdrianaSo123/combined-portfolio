@@ -13,7 +13,3 @@ export const experiments: Experiment[] = [
     links: { demo: "#", github: "#", notes: "#" },
   },
 ];
-
-export function getExperiment(slug: string): Experiment | undefined {
-  return experiments.find((e) => e.slug === slug);
-}
