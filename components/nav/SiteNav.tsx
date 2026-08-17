@@ -3,7 +3,7 @@ import { routes } from "@/lib/routes";
 
 const links = [
   { href: routes.workSection, label: "Work" },
-  { href: routes.experiments, label: "Experiments" },
+  { href: routes.experiments, label: "Lab" },
   { href: routes.about, label: "About" },
 ];
 

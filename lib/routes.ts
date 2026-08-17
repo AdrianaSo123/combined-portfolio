@@ -1,5 +1,5 @@
-// Single source of truth for URLs (audit finding #3). Nothing else in the app
-// should hardcode a route string.
+// Single source of truth for URLs. Nothing else in the app should hardcode a
+// route string.
 
 export const routes = {
   home: "/",

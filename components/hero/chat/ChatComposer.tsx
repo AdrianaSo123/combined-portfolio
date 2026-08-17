@@ -20,9 +20,17 @@ export function ChatComposer({ value, pending, onChange, onSubmit }: ChatCompose
       <label htmlFor="chat-input" className="sr-only">
         {CHAT_COPY.inputLabel}
       </label>
-      <span aria-hidden="true" className="opacity-60">
+      <span aria-hidden="true" className="text-[color:var(--color-screen)]/70">
         &gt;
       </span>
+      {!value && (
+        <span
+          aria-hidden="true"
+          className="blink -ml-1 text-[color:var(--color-screen)]"
+        >
+          ▊
+        </span>
+      )}
       <input
         id="chat-input"
         value={value}
@@ -30,7 +38,7 @@ export function ChatComposer({ value, pending, onChange, onSubmit }: ChatCompose
         placeholder={CHAT_COPY.placeholder}
         maxLength={MAX_MESSAGE_LENGTH}
         autoComplete="off"
-        className="flex-1 bg-transparent text-sm text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/50 focus:outline-none"
+        className="flex-1 bg-transparent text-sm text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/45 focus:outline-none"
       />
       <button
         type="submit"

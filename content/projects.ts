@@ -1,4 +1,5 @@
 import type { Project } from "./types";
+import { BRAND } from "@/lib/theme";
 
 // NOTE: Placeholder content. Structure matches spec §24.1 so real copy,
 // metrics, and media can be dropped in later without layout changes.
@@ -126,7 +127,7 @@ export const projects: Project[] = [
     status: "research",
     role: "Design Research",
     demonstrates: "This is where I'm going.",
-    brand: { accent: "#4f66ff" },
+    brand: { accent: BRAND.accent },
     cover: placeholderCover("AI + Chat Research"),
     gallery: [],
     sections: [

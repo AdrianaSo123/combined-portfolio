@@ -33,8 +33,7 @@ export function ProjectFeature({
         </p>
         <Link
           href={routes.work(project.slug)}
-          className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-ink underline-offset-4 hover:underline"
-          style={{ color: project.brand.accent }}
+          className="mt-6 inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-[color:var(--color-accent-dim)] underline-offset-4 hover:underline"
         >
           View case study →
         </Link>

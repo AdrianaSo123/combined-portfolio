@@ -1,6 +1,7 @@
 import { ImageResponse } from "next/og";
 import { getProject, projects } from "@/content/projects";
 import { siteConfig } from "@/lib/site";
+import { BRAND } from "@/lib/theme";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -12,7 +13,7 @@ export function generateStaticParams() {
 export default async function OgImage({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const project = getProject(slug);
-  const accent = project?.brand.accent ?? "#4f66ff";
+  const accent = project?.brand.accent ?? BRAND.accent;
 
   return new ImageResponse(
     (
@@ -36,7 +37,7 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           <div style={{ fontSize: 84, lineHeight: 1, maxWidth: 1000 }}>
             {project?.name ?? "Work"}
           </div>
-          <div style={{ fontSize: 34, color: "#aebcff" }}>
+          <div style={{ fontSize: 34, color: BRAND.phosphor }}>
             {project?.subtitle ?? ""}
           </div>
         </div>

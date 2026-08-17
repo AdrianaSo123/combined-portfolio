@@ -20,14 +20,14 @@ export function MessageList({ messages, pending, started, listRef }: MessageList
       {!started ? (
         <div className="text-[color:var(--color-screen)]">
           <p className="text-sm">{CHAT_COPY.emptyTitle}</p>
-          <p className="mt-1 text-xs opacity-60">{CHAT_COPY.emptySubtitle}</p>
+          <p className="mt-1 text-xs opacity-75">{CHAT_COPY.emptySubtitle}</p>
         </div>
       ) : (
         <ul className="space-y-4">
           {messages.map((m) => (
             <li key={m.id}>
               {m.role === "user" ? (
-                <p className="text-[color:var(--color-screen)]/75">
+                <p className="text-[color:var(--color-screen)]/85">
                   <span className="opacity-60">&gt; </span>
                   {m.text}
                 </p>

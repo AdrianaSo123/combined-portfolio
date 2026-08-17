@@ -4,7 +4,7 @@ import { SectionLabel } from "@/components/system/TechnicalRule";
 import { experiments } from "@/content/experiments";
 
 export const metadata: Metadata = {
-  title: "Lab / Experiments",
+  title: "Lab",
   description:
     "Smaller technical projects, prototypes, and tools by Adriana So.",
 };
@@ -13,7 +13,7 @@ export default function ExperimentsPage() {
   return (
     <section className="min-h-[100svh] bg-cream text-ink">
       <div className="mx-auto max-w-[1100px] px-5 pt-32 pb-20 sm:px-8">
-        <SectionLabel label="Lab / experiments" className="text-ink" />
+        <SectionLabel label="Lab" className="text-ink" />
         <h1 className="mt-6 font-display text-5xl tracking-tight sm:text-6xl">
           The Lab
         </h1>

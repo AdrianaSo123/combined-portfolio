@@ -1,5 +1,6 @@
 import { ImageResponse } from "next/og";
 import { siteConfig } from "@/lib/site";
+import { BRAND } from "@/lib/theme";
 
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
@@ -16,12 +17,12 @@ export default function OgImage() {
           flexDirection: "column",
           justifyContent: "space-between",
           padding: "72px",
-          background: "#0d0d12",
+          background: BRAND.bg,
           color: "#f4f2ea",
           fontFamily: "monospace",
         }}
       >
-        <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: "#4f66ff" }}>
+        <div style={{ display: "flex", fontSize: 26, letterSpacing: 6, color: BRAND.accent }}>
           [ 00 / ADRIANA SO ]
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>

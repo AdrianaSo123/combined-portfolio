@@ -1,5 +1,6 @@
 import Image from "next/image";
 import type { MediaRef } from "@/content/types";
+import { BRAND } from "@/lib/theme";
 
 // Renders a real image when a src exists; otherwise a labeled placeholder panel
 // so the layout is complete before media is added.
@@ -35,7 +36,7 @@ export function Media({
         <div
           className="crt-noise flex h-full w-full items-center justify-center"
           style={{
-            background: `linear-gradient(135deg, ${accent ?? "#4f66ff"}22, #16141c14)`,
+            background: `linear-gradient(135deg, ${accent ?? BRAND.accent}22, #16141c14)`,
             border: "1px solid var(--color-line-ink)",
           }}
           aria-hidden="true"

@@ -12,7 +12,7 @@ export function TerminalBoot() {
   return (
     <div
       aria-hidden="true"
-      className="border-b border-[color:var(--color-screen)]/20 pb-3 font-mono text-[0.72rem] leading-relaxed text-[color:var(--color-screen)]/75"
+      className="border-b border-[color:var(--color-screen)]/20 pb-3 font-mono text-[0.72rem] leading-relaxed text-[color:var(--color-screen)]/85"
     >
       <p className="term-line mb-2 tracking-[0.18em] text-[color:var(--color-screen)]">
         PORTFOLIO.OS <span className="opacity-50">{"// v2026.4-LTS"}</span>

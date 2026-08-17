@@ -2,10 +2,10 @@
 // can be edited without touching layout.
 
 export const CHAT_COPY = {
-  emptyTitle: "What would you like to explore?",
-  emptySubtitle: "Portfolio guide · grounded in Adriana's work",
+  emptyTitle: "Ask me anything about Adriana's work.",
+  emptySubtitle: "Answers are grounded in real projects — or pick a starting point:",
   inputLabel: "Ask something about Adriana's portfolio",
-  placeholder: "Ask something...",
+  placeholder: "Type your question…",
   send: "Send",
 } as const;
 
