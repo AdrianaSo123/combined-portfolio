@@ -58,8 +58,8 @@ export default function RootLayout({
   };
 
   return (
-    <html lang="en" className={`${display.variable} ${mono.variable}`}>
-      <body>
+    <html lang="en" className={`${display.variable} ${mono.variable}`} suppressHydrationWarning>
+      <body suppressHydrationWarning>
         <JsonLd data={personSchema} />
         <a href="#main" className="skip-link">
           Skip to content
