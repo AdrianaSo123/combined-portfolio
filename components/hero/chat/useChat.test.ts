@@ -33,6 +33,21 @@ describe("useChat", () => {
     expect(askPortfolio).not.toHaveBeenCalled();
     expect(result.current.messages).toHaveLength(0);
     expect(result.current.started).toBe(false);
+    expect(result.current.emptyHint).toBe(true);
+  });
+
+  it("clears emptyHint when the user types", async () => {
+    const { result } = renderHook(() => useChat());
+
+    await act(async () => {
+      await result.current.send("");
+    });
+    expect(result.current.emptyHint).toBe(true);
+
+    act(() => {
+      result.current.setInput("h");
+    });
+    expect(result.current.emptyHint).toBe(false);
   });
 
   it("appends the user message then the portfolio answer", async () => {

@@ -13,14 +13,20 @@ export type ChatMessage =
 // Owns chat state + transport, keeping the view components presentational.
 export function useChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
-  const [input, setInput] = useState("");
+  const [input, setInputState] = useState("");
   const [pending, setPending] = useState(false);
+  const [emptyHint, setEmptyHint] = useState(false);
   const listRef = useRef<HTMLDivElement>(null);
 
   // Message-id counter scoped to this hook instance so mounted chats never
   // share a sequence (a module-level counter leaked across instances/tests).
   const idCounter = useRef(0);
   const nextId = useCallback(() => `m${idCounter.current++}`, []);
+
+  const setInput = useCallback((value: string) => {
+    setEmptyHint(false);
+    setInputState(value);
+  }, []);
 
   const scrollToEnd = useCallback(() => {
     requestAnimationFrame(() => {
@@ -31,9 +37,14 @@ export function useChat() {
   const send = useCallback(
     async (text: string) => {
       const resolved = promptFromInput(text);
-      if (!resolved || pending) return;
+      if (!resolved) {
+        if (!pending) setEmptyHint(true);
+        return;
+      }
+      if (pending) return;
 
-      setInput("");
+      setEmptyHint(false);
+      setInputState("");
       setMessages((prev) => [...prev, { id: nextId(), role: "user", text: resolved }]);
       setPending(true);
 
@@ -71,8 +82,9 @@ export function useChat() {
 
   const reset = useCallback(() => {
     setMessages([]);
-    setInput("");
+    setInputState("");
     setPending(false);
+    setEmptyHint(false);
   }, []);
 
   return {
@@ -80,6 +92,7 @@ export function useChat() {
     input,
     setInput,
     pending,
+    emptyHint,
     send,
     reset,
     listRef,

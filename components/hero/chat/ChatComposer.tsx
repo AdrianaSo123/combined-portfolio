@@ -1,20 +1,26 @@
 import { MAX_MESSAGE_LENGTH } from "@/lib/ai/constants";
-import { CHAT_COPY } from "./copy";
+import { CHAT_COPY, menuDigitToSend } from "./copy";
 
 type ChatComposerProps = {
   value: string;
   pending: boolean;
   emptyHint: boolean;
+  started: boolean;
   onChange: (value: string) => void;
   onSubmit: () => void;
+  onPickDigit: (key: string) => void;
+  onReset: () => void;
 };
 
 export function ChatComposer({
   value,
   pending,
   emptyHint,
+  started,
   onChange,
   onSubmit,
+  onPickDigit,
+  onReset,
 }: ChatComposerProps) {
   return (
     <form
@@ -25,7 +31,7 @@ export function ChatComposer({
       className="mt-2 border-t border-[color:var(--color-screen)]/25 pt-2"
     >
       <div className="flex items-center gap-2">
-        <label htmlFor="chat-input" className="sr-only">
+        <label htmlFor={CHAT_COPY.inputId} className="sr-only">
           {CHAT_COPY.inputLabel}
         </label>
         <span aria-hidden="true" className="text-[color:var(--color-screen)]/70">
@@ -40,9 +46,15 @@ export function ChatComposer({
           </span>
         )}
         <input
-          id="chat-input"
+          id={CHAT_COPY.inputId}
           value={value}
           onChange={(e) => onChange(e.target.value)}
+          onKeyDown={(e) => {
+            const digit = menuDigitToSend(e.key, value, pending);
+            if (!digit) return;
+            e.preventDefault();
+            onPickDigit(digit);
+          }}
           placeholder={CHAT_COPY.placeholder}
           maxLength={MAX_MESSAGE_LENGTH}
           autoComplete="off"
@@ -56,6 +68,15 @@ export function ChatComposer({
         >
           {CHAT_COPY.send}
         </button>
+        {started && (
+          <button
+            type="button"
+            onClick={onReset}
+            className="text-xs uppercase tracking-[0.12em] text-[color:var(--color-screen)] opacity-80 hover:opacity-100"
+          >
+            {CHAT_COPY.reset}
+          </button>
+        )}
       </div>
       {emptyHint && (
         <p className="mt-1 text-[0.65rem] text-[color:var(--color-screen)]/70" role="status">

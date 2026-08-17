@@ -1,7 +1,6 @@
 import { SUGGESTIONS } from "./copy";
 
-// Numbered terminal menu. Click a line, or type that number. These work even
-// with zero AI availability via the scripted fallback table.
+// Numbered terminal menu. Click a line, or type that number in the field.
 export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => void }) {
   return (
     <ul className="mt-2 space-y-0">

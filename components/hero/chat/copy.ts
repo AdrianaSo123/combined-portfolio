@@ -3,7 +3,8 @@
 
 export const CHAT_COPY = {
   emptyTitle: "Ask about the work.",
-  emptySubtitle: "Press 1–4, click a line, or type a question.",
+  emptySubtitle: "Type 1–4, click a line, or ask a question.",
+  inputId: "chat-input",
   inputLabel: "Ask something about Adriana's portfolio",
   placeholder: "1–4 or a question…",
   send: "Send",
@@ -19,6 +20,19 @@ export const SUGGESTIONS = [
 ] as const;
 
 const MENU_PICK = /^[1-4]$/;
+
+// Digit keys only count as a menu pick when the field is empty and idle.
+// Typing "1" inside a question stays a character.
+export function menuDigitToSend(
+  key: string,
+  inputValue: string,
+  pending: boolean
+): string | null {
+  if (pending) return null;
+  if (!MENU_PICK.test(key)) return null;
+  if (inputValue.trim() !== "") return null;
+  return key;
+}
 
 // Maps a typed "1"–"4" to that menu line so keyboard, click, and submit
 // all produce the same prompt. Anything else is sent as written.

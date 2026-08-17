@@ -8,7 +8,6 @@ type MessageListProps = {
   pending: boolean;
   started: boolean;
   listRef: RefObject<HTMLDivElement | null>;
-  onReset?: () => void;
 };
 
 export function MessageList({
@@ -16,7 +15,6 @@ export function MessageList({
   pending,
   started,
   listRef,
-  onReset,
 }: MessageListProps) {
   return (
     <div
@@ -52,15 +50,6 @@ export function MessageList({
             </li>
           )}
         </ul>
-      )}
-      {onReset && (
-        <button
-          type="button"
-          onClick={onReset}
-          className="mt-3 text-[0.65rem] uppercase tracking-[0.14em] text-[color:var(--color-screen)]/70 hover:text-[color:var(--color-screen)]"
-        >
-          {CHAT_COPY.reset}
-        </button>
       )}
     </div>
   );

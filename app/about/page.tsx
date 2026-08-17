@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { SectionLabel } from "@/components/system/TechnicalRule";
 import { about } from "@/content/about";
+import { publishedAbout } from "@/content/published";
 import { routes } from "@/lib/routes";
-import { isPlaceholderHref, isPlaceholderText } from "@/lib/placeholders";
 
 export const metadata: Metadata = {
   title: "About",
@@ -11,14 +11,8 @@ export const metadata: Metadata = {
 };
 
 export default function AboutPage() {
-  const bio = about.bio.filter((p) => !isPlaceholderText(p));
-  const experience = about.experience.filter(
-    (e) => !isPlaceholderText(e.org) && !isPlaceholderText(e.summary)
-  );
-  const education = (about.education ?? []).filter(
-    (ed) => !isPlaceholderText(ed.credential) && !isPlaceholderText(ed.org)
-  );
-  const email = isPlaceholderHref(about.contactEmail) ? null : about.contactEmail;
+  const published = publishedAbout(about);
+  const { bio, experience, education, contactEmail } = published;
 
   return (
     <section className="min-h-[100svh] bg-cream text-ink">
@@ -110,13 +104,13 @@ export default function AboutPage() {
           </div>
         )}
 
-        {email && (
+        {contactEmail && (
           <div className="mt-16 border-t border-line-ink pt-8">
             <Link
-              href={routes.mailto(email)}
+              href={routes.mailto(contactEmail)}
               className="font-display text-2xl underline-offset-4 hover:underline sm:text-3xl"
             >
-              {email}
+              {contactEmail}
             </Link>
           </div>
         )}

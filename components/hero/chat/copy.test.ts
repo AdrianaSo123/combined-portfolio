@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { promptFromInput, SUGGESTIONS } from "./copy";
+import { promptFromInput, SUGGESTIONS, menuDigitToSend } from "./copy";
 
 describe("promptFromInput", () => {
   it("returns null for empty or whitespace", () => {
@@ -14,5 +14,26 @@ describe("promptFromInput", () => {
 
   it("passes a freeform question through trimmed", () => {
     expect(promptFromInput("  what have you shipped?  ")).toBe("what have you shipped?");
+  });
+});
+
+describe("menuDigitToSend", () => {
+  it("maps 1–4 when the field is empty and idle", () => {
+    expect(menuDigitToSend("1", "", false)).toBe("1");
+    expect(menuDigitToSend("4", "   ", false)).toBe("4");
+  });
+
+  it("ignores digits while a request is pending", () => {
+    expect(menuDigitToSend("1", "", true)).toBeNull();
+  });
+
+  it("ignores digits when the field already has a question", () => {
+    expect(menuDigitToSend("1", "hello", false)).toBeNull();
+  });
+
+  it("ignores keys that are not 1–4", () => {
+    expect(menuDigitToSend("5", "", false)).toBeNull();
+    expect(menuDigitToSend("a", "", false)).toBeNull();
+    expect(menuDigitToSend("Enter", "", false)).toBeNull();
   });
 });

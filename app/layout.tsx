@@ -6,7 +6,7 @@ import { Footer } from "@/components/layout/Footer";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { siteConfig } from "@/lib/site";
 import { about } from "@/content/about";
-import { isPlaceholderHref } from "@/lib/placeholders";
+import { publishedAbout } from "@/content/published";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -45,16 +45,17 @@ export const metadata: Metadata = {
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const published = publishedAbout(about);
   const personSchema = {
     "@context": "https://schema.org",
     "@type": "Person",
     name: siteConfig.name,
     description: about.headline,
     url: siteConfig.url,
-    ...(isPlaceholderHref(about.contactEmail) ? {} : { email: about.contactEmail }),
+    ...(published.contactEmail ? { email: published.contactEmail } : {}),
     knowsAbout: about.focus,
-    sameAs: about.socials
-      .filter((s) => s.href.startsWith("http") && !isPlaceholderHref(s.href))
+    sameAs: published.socials
+      .filter((s) => s.href.startsWith("http"))
       .map((s) => s.href),
   };
 
