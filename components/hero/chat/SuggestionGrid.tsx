@@ -1,18 +1,27 @@
 import { SUGGESTIONS } from "./copy";
 
-// Suggested entry points (spec §6). These work even with zero AI availability
-// via the scripted fallback intent table.
+// Suggested entry points (spec §6), presented as a numbered terminal menu.
+// These work even with zero AI availability via the scripted fallback table.
 export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => void }) {
   return (
-    <ul className="mt-4 grid gap-2 sm:grid-cols-2">
-      {SUGGESTIONS.map((s) => (
+    <ul className="mt-4 space-y-0.5">
+      {SUGGESTIONS.map((s, i) => (
         <li key={s}>
           <button
             type="button"
             onClick={() => onSelect(s)}
-            className="w-full rounded-sm border border-[color:var(--color-screen)]/30 px-3 py-2 text-left text-xs text-[color:var(--color-fg)] transition-colors hover:bg-[color:var(--color-screen)]/12"
+            className="group flex w-full items-baseline gap-3 rounded-sm px-2 py-1.5 text-left text-xs text-[color:var(--color-fg)] transition-colors hover:bg-[color:var(--color-screen)]/12"
           >
-            {s}
+            <span className="w-4 shrink-0 font-mono text-[color:var(--color-screen)] tabular-nums">
+              {i + 1}
+            </span>
+            <span className="flex-1">{s}</span>
+            <span
+              aria-hidden="true"
+              className="font-mono text-[color:var(--color-screen)]/0 transition-colors group-hover:text-[color:var(--color-screen)]/80"
+            >
+              &gt;
+            </span>
           </button>
         </li>
       ))}

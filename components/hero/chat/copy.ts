@@ -1,5 +1,5 @@
 // UI copy for the conversational portfolio, kept out of the components so it
-// can be edited without touching layout (audit finding #7).
+// can be edited without touching layout.
 
 export const CHAT_COPY = {
   emptyTitle: "What would you like to explore?",
