@@ -3,6 +3,9 @@ import { Space_Grotesk, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { SiteNav } from "@/components/nav/SiteNav";
 import { Footer } from "@/components/layout/Footer";
+import { JsonLd } from "@/components/seo/JsonLd";
+import { siteConfig } from "@/lib/site";
+import { about } from "@/content/about";
 
 const display = Space_Grotesk({
   subsets: ["latin"],
@@ -16,34 +19,48 @@ const mono = JetBrains_Mono({
   display: "swap",
 });
 
-const SITE_NAME = "Adriana So";
-const SITE_DESC =
-  "Product experience designer working across product, AI, and human-computer interaction. Designer and builder.";
-
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: `${SITE_NAME} — Product · AI · HCI`,
-    template: `%s — ${SITE_NAME}`,
+    default: siteConfig.title,
+    template: `%s — ${siteConfig.name}`,
   },
-  description: SITE_DESC,
+  description: siteConfig.description,
+  alternates: { canonical: "/" },
   openGraph: {
-    title: `${SITE_NAME} — Product · AI · HCI`,
-    description: SITE_DESC,
+    title: siteConfig.title,
+    description: siteConfig.description,
+    url: siteConfig.url,
+    siteName: siteConfig.name,
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: `${SITE_NAME} — Product · AI · HCI`,
-    description: SITE_DESC,
+    title: siteConfig.title,
+    description: siteConfig.description,
   },
 };
 
 export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    name: siteConfig.name,
+    description: about.headline,
+    url: siteConfig.url,
+    email: about.contactEmail,
+    knowsAbout: about.focus,
+    sameAs: about.socials
+      .filter((s) => s.href.startsWith("http"))
+      .map((s) => s.href),
+  };
+
   return (
     <html lang="en" className={`${display.variable} ${mono.variable}`}>
       <body>
+        <JsonLd data={personSchema} />
         <a href="#main" className="skip-link">
           Skip to content
         </a>
