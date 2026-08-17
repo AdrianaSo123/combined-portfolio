@@ -1,0 +1,74 @@
+import type { Destination } from "./types";
+import { routes } from "@/lib/routes";
+
+// Approved knowledge base (spec §24.3). The assistant may only state facts that
+// exist here. Placeholder text now; expand with real, quotable content later.
+export type KBEntry = {
+  id: string;
+  topic: string;
+  kind: "project" | "experiment" | "resume" | "skill" | "about" | "faq";
+  text: string;
+  destinations?: Destination[];
+};
+
+export const knowledgeBase: KBEntry[] = [
+  {
+    id: "wakefern-1",
+    topic: "wakefern",
+    kind: "project",
+    text: "Adriana worked with Wakefern to design a digital platform supporting the ShopRite LPGA Classic, bringing schedules, event information, communications, and operational workflows into one experience.",
+    destinations: [
+      { label: "WAKEFERN / SHOPRITE LPGA", href: routes.work("wakefern-lpga"), kind: "work" },
+    ],
+  },
+  {
+    id: "lyra-1",
+    topic: "lyra",
+    kind: "project",
+    text: "Lyra is a project that establishes Adriana's range in interaction design and emerging technology. (Placeholder description.)",
+    destinations: [{ label: "LYRA", href: routes.work("lyra"), kind: "work" }],
+  },
+  {
+    id: "ai-research-1",
+    topic: "ai-research",
+    kind: "project",
+    text: "Adriana researches conversational AI and human-AI interaction patterns, and what they imply for AI product design.",
+    destinations: [
+      { label: "AI + CHAT RESEARCH", href: routes.work("ai-chat-research"), kind: "work" },
+    ],
+  },
+  {
+    id: "about-1",
+    topic: "about",
+    kind: "about",
+    text: "Adriana So is a product experience designer working across product, AI, and human-computer interaction — a designer who researches emerging interactions and builds with technology.",
+    destinations: [{ label: "ABOUT", href: routes.about, kind: "about" }],
+  },
+  {
+    id: "lab-1",
+    topic: "lab",
+    kind: "experiment",
+    text: "The Lab holds smaller technical experiments and tools, such as UX Synthesizer — AI-assisted research synthesis with structured evidence.",
+    destinations: [{ label: "LAB", href: routes.experiments, kind: "experiment" }],
+  },
+];
+
+const byId: Record<string, KBEntry> = Object.fromEntries(
+  knowledgeBase.map((entry) => [entry.id, entry])
+);
+
+// Loud lookup (audit finding #2): fails with the offending id instead of a
+// silent non-null assertion far from the cause.
+export function getKBEntry(id: string): KBEntry {
+  const entry = byId[id];
+  if (!entry) throw new Error(`Unknown KB id: ${id}`);
+  return entry;
+}
+
+export function kbText(id: string): string {
+  return getKBEntry(id).text;
+}
+
+export function kbDestinations(ids: string[]): Destination[] {
+  return ids.flatMap((id) => getKBEntry(id).destinations ?? []);
+}

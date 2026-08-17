@@ -1,0 +1,77 @@
+// Content model (spec §24). All portfolio content is typed and structured so
+// the UI, sitemap, and AI knowledge base derive from one source of truth.
+
+export type MediaRef = {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  type?: "image" | "video";
+  poster?: string;
+};
+
+export type CaseStudySection = {
+  kind:
+    | "context"
+    | "problem"
+    | "role"
+    | "system"
+    | "design"
+    | "iteration"
+    | "final"
+    | "outcome"
+    | "custom";
+  heading?: string;
+  body: string[]; // paragraphs (swap for MDX later)
+  media?: MediaRef[];
+};
+
+export type Project = {
+  slug: string;
+  index: string;
+  name: string;
+  subtitle: string;
+  oneLiner: string;
+  disciplines: string[];
+  year: number;
+  status: "shipped" | "prototype" | "research";
+  role: string;
+  demonstrates: string;
+  brand: { accent: string; background?: string; foreground?: string };
+  cover: MediaRef;
+  gallery: MediaRef[];
+  sections: CaseStudySection[];
+  metrics?: { label: string; value: string }[];
+  featured: boolean;
+};
+
+export type Experiment = {
+  slug: string;
+  index: string;
+  name: string;
+  blurb: string;
+  stack: string[];
+  keyDecision?: string;
+  links: { demo?: string; github?: string; notes?: string };
+  media?: MediaRef;
+  diagram?: MediaRef;
+};
+
+export type About = {
+  headline: string;
+  bio: string[];
+  location?: string;
+  focus: string[];
+  skills: { group: string; items: string[] }[];
+  experience: { role: string; org: string; period: string; summary: string }[];
+  education?: { credential: string; org: string; period: string }[];
+  socials: { label: string; href: string }[];
+  resumeUrl?: string;
+  contactEmail: string;
+};
+
+export type Destination = {
+  label: string;
+  href: string;
+  kind: "work" | "experiment" | "about" | "resume";
+};
