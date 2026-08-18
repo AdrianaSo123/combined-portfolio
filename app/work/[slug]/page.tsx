@@ -19,7 +19,9 @@ export async function generateMetadata({
   const project = getProject(slug);
   if (!project) return {};
   return {
-    title: `${project.name} — ${project.subtitle}`,
+    title: project.headline
+      ? `${project.headline} — ${project.name}`
+      : `${project.name} — ${project.subtitle}`,
     description: project.oneLiner,
   };
 }
@@ -36,7 +38,9 @@ export default async function WorkPage({
   const creativeWork = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
-    name: `${project.name} — ${project.subtitle}`,
+    name: project.headline
+      ? `${project.headline} — ${project.name}`
+      : `${project.name} — ${project.subtitle}`,
     abstract: project.oneLiner,
     url: `${siteConfig.url}${routes.work(project.slug)}`,
     dateCreated: String(project.year),

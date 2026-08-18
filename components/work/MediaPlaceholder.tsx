@@ -11,6 +11,7 @@ export function Media({
   accent,
   className = "",
   sizes = "(max-width: 768px) 100vw, 66vw",
+  priority = false,
 }: {
   media?: MediaRef;
   label: string;
@@ -18,6 +19,7 @@ export function Media({
   accent?: string;
   className?: string;
   sizes?: string;
+  priority?: boolean;
 }) {
   const hasImage = media && media.src;
 
@@ -32,6 +34,7 @@ export function Media({
           alt={media!.alt}
           fill
           sizes={sizes}
+          priority={priority}
           className="object-cover"
         />
       ) : (

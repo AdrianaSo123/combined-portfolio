@@ -34,11 +34,11 @@ export default async function OgImage({ params }: { params: Promise<{ slug: stri
           {project ? `${project.index} / SELECTED WORK` : "SELECTED WORK"}
         </div>
         <div style={{ display: "flex", flexDirection: "column", gap: 12 }}>
-          <div style={{ fontSize: 84, lineHeight: 1, maxWidth: 1000 }}>
-            {project?.name ?? "Work"}
+          <div style={{ fontSize: project?.headline ? 56 : 84, lineHeight: 1.1, maxWidth: 1000 }}>
+            {project?.headline ?? project?.name ?? "Work"}
           </div>
           <div style={{ fontSize: 34, color: BRAND.phosphor }}>
-            {project?.subtitle ?? ""}
+            {project?.headline ? project.name : (project?.subtitle ?? "")}
           </div>
         </div>
         <div style={{ display: "flex", fontSize: 22, letterSpacing: 3, color: BRAND.muted }}>

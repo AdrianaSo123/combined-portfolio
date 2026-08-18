@@ -10,6 +10,19 @@ export type MediaRef = {
   poster?: string;
 };
 
+export type CaseStudyAnnotation = {
+  heading: string;
+  body: string[];
+  media?: MediaRef;
+  mediaLabel?: string;
+};
+
+export type CaseStudyPairing = {
+  left: string;
+  right: string;
+  rows: { left: string; right: string }[];
+};
+
 export type CaseStudySection = {
   kind:
     | "context"
@@ -22,18 +35,27 @@ export type CaseStudySection = {
     | "outcome"
     | "custom";
   heading?: string;
-  body: string[]; // paragraphs (swap for MDX later)
+  body: string[];
   media?: MediaRef[];
+  annotations?: CaseStudyAnnotation[];
+  pairing?: CaseStudyPairing;
+  bodyAfter?: string[];
+  callout?: string;
 };
 
 export type Project = {
   slug: string;
   index: string;
   name: string;
+  /** Case-study H1. Use when `name` is the client or label, not the work. */
+  headline?: string;
+  /** Billboard kicker + spec client. e.g. "Wakefern · ShopRite LPGA Classic". */
+  client?: string;
   subtitle: string;
   oneLiner: string;
   disciplines: string[];
   year: number;
+  timeline?: string;
   status: "shipped" | "prototype" | "research";
   role: string;
   demonstrates: string;
@@ -42,6 +64,7 @@ export type Project = {
   gallery: MediaRef[];
   sections: CaseStudySection[];
   metrics?: { label: string; value: string }[];
+  contributions?: string[];
   featured: boolean;
 };
 

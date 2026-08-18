@@ -17,7 +17,7 @@ export const knowledgeBase: KBEntry[] = [
     id: "wakefern-1",
     topic: "wakefern",
     kind: "project",
-    text: "Adriana worked with Wakefern to design a digital platform supporting the ShopRite LPGA Classic, bringing schedules, event information, communications, and operational workflows into one experience.",
+    text: "Adriana was UX and product design intern at Wakefern Food Corp (February–May 2026), designing a mobile sponsor app and desktop admin platform for the ShopRite LPGA Classic. The work centralized personalized schedules, tournament information, wayfinding, communications, and administrative control for an event with 65,000+ attendees. Core workflows were approved for production implementation.",
     destinations: [
       { label: "WAKEFERN / SHOPRITE LPGA", href: routes.work("wakefern-lpga"), kind: "work" },
     ],
