@@ -94,7 +94,12 @@ export const projects: Project[] = [
     role: "Product Design",
     demonstrates: "I have range.",
     brand: { accent: "#5b8def" },
-    cover: placeholderCover("Lyra"),
+    cover: {
+      src: "/images/lyra.avif",
+      alt: "Lyra — project cover",
+      width: 3514,
+      height: 2083,
+    },
     gallery: [],
     sections: [
       {
