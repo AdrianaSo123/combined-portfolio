@@ -21,10 +21,14 @@ export function ProjectFeature({
         <h3 className="font-display text-3xl leading-none tracking-tight text-ink sm:text-4xl">
           {project.name}
         </h3>
-        <p className="mt-1 font-display text-base text-ink/70">{project.subtitle}</p>
-        <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/80">
-          {project.oneLiner}
-        </p>
+        {project.subtitle ? (
+          <p className="mt-1 font-display text-base text-ink/70">{project.subtitle}</p>
+        ) : null}
+        {project.oneLiner ? (
+          <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/80">
+            {project.oneLiner}
+          </p>
+        ) : null}
         <p className="mt-5 font-mono text-[0.7rem] uppercase tracking-[0.18em] text-muted-ink">
           {meta}
         </p>

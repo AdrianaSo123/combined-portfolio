@@ -1,4 +1,4 @@
-import type { About, Experiment } from "./types";
+import type { About, Experiment, Project } from "./types";
 import { isPlaceholderHref, isPlaceholderText } from "../lib/placeholders";
 
 // One owner for "what is safe to show." Call sites should not re-filter
@@ -49,4 +49,29 @@ export function publishedAbout(about: About) {
       about.resumeUrl && !isPlaceholderHref(about.resumeUrl) ? about.resumeUrl : null,
     contactEmail: isPlaceholderHref(about.contactEmail) ? null : about.contactEmail,
   };
+}
+
+export function publishedProject(project: Project): Project {
+  const subtitle = isPlaceholderText(project.subtitle) ? "" : project.subtitle;
+  const oneLiner = isPlaceholderText(project.oneLiner) ? "" : project.oneLiner;
+  const sections = project.sections
+    .map((section) => ({
+      ...section,
+      body: liveParagraphs(section.body),
+      bodyAfter: section.bodyAfter ? liveParagraphs(section.bodyAfter) : undefined,
+      callout:
+        section.callout && !isPlaceholderText(section.callout)
+          ? section.callout
+          : undefined,
+    }))
+    .filter(
+      (section) =>
+        section.body.length > 0 ||
+        Boolean(section.callout) ||
+        Boolean(section.pairing) ||
+        Boolean(section.annotations?.length) ||
+        Boolean(section.media?.length)
+    );
+
+  return { ...project, subtitle, oneLiner, sections };
 }

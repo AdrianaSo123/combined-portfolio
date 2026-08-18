@@ -8,12 +8,13 @@ export type MediaRef = {
   height: number;
   type?: "image" | "video";
   poster?: string;
+  caption?: string;
 };
 
 export type CaseStudyAnnotation = {
   heading: string;
   body: string[];
-  media?: MediaRef;
+  media?: MediaRef[];
   mediaLabel?: string;
 };
 
@@ -56,7 +57,7 @@ export type Project = {
   disciplines: string[];
   year: number;
   timeline?: string;
-  status: "shipped" | "prototype" | "research";
+  status: "shipped" | "approved" | "prototype" | "research";
   role: string;
   demonstrates: string;
   brand: { accent: string; background?: string; foreground?: string };
@@ -66,6 +67,13 @@ export type Project = {
   metrics?: { label: string; value: string }[];
   contributions?: string[];
   featured: boolean;
+};
+
+export const STATUS_LABEL: Record<Project["status"], string> = {
+  shipped: "Shipped",
+  approved: "Approved for production",
+  prototype: "Prototype",
+  research: "Research",
 };
 
 export type Experiment = {

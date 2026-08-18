@@ -26,7 +26,7 @@ export const knowledgeBase: KBEntry[] = [
     id: "lyra-1",
     topic: "lyra",
     kind: "project",
-    text: "Lyra is a project that establishes Adriana's range in interaction design and emerging technology. (Placeholder description.)",
+    text: "Lyra is a project that establishes Adriana's range in interaction design and emerging technology.",
     destinations: [{ label: "LYRA", href: routes.work("lyra"), kind: "work" }],
   },
   {
@@ -56,7 +56,7 @@ export const knowledgeBase: KBEntry[] = [
     id: "process-1",
     topic: "process",
     kind: "faq",
-    text: "Adriana starts from the people and the system: context, constraints, then design and iteration until there is a clear outcome. The case studies follow that path — live product work, interaction pieces, and AI research.",
+    text: "Adriana starts from the people and the system: context, constraints, then design and iteration until there is a clear outcome. The case studies follow that path — product work, interaction pieces, and AI research.",
     destinations: [
       { label: "SELECTED WORK", href: routes.workSection, kind: "work" },
       { label: "ABOUT", href: routes.about, kind: "about" },

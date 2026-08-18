@@ -12,6 +12,7 @@ export function Media({
   className = "",
   sizes = "(max-width: 768px) 100vw, 66vw",
   priority = false,
+  fit = "cover",
 }: {
   media?: MediaRef;
   label: string;
@@ -20,12 +21,13 @@ export function Media({
   className?: string;
   sizes?: string;
   priority?: boolean;
+  fit?: "cover" | "contain";
 }) {
   const hasImage = media && media.src;
 
   return (
     <div
-      className={`relative overflow-hidden rounded-sm ${className}`}
+      className={`relative overflow-hidden rounded-sm ${fit === "contain" ? "bg-cream-deep" : ""} ${className}`}
       style={{ aspectRatio: ratio }}
     >
       {hasImage ? (
@@ -35,7 +37,7 @@ export function Media({
           fill
           sizes={sizes}
           priority={priority}
-          className="object-cover"
+          className={fit === "contain" ? "object-contain p-3 sm:p-5" : "object-cover"}
         />
       ) : (
         <div

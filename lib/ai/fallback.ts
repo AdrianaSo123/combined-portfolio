@@ -32,7 +32,7 @@ const intents: Intent[] = [
     id: "projects",
     match: /\b(projects?|portfolio|selected work|product design|design work|case study)\b/i,
     answer:
-      "Selected work includes a live product platform for Wakefern / ShopRite LPGA, Lyra for interaction range, and research on conversational AI.",
+      "Selected work includes a tournament platform for Wakefern / ShopRite LPGA, approved for production, Lyra for interaction range, and research on conversational AI.",
     destinationsFrom: ["wakefern-1", "lyra-1", "ai-research-1"],
   },
   {

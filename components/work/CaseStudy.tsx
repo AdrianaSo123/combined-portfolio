@@ -1,7 +1,8 @@
 import Link from "next/link";
-import type { CaseStudyAnnotation, CaseStudySection, Project } from "@/content/types";
+import { STATUS_LABEL, type CaseStudyAnnotation, type CaseStudySection, type Project } from "@/content/types";
 import { routes } from "@/lib/routes";
 import { Media } from "./MediaPlaceholder";
+import { MediaCarousel } from "./MediaCarousel";
 import { MetaList } from "@/components/system/MetaList";
 import { PairingTable } from "./PairingTable";
 
@@ -20,6 +21,35 @@ function Prose({ paragraphs }: { paragraphs: string[] }) {
   );
 }
 
+function AnnotationMedia({
+  annotation,
+  accent,
+}: {
+  annotation: CaseStudyAnnotation;
+  accent: string;
+}) {
+  const label = annotation.mediaLabel ?? annotation.heading;
+  const shots = annotation.media ?? [];
+
+  if (shots.length > 1) {
+    return <MediaCarousel items={shots} label={label} />;
+  }
+
+  const shot = shots[0];
+  const landscape = shot ? shot.width >= shot.height : false;
+
+  return (
+    <Media
+      media={shot}
+      label={label}
+      accent={accent}
+      ratio={landscape ? "16 / 10" : "4 / 5"}
+      fit={shot ? "contain" : "cover"}
+      sizes="(max-width: 1024px) 100vw, 58vw"
+    />
+  );
+}
+
 function AnnotationRow({
   annotation,
   reversed,
@@ -30,15 +60,9 @@ function AnnotationRow({
   accent: string;
 }) {
   return (
-    <div className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-      <div className={`lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}>
-        <Media
-          media={annotation.media}
-          label={annotation.mediaLabel ?? annotation.heading}
-          accent={accent}
-          ratio="4 / 3"
-          sizes="(max-width: 1024px) 100vw, 58vw"
-        />
+    <div className="grid min-w-0 items-center gap-8 lg:grid-cols-12 lg:gap-12">
+      <div className={`min-w-0 lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}>
+        <AnnotationMedia annotation={annotation} accent={accent} />
       </div>
       <div className={`lg:col-span-5 ${reversed ? "lg:order-1" : ""}`}>
         <h3 className="font-display text-2xl leading-snug tracking-tight text-ink sm:text-3xl">
@@ -113,13 +137,13 @@ function NarrativeSection({
 export function CaseStudy({ project }: { project: Project }) {
   const heading = project.headline ?? project.name;
   const kicker = project.client ?? `OPENING / WORK_${project.index}`;
-  const deck = project.subtitle !== heading ? project.subtitle : null;
+  const deck = project.subtitle && project.subtitle !== heading ? project.subtitle : null;
   const metaRows = [
     ...(project.client ? [{ label: "Client", value: project.name }] : []),
     { label: "Role", value: project.role },
     { label: "Timeline", value: project.timeline ?? String(project.year) },
     { label: "Discipline", value: project.disciplines.join(", ") },
-    { label: "Status", value: project.status },
+    { label: "Status", value: STATUS_LABEL[project.status] },
   ];
 
   return (
@@ -140,9 +164,11 @@ export function CaseStudy({ project }: { project: Project }) {
               {deck}
             </p>
           )}
-          <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/85">
-            {project.oneLiner}
-          </p>
+          {project.oneLiner ? (
+            <p className="mt-6 max-w-xl text-base leading-relaxed text-ink/85">
+              {project.oneLiner}
+            </p>
+          ) : null}
           {project.contributions && project.contributions.length > 0 && (
             <ul className="mt-6 flex flex-wrap gap-2">
               {project.contributions.map((tag) => (

@@ -13,7 +13,14 @@ describe("scriptedAnswer", () => {
   it("routes project questions to selected work", () => {
     const result = scriptedAnswer("What are the projects?");
     expect(result.citations).toEqual(["wakefern-1", "lyra-1", "ai-research-1"]);
+    expect(result.answer).toMatch(/approved for production/i);
+    expect(result.answer).not.toMatch(/live product/i);
     expect(result.suggestedDestinations).toHaveLength(3);
+    expect(result.suggestedDestinations.map((d) => d.href)).toEqual([
+      "/work/wakefern-lpga",
+      "/work/lyra",
+      "/work/ai-chat-research",
+    ]);
   });
 
   it("routes process questions to how the work is done", () => {

@@ -1,7 +1,8 @@
 import { describe, it, expect } from "vitest";
 import { about, HEADLINE, HERO_LINES } from "./about";
 import { kbText } from "./kb";
-import { publishedAbout, publishedLinks } from "./published";
+import { publishedAbout, publishedLinks, publishedProject } from "./published";
+import { featuredProjects, getProject } from "./projects";
 import { siteConfig } from "../lib/site";
 
 describe("publishedAbout", () => {
@@ -59,6 +60,36 @@ describe("publishedLinks", () => {
   });
 });
 
+describe("publishedProject", () => {
+  it("strips placeholder case-study copy", () => {
+    const lyra = getProject("lyra");
+    expect(lyra).toBeDefined();
+    const published = publishedProject(lyra!);
+    expect(published.subtitle).toBe("");
+    expect(published.oneLiner).toBe("");
+    expect(published.sections).toEqual([]);
+  });
+
+  it("keeps real Wakefern narrative", () => {
+    const wakefern = getProject("wakefern-lpga");
+    expect(wakefern).toBeDefined();
+    const published = publishedProject(wakefern!);
+    expect(published.status).toBe("approved");
+    expect(published.sections.length).toBeGreaterThan(5);
+    expect(published.sections.some((s) => s.heading === "Outcome")).toBe(true);
+  });
+});
+
+describe("featuredProjects", () => {
+  it("includes all featured case studies", () => {
+    expect(featuredProjects.map((p) => p.slug)).toEqual([
+      "wakefern-lpga",
+      "lyra",
+      "ai-chat-research",
+    ]);
+  });
+});
+
 describe("HEADLINE", () => {
   it("is the single positioning string for about, metadata, and KB", () => {
     expect(about.headline).toBe(HEADLINE);
@@ -68,5 +99,13 @@ describe("HEADLINE", () => {
 
   it("stacks the same positioning as separate hero lines", () => {
     expect(HERO_LINES.join(" ")).toBe(HEADLINE);
+  });
+});
+
+describe("Wakefern status language", () => {
+  it("never calls Wakefern a live product", () => {
+    expect(kbText("wakefern-1")).toMatch(/approved for production/i);
+    expect(kbText("wakefern-1")).not.toMatch(/live product/i);
+    expect(kbText("process-1")).not.toMatch(/live product/i);
   });
 });

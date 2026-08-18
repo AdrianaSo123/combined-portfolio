@@ -1,8 +1,21 @@
-import type { Project } from "./types";
+import type { MediaRef, Project } from "./types";
 import { BRAND } from "@/lib/theme";
 
-// NOTE: Placeholder content. Structure matches spec §24.1 so real copy,
-// metrics, and media can be dropped in later without layout changes.
+const WAKEFERN_PHONE = { width: 833, height: 1600 };
+
+function wakefernScreen(
+  file: string,
+  caption: string,
+  size: { width: number; height: number } = WAKEFERN_PHONE,
+): MediaRef {
+  return {
+    src: `/images/wakefern/${file}`,
+    alt: `${caption} — ShopRite LPGA Classic`,
+    caption,
+    width: size.width,
+    height: size.height,
+  };
+}
 
 export const projects: Project[] = [
   {
@@ -17,7 +30,7 @@ export const projects: Project[] = [
     disciplines: ["Product Design", "Systems"],
     year: 2026,
     timeline: "February–May 2026",
-    status: "shipped",
+    status: "approved",
     role: "UX & Product Design Intern",
     demonstrates: "I can do the job.",
     brand: { accent: "#c8102e" },
@@ -68,6 +81,11 @@ export const projects: Project[] = [
               "Sponsors could access relevant schedules, hospitality information, event details, announcements, and tournament content in one place.",
             ],
             mediaLabel: "Sponsor home, personalized schedule, and event details",
+            media: [
+              wakefernScreen("sponsor-home.png", "Sponsor home"),
+              wakefernScreen("sponsor-schedule.png", "Personalized schedule"),
+              wakefernScreen("event-details.png", "Event details"),
+            ],
           },
           {
             heading: "Tournament information and wayfinding",
@@ -75,6 +93,12 @@ export const projects: Project[] = [
               "Maps, tee times, scoreboards, player profiles, news, and announcements helped users find important information throughout the event.",
             ],
             mediaLabel: "Interactive map and tournament information screens",
+            media: [
+              wakefernScreen("map.png", "Map"),
+              wakefernScreen("map-down.png", "Map filters"),
+              wakefernScreen("tee-times.png", "Tee times"),
+              wakefernScreen("scoreboard.png", "Scoreboard"),
+            ],
           },
           {
             heading: "Administrative control",
@@ -82,6 +106,13 @@ export const projects: Project[] = [
               "A desktop experience allowed staff to manage sponsors, accounts, access, announcements, schedules, and platform content.",
             ],
             mediaLabel: "Admin dashboard and sponsor-management screens",
+            media: [
+              wakefernScreen("admin-home.png", "Admin home", { width: 2185, height: 1457 }),
+              wakefernScreen("sponsor-management.png", "Sponsor management", {
+                width: 2200,
+                height: 1398,
+              }),
+            ],
           },
         ],
       },
@@ -103,6 +134,15 @@ export const projects: Project[] = [
           "Our team did not begin with extensive knowledge of golf-event applications, so we reviewed comparable products to understand established conventions.",
           "I examined how golf applications organized schedules, tee times, scoreboards, player profiles, and event updates. I also studied map-based applications to understand patterns for markers, location categories, wayfinding, and location details. Additionally, I studied previous ShopRite apps to ensure our designs matched the company’s previous branding and felt like a seamless part of the ShopRite ecosystem.",
           "This research helped me understand industry-familiar design patterns while identifying what needed to be adapted for the ShopRite LPGA Classic.",
+        ],
+      },
+      {
+        kind: "design",
+        heading: "Exploring directions through wireframes",
+        body: [
+          "From the competitive analysis, I began wireframing the experience around the features that would matter most during the event.",
+          "My team and I each produced a set of wireframes so we could compare different interpretations of the same product. We reviewed them together and selected the directions closest to the vision: a focused companion for the tournament rather than a dense catalog of information.",
+          "Those wireframes became a shared starting point. They helped us align on structure before committing to higher-fidelity screens, and they made it easier to decide what to keep, combine, or leave out as the requirements continued to change.",
         ],
       },
       {
@@ -203,8 +243,9 @@ export const projects: Project[] = [
           "Our early personas, sitemap, and user flows changed as we learned more, but that did not make them unsuccessful. Their value was in making our assumptions visible and giving stakeholders something concrete to evaluate.",
           "When the separate desktop requirement became clear late in the project, I learned to focus on the features needed to make the mobile and desktop experiences work together instead of attempting to perfect every possible feature. It was more important to design the essential features well than to rush through everything and sacrifice quality.",
           "With more time, I would test the platform directly with sponsors and administrators, focusing on personalized schedules, event wayfinding, and high-frequency administrative tasks.",
-          "My biggest takeaway: good product design is not only about designing useful interfaces. It is about making thoughtful design decisions even when the requirements aren’t solidified.",
         ],
+        callout:
+          "My biggest takeaway: good product design is not only about designing useful interfaces. It is about making thoughtful design decisions even when the requirements aren’t solidified.",
       },
     ],
     featured: true,

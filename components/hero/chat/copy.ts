@@ -33,7 +33,7 @@ export function menuDigitToSend(
   return key;
 }
 
-// Maps a typed "1"–"4" to that menu line so keyboard, click, and submit
+// Maps a typed "1"–"3" to that menu line so keyboard, click, and submit
 // all produce the same prompt. Anything else is sent as written.
 export function promptFromInput(raw: string): string | null {
   const trimmed = raw.trim();
