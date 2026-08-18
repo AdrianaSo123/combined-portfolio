@@ -3,14 +3,6 @@ import { BRAND } from "@/lib/theme";
 
 // NOTE: Placeholder content. Structure matches spec §24.1 so real copy,
 // metrics, and media can be dropped in later without layout changes.
-// Media uses empty src -> UI renders a labeled placeholder panel.
-
-const placeholderCover = (label: string): Project["cover"] => ({
-  src: "",
-  alt: `${label} — project cover (placeholder)`,
-  width: 1600,
-  height: 1000,
-});
 
 export const projects: Project[] = [
   {
@@ -26,7 +18,12 @@ export const projects: Project[] = [
     role: "Product Design",
     demonstrates: "I can do the job.",
     brand: { accent: "#c8102e" },
-    cover: placeholderCover("Wakefern / ShopRite LPGA"),
+    cover: {
+      src: "/images/wakefern-thumb.png",
+      alt: "Wakefern / ShopRite LPGA Classic — project cover",
+      width: 1800,
+      height: 1200,
+    },
     gallery: [],
     metrics: [
       { label: "Workflows unified", value: "—" },
@@ -95,10 +92,10 @@ export const projects: Project[] = [
     demonstrates: "I have range.",
     brand: { accent: "#5b8def" },
     cover: {
-      src: "/images/lyra.avif",
+      src: "/images/lyra.png",
       alt: "Lyra — project cover",
-      width: 3514,
-      height: 2083,
+      width: 1800,
+      height: 1200,
     },
     gallery: [],
     sections: [
@@ -133,7 +130,12 @@ export const projects: Project[] = [
     role: "Design Research",
     demonstrates: "This is where I'm going.",
     brand: { accent: BRAND.accent },
-    cover: placeholderCover("AI + Chat Research"),
+    cover: {
+      src: "/images/ai-chat-research.png",
+      alt: "AI + Chat Research — project cover",
+      width: 1800,
+      height: 1200,
+    },
     gallery: [],
     sections: [
       {
