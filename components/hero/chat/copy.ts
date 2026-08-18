@@ -2,24 +2,23 @@
 // can be edited without touching layout.
 
 export const CHAT_COPY = {
-  emptyTitle: "Ask about the work.",
-  emptySubtitle: "Type 1–4, click a line, or ask a question.",
+  emptyTitle: "Where do you want to start?",
+  emptySubtitle: "Type 1–3, or ask a question.",
   inputId: "chat-input",
   inputLabel: "Ask something about Adriana's portfolio",
-  placeholder: "1–4 or a question…",
+  placeholder: "1–3 or a question…",
   send: "Send",
-  emptyHint: "Type a question, or 1–4 to pick a line.",
+  emptyHint: "Type a question, or 1–3 to pick a line.",
   reset: "New question",
 } as const;
 
 export const SUGGESTIONS = [
-  "What have you shipped?",
-  "Show me your product design work.",
-  "What are you researching about AI?",
-  "Show me something technical.",
+  "Who is Adriana?",
+  "What are the projects?",
+  "How does Adriana work?",
 ] as const;
 
-const MENU_PICK = /^[1-4]$/;
+const MENU_PICK = /^[1-3]$/;
 
 // Digit keys only count as a menu pick when the field is empty and idle.
 // Typing "1" inside a question stays a character.

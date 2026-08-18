@@ -121,10 +121,10 @@ describe("useChat", () => {
       await result.current.send("1");
     });
 
-    expect(askPortfolio).toHaveBeenCalledWith("What have you shipped?");
+    expect(askPortfolio).toHaveBeenCalledWith("Who is Adriana?");
     expect(result.current.messages[0]).toMatchObject({
       role: "user",
-      text: "What have you shipped?",
+      text: "Who is Adriana?",
     });
   });
 });

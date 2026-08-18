@@ -14,17 +14,14 @@ export function ProjectFeature({
   const meta = `${project.disciplines.join(" · ")} · ${project.year}`;
 
   return (
-    <article className="grid gap-6 border-t border-line-ink py-12 sm:py-16 lg:grid-cols-12 lg:gap-10">
+    <article className="grid items-center gap-6 border-t border-line-ink py-10 sm:py-12 lg:grid-cols-12 lg:gap-10">
       <div
-        className={`lg:col-span-4 ${reversed ? "lg:order-2 lg:col-start-9" : ""}`}
+        className={`lg:col-span-5 ${reversed ? "lg:order-2 lg:col-start-8" : ""}`}
       >
-        <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
-          {project.index}
-        </p>
-        <h3 className="mt-4 font-display text-4xl leading-none tracking-tight text-ink sm:text-5xl">
+        <h3 className="font-display text-3xl leading-none tracking-tight text-ink sm:text-4xl">
           {project.name}
         </h3>
-        <p className="mt-1 font-display text-lg text-ink/70">{project.subtitle}</p>
+        <p className="mt-1 font-display text-base text-ink/70">{project.subtitle}</p>
         <p className="mt-4 max-w-sm text-sm leading-relaxed text-ink/80">
           {project.oneLiner}
         </p>
@@ -39,17 +36,18 @@ export function ProjectFeature({
         </Link>
       </div>
 
-      <div className={`lg:col-span-8 ${reversed ? "lg:order-1 lg:col-start-1" : ""}`}>
+      <div className={`lg:col-span-6 ${reversed ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
         <Link
           href={routes.work(project.slug)}
           aria-label={`View ${project.name} case study`}
-          className="block"
+          className="block max-w-xl lg:max-w-none"
         >
           <Media
             media={project.cover}
-            label={`${project.index} / ${project.name}`}
+            label={project.name}
             accent={project.brand.accent}
-            ratio="16 / 10"
+            ratio="3 / 2"
+            sizes="(max-width: 768px) 100vw, 42vw"
           />
         </Link>
       </div>

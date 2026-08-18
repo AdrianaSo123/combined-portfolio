@@ -3,7 +3,7 @@ import { SUGGESTIONS } from "./copy";
 // Numbered terminal menu. Click a line, or type that number in the field.
 export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => void }) {
   return (
-    <ul className="mt-2 space-y-0">
+    <ul className="mt-1.5 space-y-0">
       {SUGGESTIONS.map((s, i) => {
         const n = String(i + 1);
         return (
@@ -12,7 +12,7 @@ export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => voi
               type="button"
               onClick={() => onSelect(s)}
               aria-keyshortcuts={n}
-              className="group flex w-full items-center gap-2 rounded-sm px-1 py-1.5 text-left text-xs leading-snug text-[color:var(--color-screen)]/90 transition-colors hover:bg-[color:var(--color-screen)]/12 hover:text-[color:var(--color-screen)] sm:text-sm"
+              className="group flex w-full items-center gap-2 rounded-sm py-1 text-left text-[0.7rem] leading-snug text-[color:var(--color-screen)]/90 transition-colors hover:bg-[color:var(--color-screen)]/12 hover:text-[color:var(--color-screen)] sm:text-xs"
             >
               <span className="w-4 shrink-0 font-mono tabular-nums text-[color:var(--color-screen)]">
                 {n}
@@ -20,7 +20,7 @@ export function SuggestionGrid({ onSelect }: { onSelect: (prompt: string) => voi
               <span className="flex-1 underline-offset-2 group-hover:underline">{s}</span>
               <span
                 aria-hidden="true"
-                className="font-mono text-[color:var(--color-screen)]/45 transition-all group-hover:translate-x-0.5 group-hover:text-[color:var(--color-screen)]"
+                className="w-10 shrink-0 text-right font-mono text-[color:var(--color-screen)]/45 group-hover:text-[color:var(--color-screen)]"
               >
                 &gt;
               </span>

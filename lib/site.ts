@@ -5,7 +5,7 @@ import { HEADLINE } from "@/content/about";
 
 export const siteConfig = {
   name: "Adriana So",
-  title: "Adriana So — Product · AI · HCI",
+  title: "Adriana So — Product · AI",
   description: HEADLINE,
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? "https://adrianaso.com").replace(/\/$/, ""),
 } as const;

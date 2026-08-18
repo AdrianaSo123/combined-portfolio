@@ -10,12 +10,14 @@ export function Media({
   ratio = "16 / 10",
   accent,
   className = "",
+  sizes = "(max-width: 768px) 100vw, 66vw",
 }: {
   media?: MediaRef;
   label: string;
   ratio?: string;
   accent?: string;
   className?: string;
+  sizes?: string;
 }) {
   const hasImage = media && media.src;
 
@@ -29,7 +31,7 @@ export function Media({
           src={media!.src}
           alt={media!.alt}
           fill
-          sizes="(max-width: 768px) 100vw, 66vw"
+          sizes={sizes}
           className="object-cover"
         />
       ) : (

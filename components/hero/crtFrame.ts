@@ -1,22 +1,23 @@
 import type { CSSProperties } from "react";
 import { BRAND_RGB, rgba } from "@/lib/theme";
 
-// Measured glass well for public/images/crt-frame.png.
-// Percentages are of the image box — keep the frame at this aspect ratio so
-// the well stays registered to the bezel. Recompute if the photo is replaced.
+// The photo's punched hole is jagged. The live well sits ON TOP of the
+// frame and covers that hole with a smooth rounded rect, so leftover
+// gray in the PNG cannot show through.
 
 export const CRT_FRAME = {
   src: "/images/crt-frame.png",
   width: 1103,
   height: 1022,
   well: {
-    left: 10.6613,
-    top: 13.7385,
-    width: 77.7417,
-    height: 60.5802,
+    left: 10.35,
+    top: 13.45,
+    width: 80.05,
+    height: 61.1,
   },
-  glassPad: { x: "6%", y: "7%" },
-  glow: rgba(BRAND_RGB.accent, 0.22),
+  wellRadius: { x: "5.4%", y: "7.8%" },
+  glassPad: { left: "7%", right: "9%", top: "8%", bottom: "10%" },
+  glow: rgba(BRAND_RGB.accent, 0.55),
 } as const;
 
 export function wellStyle(
@@ -27,5 +28,6 @@ export function wellStyle(
     top: `${well.top}%`,
     width: `${well.width}%`,
     height: `${well.height}%`,
+    borderRadius: `${CRT_FRAME.wellRadius.x} / ${CRT_FRAME.wellRadius.y}`,
   };
 }

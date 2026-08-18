@@ -19,7 +19,7 @@ export function MessageList({
   return (
     <div
       ref={listRef}
-      className="flex-1 overflow-y-auto pr-1 text-sm leading-relaxed"
+      className="flex-1 overflow-y-auto pr-1 text-xs leading-snug sm:text-[0.8rem] sm:leading-relaxed"
       aria-live="polite"
     >
       {!started ? (

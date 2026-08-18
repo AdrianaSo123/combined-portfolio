@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { about, HEADLINE } from "./about";
+import { about, HEADLINE, HERO_LINES } from "./about";
 import { kbText } from "./kb";
 import { publishedAbout, publishedLinks } from "./published";
 import { siteConfig } from "../lib/site";
@@ -43,5 +43,9 @@ describe("HEADLINE", () => {
     expect(about.headline).toBe(HEADLINE);
     expect(siteConfig.description).toBe(HEADLINE);
     expect(kbText("about-1")).toBe(HEADLINE);
+  });
+
+  it("stacks the same positioning as separate hero lines", () => {
+    expect(HERO_LINES.join(" ")).toBe(HEADLINE);
   });
 });

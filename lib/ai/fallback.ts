@@ -17,10 +17,22 @@ type Intent = {
 
 const intents: Intent[] = [
   {
-    id: "product-design",
-    match: /\b(product design|design work|case study|ux|projects?)\b/i,
+    id: "process",
+    match: /\b(process|how do you work|how does adriana work|how you work|method)\b/i,
+    answer: kbText("process-1"),
+    destinationsFrom: ["process-1"],
+  },
+  {
+    id: "about",
+    match: /\b(who|about|adriana|background|résumé|resume|contact|hire)\b/i,
+    answer: kbText("about-1"),
+    destinationsFrom: ["about-1"],
+  },
+  {
+    id: "projects",
+    match: /\b(projects?|portfolio|selected work|product design|design work|case study)\b/i,
     answer:
-      "Adriana's selected work spans a shipped product platform, a project showing interaction-design range, and human-AI research.",
+      "Selected work includes a live product platform for Wakefern / ShopRite LPGA, Lyra for interaction range, and research on conversational AI.",
     destinationsFrom: ["wakefern-1", "lyra-1", "ai-research-1"],
   },
   {
@@ -31,19 +43,13 @@ const intents: Intent[] = [
   },
   {
     id: "technical",
-    match: /\b(technical|build|code|engineer|prototype|lab|experiment)\b/i,
+    match: /\b(technical|build|built|code|engineer|prototype|lab|experiment)\b/i,
     answer: kbText("lab-1"),
     destinationsFrom: ["lab-1"],
   },
   {
-    id: "about",
-    match: /\b(who|about|background|résumé|resume|contact|hire)\b/i,
-    answer: kbText("about-1"),
-    destinationsFrom: ["about-1"],
-  },
-  {
     id: "shipped",
-    match: /\b(ship|shipped|launch|real|professional|work)\b/i,
+    match: /\b(ship|shipped|launch|launched|live|wakefern|lpga)\b/i,
     answer: kbText("wakefern-1"),
     destinationsFrom: ["wakefern-1"],
   },

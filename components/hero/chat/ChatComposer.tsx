@@ -28,7 +28,7 @@ export function ChatComposer({
         e.preventDefault();
         onSubmit();
       }}
-      className="mt-2 border-t border-[color:var(--color-screen)]/25 pt-2"
+      className="mt-1.5 border-t border-[color:var(--color-screen)]/25 pt-1.5"
     >
       <div className="flex items-center gap-2">
         <label htmlFor={CHAT_COPY.inputId} className="sr-only">
@@ -59,24 +59,24 @@ export function ChatComposer({
           maxLength={MAX_MESSAGE_LENGTH}
           autoComplete="off"
           enterKeyHint="send"
-          className="flex-1 bg-transparent text-sm text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/45 focus:outline-none"
+          className="flex-1 bg-transparent text-xs text-[color:var(--color-screen)] placeholder:text-[color:var(--color-screen)]/45 focus:outline-none sm:text-sm"
         />
-        <button
-          type="submit"
-          disabled={pending}
-          className="text-xs uppercase tracking-[0.12em] text-[color:var(--color-screen)] opacity-80 hover:opacity-100 disabled:opacity-40"
-        >
-          {CHAT_COPY.send}
-        </button>
         {started && (
           <button
             type="button"
             onClick={onReset}
-            className="text-xs uppercase tracking-[0.12em] text-[color:var(--color-screen)] opacity-80 hover:opacity-100"
+            className="shrink-0 text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--color-screen)] opacity-80 hover:opacity-100"
           >
             {CHAT_COPY.reset}
           </button>
         )}
+        <button
+          type="submit"
+          disabled={pending}
+          className="w-10 shrink-0 text-right text-[0.65rem] uppercase tracking-[0.08em] text-[color:var(--color-screen)] opacity-80 hover:opacity-100 disabled:opacity-40"
+        >
+          {CHAT_COPY.send}
+        </button>
       </div>
       {emptyHint && (
         <p className="mt-1 text-[0.65rem] text-[color:var(--color-screen)]/70" role="status">

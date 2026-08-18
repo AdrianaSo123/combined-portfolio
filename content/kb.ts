@@ -52,6 +52,16 @@ export const knowledgeBase: KBEntry[] = [
     text: "The Lab holds smaller technical experiments and tools, such as UX Synthesizer — AI-assisted research synthesis with structured evidence.",
     destinations: [{ label: "LAB", href: routes.experiments, kind: "experiment" }],
   },
+  {
+    id: "process-1",
+    topic: "process",
+    kind: "faq",
+    text: "Adriana starts from the people and the system: context, constraints, then design and iteration until there is a clear outcome. The case studies follow that path — live product work, interaction pieces, and AI research.",
+    destinations: [
+      { label: "SELECTED WORK", href: routes.workSection, kind: "work" },
+      { label: "ABOUT", href: routes.about, kind: "about" },
+    ],
+  },
 ];
 
 const byId: Record<string, KBEntry> = Object.fromEntries(

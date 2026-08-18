@@ -7,9 +7,9 @@ describe("promptFromInput", () => {
     expect(promptFromInput("   ")).toBeNull();
   });
 
-  it("maps 1–4 to the numbered menu lines", () => {
+  it("maps 1–3 to the numbered menu lines", () => {
     expect(promptFromInput("1")).toBe(SUGGESTIONS[0]);
-    expect(promptFromInput(" 4 ")).toBe(SUGGESTIONS[3]);
+    expect(promptFromInput(" 3 ")).toBe(SUGGESTIONS[2]);
   });
 
   it("passes a freeform question through trimmed", () => {
@@ -18,9 +18,9 @@ describe("promptFromInput", () => {
 });
 
 describe("menuDigitToSend", () => {
-  it("maps 1–4 when the field is empty and idle", () => {
+  it("maps 1–3 when the field is empty and idle", () => {
     expect(menuDigitToSend("1", "", false)).toBe("1");
-    expect(menuDigitToSend("4", "   ", false)).toBe("4");
+    expect(menuDigitToSend("3", "   ", false)).toBe("3");
   });
 
   it("ignores digits while a request is pending", () => {
@@ -31,7 +31,8 @@ describe("menuDigitToSend", () => {
     expect(menuDigitToSend("1", "hello", false)).toBeNull();
   });
 
-  it("ignores keys that are not 1–4", () => {
+  it("ignores keys that are not 1–3", () => {
+    expect(menuDigitToSend("4", "", false)).toBeNull();
     expect(menuDigitToSend("5", "", false)).toBeNull();
     expect(menuDigitToSend("a", "", false)).toBeNull();
     expect(menuDigitToSend("Enter", "", false)).toBeNull();

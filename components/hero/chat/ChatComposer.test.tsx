@@ -16,7 +16,7 @@ const idle = {
 };
 
 describe("ChatComposer", () => {
-  it("sends 1–4 from the focused empty field and prevents the key from typing", () => {
+  it("sends 1–3 from the focused empty field and prevents the key from typing", () => {
     const onPickDigit = vi.fn();
     render(<ChatComposer {...idle} value="" onPickDigit={onPickDigit} />);
 
@@ -39,7 +39,7 @@ describe("ChatComposer", () => {
     expect(allowed).toBe(true);
   });
 
-  it("does not intercept 1–4 while a request is pending", () => {
+  it("does not intercept 1–3 while a request is pending", () => {
     const onPickDigit = vi.fn();
     render(
       <ChatComposer {...idle} value="" pending onPickDigit={onPickDigit} />

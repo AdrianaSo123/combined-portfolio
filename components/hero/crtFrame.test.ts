@@ -14,7 +14,7 @@ describe("CRT_FRAME", () => {
     expect(CRT_FRAME.height).toBe(file.height);
   });
 
-  it("keeps the well inside the image so the bezel can crop it", () => {
+  it("keeps the well inside the image", () => {
     const { well } = CRT_FRAME;
     expect(well.left).toBeGreaterThan(0);
     expect(well.top).toBeGreaterThan(0);
@@ -22,12 +22,21 @@ describe("CRT_FRAME", () => {
     expect(well.top + well.height).toBeLessThan(100);
   });
 
-  it("formats the well as CSS percentages", () => {
+  it("covers the photographed glass opening, not an inset box inside it", () => {
+    const { well } = CRT_FRAME;
+    expect(well.left).toBeLessThan(11);
+    expect(well.top).toBeLessThan(14);
+    expect(well.left + well.width).toBeGreaterThan(90);
+    expect(well.top + well.height).toBeGreaterThan(73);
+  });
+
+  it("formats the well as a rounded rectangle on the image box", () => {
     expect(wellStyle()).toEqual({
       left: `${CRT_FRAME.well.left}%`,
       top: `${CRT_FRAME.well.top}%`,
       width: `${CRT_FRAME.well.width}%`,
       height: `${CRT_FRAME.well.height}%`,
+      borderRadius: `${CRT_FRAME.wellRadius.x} / ${CRT_FRAME.wellRadius.y}`,
     });
   });
 });

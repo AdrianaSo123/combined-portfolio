@@ -3,7 +3,15 @@ import type { About } from "./types";
 // Positioning line (spec §3). Hero, About, metadata, OG, and the KB about
 // answer all import this so a rewrite cannot drift.
 export const HEADLINE =
-  "Designer and builder working across product, AI, and human-computer interaction.";
+  "Designer and builder working across product and AI.";
+
+// Hero stacks these as separate lines. Joined with spaces they are HEADLINE.
+export const HERO_KICKER = "Product · AI";
+export const HERO_LINES = [
+  "Designer and builder",
+  "working across product and AI.",
+] as const;
+export const HERO_KEYWORDS = ["product", "AI"] as const;
 
 // Placeholder about/résumé (spec §24.4). Final headline copy TBD by Adriana.
 export const about: About = {
@@ -13,7 +21,7 @@ export const about: About = {
     "Placeholder bio paragraph two. She moves between designing, researching, and building intelligent systems.",
   ],
   location: "—",
-  focus: ["Product design", "AI interaction", "Human-computer interaction"],
+  focus: ["Product design", "AI interaction"],
   skills: [
     { group: "Design", items: ["Product design", "Interaction design", "Prototyping", "Design systems"] },
     { group: "Research", items: ["User research", "Synthesis", "Usability", "Human–AI interaction"] },

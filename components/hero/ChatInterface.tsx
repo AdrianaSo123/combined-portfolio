@@ -21,7 +21,7 @@ export function ChatInterface() {
   } = useChat();
 
   return (
-    <div className="flex h-full min-h-0 flex-col font-mono text-[color:var(--color-screen)]">
+    <div className="flex h-full min-h-0 flex-col overflow-hidden font-mono text-[color:var(--color-screen)]">
       <MessageList
         messages={messages}
         pending={pending}
