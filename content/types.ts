@@ -59,11 +59,19 @@ export type Experiment = {
 
 export type About = {
   headline: string;
+  greeting: string;
+  portrait?: MediaRef;
   bio: string[];
+  snapshot: string[];
+  origin: string[];
+  philosophy: { hook: string; body: string[] }[];
+  prior: string[];
+  community: string[];
+  offline: string[];
   location?: string;
   focus: string[];
   skills: { group: string; items: string[] }[];
-  experience: { role: string; org: string; period: string; summary: string }[];
+  experience: { role: string; org: string; period: string; location?: string; summary?: string }[];
   education?: { credential: string; org: string; period: string }[];
   socials: { label: string; href: string }[];
   resumeUrl?: string;

@@ -5,13 +5,26 @@ import { publishedAbout, publishedLinks } from "./published";
 import { siteConfig } from "../lib/site";
 
 describe("publishedAbout", () => {
-  it("strips placeholder bio, experience, email, and hash socials", () => {
+  it("strips placeholder bio, experience, and email", () => {
     const published = publishedAbout(about);
     expect(published.bio).toEqual([]);
-    expect(published.experience).toEqual([]);
+    expect(published.snapshot).toEqual([]);
+    expect(published.origin).toEqual([]);
+    expect(published.philosophy).toEqual([]);
+    expect(published.prior).toEqual([]);
+    expect(published.community).toEqual([]);
+    expect(published.offline).toEqual([]);
+    expect(published.experience.map((e) => e.org)).toEqual([
+      "Skyscraper Games",
+      "Wakefern Food Corp",
+      "Social Interaction Lab",
+    ]);
     expect(published.education).toEqual([]);
     expect(published.contactEmail).toBeNull();
-    expect(published.socials).toEqual([]);
+    expect(published.socials).toEqual([
+      { label: "LinkedIn", href: "https://www.linkedin.com/in/adriana-so-24071219b" },
+      { label: "GitHub", href: "https://github.com/AdrianaSo123" },
+    ]);
     expect(published.location).toBeNull();
   });
 
@@ -19,10 +32,18 @@ describe("publishedAbout", () => {
     const published = publishedAbout({
       ...about,
       bio: ["Real bio."],
+      snapshot: ["Born somewhere. Studying something."],
+      origin: ["I started in UX, then built systems."],
+      philosophy: [{ hook: "Research first.", body: ["Designs need a reason."] }],
       contactEmail: "hello@adriana.so",
       socials: [{ label: "LinkedIn", href: "https://linkedin.com/in/real" }],
     });
     expect(published.bio).toEqual(["Real bio."]);
+    expect(published.snapshot).toEqual(["Born somewhere. Studying something."]);
+    expect(published.origin).toEqual(["I started in UX, then built systems."]);
+    expect(published.philosophy).toEqual([
+      { hook: "Research first.", body: ["Designs need a reason."] },
+    ]);
     expect(published.contactEmail).toBe("hello@adriana.so");
     expect(published.socials).toEqual([
       { label: "LinkedIn", href: "https://linkedin.com/in/real" },

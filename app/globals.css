@@ -8,8 +8,8 @@
   --color-bg: #0d0d12;          /* near-black hero ground */
   --color-surface: #15151d;     /* raised dark surfaces */
   --color-fg: #f4f2ea;          /* off-white text on dark */
-  --color-cream: #efe8d8;       /* cream work zone (spec: lower half) */
-  --color-cream-deep: #e7dfca;  /* cream section accents */
+  --color-cream: #f5f1e8;       /* light cream work zone */
+  --color-cream-deep: #f0ebe0;  /* same family, one step warmer */
   --color-ink: #16141c;         /* near-black text on cream */
   --color-muted: #8b8b97;       /* gray/silver secondary text */
   --color-muted-ink: #6a6558;   /* muted text on cream */
@@ -26,6 +26,25 @@
   --dur-fast: 140ms;
   --dur-base: 320ms;
   --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* dark-page scan: phosphor lines, not multiply (that was for CRT glass) */
+.sys-panel {
+  position: relative;
+  overflow: hidden;
+}
+.sys-panel::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: repeating-linear-gradient(
+    to bottom,
+    transparent 0px,
+    transparent 3px,
+    color-mix(in srgb, var(--color-screen) 7%, transparent) 4px
+  );
+  border-radius: inherit;
 }
 
 /* ---------- base ---------- */

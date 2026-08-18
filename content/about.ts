@@ -16,10 +16,26 @@ export const HERO_KEYWORDS = ["product", "AI"] as const;
 // Placeholder about/résumé (spec §24.4). Final headline copy TBD by Adriana.
 export const about: About = {
   headline: HEADLINE,
+  greeting: "hey there, i'm adriana.",
+  portrait: {
+    src: "/images/adriana-pixel.png",
+    alt: "Pixel portrait of Adriana So",
+    width: 931,
+    height: 1024,
+  },
   bio: [
     "Placeholder bio paragraph one. Adriana is a product experience designer working with emerging technology.",
     "Placeholder bio paragraph two. She moves between designing, researching, and building intelligent systems.",
   ],
+  // Story copy — empty sections stay hidden until you paste text.
+  // snapshot = Who I am · origin = Why UX / AI
+  // philosophy: [{ hook: "One-line belief.", body: ["The paragraph under it."] }]
+  snapshot: [],
+  origin: [],
+  philosophy: [],
+  prior: [],
+  community: [],
+  offline: [],
   location: "—",
   focus: ["Product design", "AI interaction"],
   skills: [
@@ -29,19 +45,30 @@ export const about: About = {
   ],
   experience: [
     {
-      role: "Product Designer",
-      org: "Placeholder Org",
-      period: "20— – present",
-      summary: "Placeholder summary of role and impact.",
+      role: "Research Assistant",
+      org: "Skyscraper Games",
+      location: "Newark",
+      period: "February 2026 – Present",
+    },
+    {
+      role: "UX Designer",
+      org: "Wakefern Food Corp",
+      location: "Newark",
+      period: "February 2026 – May 2026",
+    },
+    {
+      role: "Research Assistant",
+      org: "Social Interaction Lab",
+      location: "Newark",
+      period: "September 2024 – December 2024",
     },
   ],
   education: [
     { credential: "Placeholder degree", org: "Placeholder University", period: "20— – 20—" },
   ],
   socials: [
-    { label: "Email", href: "mailto:hello@example.com" },
-    { label: "LinkedIn", href: "#" },
-    { label: "GitHub", href: "#" },
+    { label: "LinkedIn", href: "https://www.linkedin.com/in/adriana-so-24071219b" },
+    { label: "GitHub", href: "https://github.com/AdrianaSo123" },
   ],
   resumeUrl: undefined,
   contactEmail: "hello@example.com",

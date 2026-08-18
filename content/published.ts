@@ -10,16 +10,34 @@ export function publishedLinks(links: Experiment["links"]): [string, string][] {
   );
 }
 
+function liveParagraphs(paragraphs: string[]): string[] {
+  return paragraphs.filter((p) => p.trim() !== "" && !isPlaceholderText(p));
+}
+
 export function publishedAbout(about: About) {
   return {
     headline: about.headline,
-    bio: about.bio.filter((p) => !isPlaceholderText(p)),
+    greeting: about.greeting,
+    portrait:
+      about.portrait && !isPlaceholderHref(about.portrait.src) ? about.portrait : null,
+    bio: liveParagraphs(about.bio),
+    snapshot: liveParagraphs(about.snapshot),
+    origin: liveParagraphs(about.origin),
+    philosophy: about.philosophy
+      .map((p) => ({
+        hook: p.hook.trim(),
+        body: liveParagraphs(p.body),
+      }))
+      .filter((p) => p.hook !== "" && !isPlaceholderText(p.hook)),
+    prior: liveParagraphs(about.prior),
+    community: liveParagraphs(about.community),
+    offline: liveParagraphs(about.offline),
     location:
       about.location && !isPlaceholderText(about.location) ? about.location : null,
     focus: about.focus,
     skills: about.skills,
     experience: about.experience.filter(
-      (e) => !isPlaceholderText(e.org) && !isPlaceholderText(e.summary)
+      (e) => !isPlaceholderText(e.org) && !isPlaceholderText(e.role)
     ),
     education: (about.education ?? []).filter(
       (ed) => !isPlaceholderText(ed.credential) && !isPlaceholderText(ed.org)
