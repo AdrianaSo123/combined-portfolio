@@ -6,6 +6,7 @@ export const routes = {
   work: (slug: string) => `/work/${slug}`,
   workSection: "/#work",
   experiments: "/experiments",
+  experiment: (slug: string) => `/experiments/${slug}`,
   about: "/about",
   chatApi: "/api/chat",
   mailto: (email: string) => `mailto:${email}`,

@@ -11,6 +11,8 @@ function wakefernScreen(
     height: number;
     after?: number;
     scale?: MediaRef["scale"];
+    zoom?: number;
+    objectPosition?: string;
   } = WAKEFERN_PHONE,
 ): MediaRef {
   return {
@@ -21,6 +23,8 @@ function wakefernScreen(
     height: size.height,
     after: size.after,
     scale: size.scale,
+    zoom: size.zoom,
+    objectPosition: size.objectPosition,
   };
 }
 

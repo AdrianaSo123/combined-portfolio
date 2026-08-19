@@ -93,6 +93,8 @@ export type Experiment = {
   blurb: string;
   stack: string[];
   keyDecision?: string;
+  outcome?: string;
+  proofSystem?: string;
   links: { demo?: string; github?: string; notes?: string };
   media?: MediaRef;
   diagram?: MediaRef;

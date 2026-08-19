@@ -16,12 +16,14 @@ const base: Experiment = {
 };
 
 describe("ExperimentCard", () => {
-  it("does not render placeholder # links", () => {
+  it("keeps placeholder links hidden while showing the detail route", () => {
     render(<ExperimentCard experiment={base} />);
-    expect(screen.queryByRole("link")).toBeNull();
+    const links = screen.getAllByRole("link");
+    expect(links).toHaveLength(1);
+    expect(links[0].getAttribute("href")).toBe("/experiments/ux-synthesizer");
   });
 
-  it("renders only real destinations", () => {
+  it("renders real external destinations plus the detail route", () => {
     render(
       <ExperimentCard
         experiment={{
@@ -31,7 +33,10 @@ describe("ExperimentCard", () => {
       />
     );
     const links = screen.getAllByRole("link");
-    expect(links).toHaveLength(1);
-    expect(links[0].getAttribute("href")).toBe("https://github.com/real");
+    expect(links).toHaveLength(2);
+    expect(links.map((link) => link.getAttribute("href"))).toEqual([
+      "https://github.com/real",
+      "/experiments/ux-synthesizer",
+    ]);
   });
 });

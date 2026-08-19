@@ -49,7 +49,7 @@ export const knowledgeBase: KBEntry[] = [
     id: "lab-1",
     topic: "lab",
     kind: "experiment",
-    text: "The Lab holds smaller technical experiments and tools, such as UX Synthesizer — AI-assisted research synthesis with structured evidence.",
+    text: "The Lab holds smaller technical experiments and tools, including UX Synthesizer: a Next.js and TypeScript system that synthesizes qualitative UX inputs into grounded themes, pain points, personas, codebooks, and recommendations, with Zod validation and evidence checks.",
     destinations: [{ label: "LAB", href: routes.experiments, kind: "experiment" }],
   },
   {
