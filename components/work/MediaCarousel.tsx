@@ -57,9 +57,10 @@ export function MediaCarousel({
     <div role="region" aria-roledescription="carousel" aria-label={label} className="min-w-0">
       <div
         ref={scroller}
-        className="flex w-full min-w-0 snap-x snap-mandatory overflow-x-auto overflow-y-hidden rounded-sm bg-cream-deep [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="flex w-full min-w-0 snap-x snap-mandatory overflow-x-auto overflow-y-hidden rounded-sm border border-line-ink bg-cream-deep [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         onScroll={syncIndex}
         tabIndex={0}
+        aria-label={label}
         onKeyDown={(e) => {
           if (e.key === "ArrowRight") {
             e.preventDefault();
@@ -74,7 +75,7 @@ export function MediaCarousel({
         {items.map((item, i) => (
           <figure
             key={item.src}
-            className="relative w-full min-w-full max-w-full shrink-0 grow-0 basis-full overflow-hidden snap-start"
+            className="relative w-full min-w-full max-w-full shrink-0 grow-0 basis-full overflow-hidden border-r border-line-ink bg-cream-last snap-start last:border-r-0"
             style={{ height: frame.height }}
             aria-hidden={i !== index}
           >
@@ -85,6 +86,11 @@ export function MediaCarousel({
                 fill
                 sizes={sizes}
                 priority={i === 0}
+                loading={i === 0 ? "eager" : "lazy"}
+                style={{
+                  transform: item.zoom ? `scale(${item.zoom})` : undefined,
+                  transformOrigin: item.objectPosition ?? "center center",
+                }}
                 className="object-contain object-center"
               />
             </div>

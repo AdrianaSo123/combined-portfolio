@@ -9,6 +9,8 @@ export type MediaRef = {
   type?: "image" | "video";
   poster?: string;
   caption?: string;
+  zoom?: number;
+  objectPosition?: string;
   /** 0-based: render after this body paragraph. Omit = after all body. */
   after?: number;
   /** full = article width; inset = narrower; tight = closer to the reading measure. */

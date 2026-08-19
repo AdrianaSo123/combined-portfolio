@@ -130,7 +130,8 @@ export const projects: Project[] = [
           "Because my team and I did not initially have direct access to end users, I developed provisional personas based on the roles identified by executive stakeholders.",
           "I treated these personas as working assumptions rather than validated user research. They helped us compare the potential goals and information needs of sponsors, participants, volunteers, event staff, administrators, and general attendees.",
           "We used them to consider what information each role needed, which tasks would be time-sensitive, what content should be shared or personalized, which users required different levels of access, and who would maintain the information behind the experience.",
-          "We also created a sitemap to organize the requested features and confirm our understanding of tournament terminology with stakeholders. User journeys and flows helped us explore how each audience might complete important tasks.",
+          "I also created a sitemap to organize the requested features and confirm our understanding of tournament terminology with stakeholders. User journeys and flows helped us explore how each audience might complete important tasks.",
+          "Since the app was role dependent, different users would have access to different features. This stage was exceptionally useful in helping me visualize those differences.",
           "These artifacts were useful because they made our assumptions visible. As we continued speaking with stakeholders, several of those assumptions changed.",
         ],
         media: [
@@ -139,12 +140,32 @@ export const projects: Project[] = [
             height: 2020,
             after: 2,
             scale: "tight",
+            zoom: 1.08,
+            objectPosition: "center 42%",
           }),
           wakefernScreen("sitemap.png", "Initial sitemap", {
             width: 2400,
             height: 1514,
             after: 3,
             scale: "tight",
+            zoom: 1.08,
+            objectPosition: "center 50%",
+          }),
+          wakefernScreen("attendee-flow.png", "Attendee events homepage user flow", {
+            width: 1600,
+            height: 1100,
+            after: 3,
+            scale: "tight",
+            zoom: 1.12,
+            objectPosition: "center 52%",
+          }),
+          wakefernScreen("sponsors-flow.png", "Sponsors and players profile page user flow", {
+            width: 1700,
+            height: 980,
+            after: 3,
+            scale: "tight",
+            zoom: 1.1,
+            objectPosition: "center 52%",
           }),
         ],
       },
@@ -152,21 +173,27 @@ export const projects: Project[] = [
         kind: "custom",
         heading: "Learning from comparable experiences",
         body: [
-          "Our team did not begin with extensive knowledge of golf-event applications, so we reviewed comparable products to understand established conventions.",
-          "I examined how golf applications organized schedules, tee times, scoreboards, player profiles, and event updates. I also studied map-based applications to understand patterns for markers, location categories, wayfinding, and location details. Additionally, I studied previous ShopRite apps to ensure our designs matched the company’s previous branding and felt like a seamless part of the ShopRite ecosystem.",
+          "Because our team had very limited experience with golf or golf tournaments, I reviewed popular golf and event apps to understand the conventions users would already expect.",
+          "I looked at how they prioritized schedules, tee times, scores, player information, and live updates, then used those patterns to guide our navigation and information hierarchy.",
+          "I also compared approaches to map markers, location categories, and wayfinding, while reviewing previous ShopRite applications to keep the experience consistent with the existing brand.",
+          "This gave me a clearer basis for deciding which familiar patterns to borrow and which needed to be adapted for sponsors.",
         ],
         media: [
           wakefernScreen("moodboard-1.png", "Moodboard 1", {
             width: 2400,
             height: 1773,
             after: 1,
-            scale: "tight",
+            scale: "inset",
+            zoom: 1.08,
+            objectPosition: "center 52%",
           }),
           wakefernScreen("moodboard-2.png", "Moodboard 2", {
             width: 2400,
             height: 1183,
             after: 1,
-            scale: "tight",
+            scale: "inset",
+            zoom: 1.12,
+            objectPosition: "center 38%",
           }),
         ],
         bodyAfter: [
@@ -185,6 +212,9 @@ export const projects: Project[] = [
           wakefernScreen("wireframes.jpg", "Early wireframes", {
             width: 3200,
             height: 2056,
+            scale: "inset",
+            zoom: 1.06,
+            objectPosition: "center 45%",
           }),
         ],
       },
@@ -193,11 +223,11 @@ export const projects: Project[] = [
         heading: "The scope evolved",
         body: [
           "Our initial structure attempted to accommodate every audience described in the requirements. As the deadline approached and stakeholder conversations clarified priorities, it became clear that we could not design equally complete experiences for every group.",
-          "We narrowed the primary mobile experience to sponsors and administrators who needed to run the app before and during the event.",
+          "I narrowed the primary mobile experience to sponsors and administrators who needed to run the app before and during the event.",
           "Sponsors needed relevant event information. Administrators needed control over the system providing it.",
-          "We knew from the beginning that some form of administrative functionality would be necessary. However, we did not initially understand that our deliverables would include a separate desktop admin platform.",
-          "Five weeks before the deadline, the expectation became clear. What we had understood as supporting functionality became a distinct platform with its own navigation, information hierarchy, and workflows. We now had to define the desktop experience while continuing to revise the mobile product.",
-          "To work within the remaining time, we prioritized the administrative capabilities most directly connected to the sponsor experience rather than attempting to resolve every possible workflow.",
+          "I knew from the beginning that some form of administrative functionality would be necessary. I just did not initially understand that our deliverables would include a separate desktop admin platform.",
+          "Five weeks before the deadline, the expectation became clear. What I had understood as supporting functionality became a distinct platform with its own navigation, information hierarchy, and workflows. I had to define the desktop experience while continuing to revise the mobile product.",
+          "To work within the remaining time, I prioritized the administrative capabilities most directly connected to the sponsor experience rather than trying to resolve every possible workflow.",
         ],
         media: [
           wakefernScreen("timeline.png", "Project timeline", {
@@ -205,6 +235,8 @@ export const projects: Project[] = [
             height: 591,
             after: 4,
             scale: "inset",
+            zoom: 1.08,
+            objectPosition: "center 50%",
           }),
         ],
       },
@@ -214,9 +246,9 @@ export const projects: Project[] = [
         body: [
           "A complete event schedule would contain a large amount of information, but not all of it would be relevant to every sponsor.",
           "Sponsors could have access to different events, Pro-Am activities, and hospitality experiences depending on their role or participation. Showing every event to every user would require sponsors to determine what applied to them.",
-          "We prioritized a role-aware schedule that surfaced the events relevant to each sponsor.",
+          "We used a role-aware schedule that showed the events relevant to each sponsor.",
           "Each event emphasized the information needed for an immediate decision: what is happening, when it begins, where it is located, whether it is part of my schedule, and what I should know before attending.",
-          "This changed the platform from a general repository of tournament information into a more personal event companion.",
+          "This made me rethink the platform as more than a general repository of tournament information; it became a more personal event companion.",
         ],
       },
       {
@@ -236,7 +268,7 @@ export const projects: Project[] = [
         body: [
           "Personalization on the mobile side created complexity on the administrative side.",
           "If sponsors received different schedules, administrators needed to manage those schedules and their associated access. If event information changed, staff needed a way to update it. If an announcement was time-sensitive, administrators needed to publish it without relying on engineering for routine changes.",
-          "We treated the desktop platform as the system administrators used to manage the sponsor experience.",
+          "I treated the desktop platform as the system administrators used to manage the sponsor experience.",
         ],
         pairing: {
           left: "Sponsor experience",
@@ -278,23 +310,13 @@ export const projects: Project[] = [
         ],
       },
       {
-        kind: "outcome",
-        heading: "Outcome",
-        bodyFormat: "list",
-        body: [
-          "By the end of the internship, the platform and its core workflows were approved for production implementation.",
-          "I presented the design work directly to executive leadership and peers at NJIT.",
-          "The proposed system connected sponsor schedules, maps, tournament information, announcements, access, and administrative management.",
-        ],
-      },
-      {
         kind: "custom",
         heading: "Reflection",
         body: [
           "This project taught me that product design does not always begin with a stable problem or follow a clean, linear process.",
           "Our early personas, sitemap, and user flows changed as we learned more, but that did not make them unsuccessful. Their value was in making our assumptions visible and giving stakeholders something concrete to evaluate.",
-          "When the separate desktop requirement became clear late in the project, I learned to focus on the features needed to make the mobile and desktop experiences work together instead of attempting to perfect every possible feature. It was more important to design the essential features well than to rush through everything and sacrifice quality.",
-          "With more time, I would test the platform directly with sponsors and administrators, focusing on personalized schedules, event wayfinding, and high-frequency administrative tasks.",
+          "When the separate desktop requirement became clear late in the project, I learned to focus on the features needed to make the mobile and desktop experiences work together instead of trying to perfect every possible feature. It was more important to design the essential pieces well than to rush through everything and sacrifice quality.",
+          "With more time, I would test the platform directly with sponsors and administrators, focusing on personalized schedules, event wayfinding, and the high-frequency administrative tasks that would shape how the system actually worked during the event.",
         ],
         callout:
           "My biggest takeaway: good product design is not only about designing useful interfaces. It is about making thoughtful design decisions even when the requirements aren’t solidified.",

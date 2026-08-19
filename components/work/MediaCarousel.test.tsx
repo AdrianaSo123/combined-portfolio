@@ -2,12 +2,14 @@
 import { describe, it, expect, afterEach, vi } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
 import { MediaCarousel } from "./MediaCarousel";
-import type { MediaRef } from "@/content/types";
+import { Media } from "./MediaPlaceholder";
+import { CaseStudy } from "./CaseStudy";
+import type { MediaRef, Project } from "@/content/types";
 
 vi.mock("next/image", () => ({
-  default: ({ alt, src }: { alt: string; src: string }) => (
+  default: ({ alt, src, loading, priority }: { alt: string; src: string; loading?: string; priority?: boolean }) => (
     // eslint-disable-next-line @next/next/no-img-element
-    <img alt={alt} src={src} />
+    <img alt={alt} src={src} loading={loading} data-priority={priority ? "true" : "false"} />
   ),
 }));
 
@@ -67,5 +69,83 @@ describe("MediaCarousel", () => {
     );
     const slide = container.querySelector("figure");
     expect(slide?.getAttribute("style")).toMatch(/36rem/);
+  });
+
+  it("marks priority media as eager loading for above-the-fold images", () => {
+    render(
+      <Media
+        media={{
+          src: "/images/wakefern/moodboard-2.png",
+          alt: "Moodboard 2",
+          caption: "Moodboard 2",
+          width: 2400,
+          height: 1183,
+        }}
+        label="Moodboard 2"
+        priority
+      />,
+    );
+
+    const image = screen.getByAltText("Moodboard 2");
+    expect(image.getAttribute("loading")).toBe("eager");
+  });
+
+  it("renders grouped section media as a swipeable carousel", () => {
+    const project: Project = {
+      slug: "wakefern-lpga",
+      index: "01",
+      name: "Wakefern",
+      subtitle: "Designing a connected tournament experience",
+      oneLiner: "A mobile and desktop platform designed for the ShopRite LPGA Classic.",
+      disciplines: ["Product Design"],
+      year: 2026,
+      status: "approved",
+      role: "UX & Product Design Intern",
+      demonstrates: "I can do the job.",
+      brand: { accent: "#c8102e" },
+      cover: {
+        src: "/images/wakefern-thumb.png",
+        alt: "Wakefern cover",
+        width: 1800,
+        height: 1200,
+      },
+      gallery: [],
+      featured: true,
+      sections: [
+        {
+          kind: "system",
+          heading: "Creating an initial product structure",
+          body: ["User journeys and flows helped us explore how each audience might complete important tasks."],
+          media: [
+            {
+              src: "/images/wakefern/attendee-flow.png",
+              alt: "Attendee events homepage user flow",
+              caption: "Attendee events homepage user flow",
+              width: 1600,
+              height: 1100,
+              after: 0,
+              scale: "tight",
+            },
+            {
+              src: "/images/wakefern/sponsors-flow.png",
+              alt: "Sponsors and players profile page user flow",
+              caption: "Sponsors and players profile page user flow",
+              width: 1700,
+              height: 980,
+              after: 0,
+              scale: "tight",
+            },
+          ],
+        },
+      ],
+    };
+
+    render(<CaseStudy project={project} />);
+
+    expect(
+      screen.getByRole("region", {
+        name: /Attendee events homepage user flow.*Sponsors and players profile page user flow/i,
+      }),
+    ).toBeDefined();
   });
 });

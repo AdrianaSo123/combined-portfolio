@@ -76,7 +76,7 @@ describe("publishedProject", () => {
     const published = publishedProject(wakefern!);
     expect(published.status).toBe("approved");
     expect(published.sections.length).toBeGreaterThan(5);
-    expect(published.sections.some((s) => s.heading === "Outcome")).toBe(true);
+    expect(published.sections.some((s) => s.heading === "Reflection")).toBe(true);
   });
 
   it("includes Wakefern process artifacts", () => {

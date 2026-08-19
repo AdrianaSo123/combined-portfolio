@@ -37,6 +37,11 @@ export function Media({
           fill
           sizes={sizes}
           priority={priority}
+          loading={priority ? "eager" : "lazy"}
+          style={{
+            transform: media!.zoom ? `scale(${media!.zoom})` : undefined,
+            transformOrigin: media!.objectPosition ?? "center center",
+          }}
           className={fit === "contain" ? "object-contain p-3 sm:p-5" : "object-cover"}
         />
       ) : (

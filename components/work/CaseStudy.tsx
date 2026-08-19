@@ -159,7 +159,7 @@ function mediaSizes(scale?: MediaRef["scale"]) {
 
 type BodyBlock =
   | { kind: "prose"; paragraphs: string[] }
-  | { kind: "media"; item: MediaRef };
+  | { kind: "media"; items: MediaRef[] };
 
 function interleaveBodyMedia(section: CaseStudySection): BodyBlock[] {
   const blocks: BodyBlock[] = [];
@@ -177,13 +177,14 @@ function interleaveBodyMedia(section: CaseStudySection): BodyBlock[] {
     const inserts = media.filter((m) => m.after === i);
     if (inserts.length > 0) {
       flush();
-      for (const item of inserts) blocks.push({ kind: "media", item });
+      blocks.push({ kind: "media", items: inserts });
     }
   });
   flush();
 
-  for (const item of media.filter((m) => m.after === undefined)) {
-    blocks.push({ kind: "media", item });
+  const trailing = media.filter((m) => m.after === undefined);
+  if (trailing.length > 0) {
+    blocks.push({ kind: "media", items: trailing });
   }
   return blocks;
 }
@@ -201,24 +202,37 @@ function SectionFigure({
   accent,
   fallbackLabel,
 }: {
-  media: MediaRef;
+  media: MediaRef[];
   accent: string;
   fallbackLabel: string;
 }) {
+  if (media.length === 1) {
+    const item = media[0];
+    return (
+      <figure className={`mt-8 ${mediaScaleClass(item.scale)}`}>
+        <Media
+          media={item}
+          label={item.caption ?? fallbackLabel}
+          accent={accent}
+          ratio={`${item.width} / ${item.height}`}
+          sizes={mediaSizes(item.scale)}
+        />
+        {item.caption ? (
+          <figcaption className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-ink">
+            {item.caption}
+          </figcaption>
+        ) : null}
+      </figure>
+    );
+  }
+
+  const label = media.map((item) => item.caption ?? item.alt).join(", ");
+  const sizes = mediaSizes(media[0]?.scale);
+  const well = media[0]?.width >= media[0]?.height ? "desktop" : "phone";
+
   return (
-    <figure className={`mt-8 ${mediaScaleClass(media.scale)}`}>
-      <Media
-        media={media}
-        label={media.caption ?? fallbackLabel}
-        accent={accent}
-        ratio={`${media.width} / ${media.height}`}
-        sizes={mediaSizes(media.scale)}
-      />
-      {media.caption ? (
-        <figcaption className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-ink">
-          {media.caption}
-        </figcaption>
-      ) : null}
+    <figure className={`mt-8 ${mediaScaleClass(media[0]?.scale)}`}>
+      <MediaCarousel items={media} label={label} sizes={sizes} well={well} />
     </figure>
   );
 }
@@ -266,8 +280,8 @@ function NarrativeSection({
         }
         return (
           <SectionFigure
-            key={block.item.src}
-            media={block.item}
+            key={block.items.map((item) => item.src).join("-")}
+            media={block.items}
             accent={project.brand.accent}
             fallbackLabel={project.name}
           />
