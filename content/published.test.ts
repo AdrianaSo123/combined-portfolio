@@ -61,13 +61,14 @@ describe("publishedLinks", () => {
 });
 
 describe("publishedProject", () => {
-  it("strips placeholder case-study copy", () => {
+  it("keeps Lyra’s real case-study copy", () => {
     const lyra = getProject("lyra");
     expect(lyra).toBeDefined();
     const published = publishedProject(lyra!);
-    expect(published.subtitle).toBe("");
-    expect(published.oneLiner).toBe("");
-    expect(published.sections).toEqual([]);
+    expect(published.subtitle).toBe("Designing AI to support thinking, not replace it");
+    expect(published.oneLiner).toContain("AI-supported learning assistant");
+    expect(published.sections.length).toBeGreaterThan(4);
+    expect(published.sections.some((s) => s.heading === "Outcome and reflection")).toBe(true);
   });
 
   it("keeps real Wakefern narrative", () => {

@@ -127,12 +127,8 @@ export const projects: Project[] = [
         kind: "system",
         heading: "Creating an initial product structure",
         body: [
-          "Because my team and I did not initially have direct access to end users, I developed provisional personas based on the roles identified by executive stakeholders.",
-          "I treated these personas as working assumptions rather than validated user research. They helped us compare the potential goals and information needs of sponsors, participants, volunteers, event staff, administrators, and general attendees.",
-          "We used them to consider what information each role needed, which tasks would be time-sensitive, what content should be shared or personalized, which users required different levels of access, and who would maintain the information behind the experience.",
-          "I also created a sitemap to organize the requested features and confirm our understanding of tournament terminology with stakeholders. User journeys and flows helped us explore how each audience might complete important tasks.",
-          "Since the app was role dependent, different users would have access to different features. This stage was exceptionally useful in helping me visualize those differences.",
-          "These artifacts were useful because they made our assumptions visible. As we continued speaking with stakeholders, several of those assumptions changed.",
+          "Without direct access to end users, we created provisional personas from the roles identified by stakeholders. We treated them as working assumptions—not validated research—to compare each audience’s goals, information needs, and access requirements.",
+          "We then used a sitemap and representative user flows to organize the requested features and confirm our understanding of tournament terminology. These artifacts made our assumptions visible, allowing stakeholders to correct them as the scope developed.",
         ],
         media: [
           wakefernScreen("personas.png", "Provisional personas", {
@@ -173,10 +169,8 @@ export const projects: Project[] = [
         kind: "custom",
         heading: "Learning from comparable experiences",
         body: [
-          "Because our team had very limited experience with golf or golf tournaments, I reviewed popular golf and event apps to understand the conventions users would already expect.",
-          "I looked at how they prioritized schedules, tee times, scores, player information, and live updates, then used those patterns to guide our navigation and information hierarchy.",
-          "I also compared approaches to map markers, location categories, and wayfinding, while reviewing previous ShopRite applications to keep the experience consistent with the existing brand.",
-          "This gave me a clearer basis for deciding which familiar patterns to borrow and which needed to be adapted for sponsors.",
+          "Because our team was unfamiliar with golf-event applications, we reviewed comparable golf and map-based products. We studied conventions for schedules, tee times, scoreboards, player profiles, location categories, and wayfinding.",
+          "These patterns gave us a baseline for user expectations while helping us determine what needed to be adapted for the ShopRite LPGA Classic.",
         ],
         media: [
           wakefernScreen("moodboard-1.png", "Moodboard 1", {
@@ -255,7 +249,7 @@ export const projects: Project[] = [
         kind: "design",
         heading: "Design for decisions made during a live event",
         body: [
-          "Users might check the application while moving between locations or responding to a schedule change. They needed to find answers quickly rather than carefully exploring a large content library.",
+          "Because users would often check the application while moving through the event, we prioritized immediate answers over extended exploration.",
           "We grouped tournament information into predictable categories, including tee times, scoreboards, player profiles, news and announcements, and maps. Timing, location, and status were prioritized over secondary details.",
           "The map supported wayfinding to entrances, parking areas, hospitality spaces, sponsor tents, and other event destinations. As the event spanned two golf courses and a physical building, it was essential for sponsors to find information easily. Location details connected the physical destination with relevant event information.",
         ],
@@ -302,24 +296,23 @@ export const projects: Project[] = [
         ],
       },
       {
-        kind: "iteration",
-        heading: "Designing through continued change",
-        body: [
-          "The design process was not a linear progression from research to final screens. Requirements continued to evolve as stakeholders clarified the product and engineers evaluated implementation needs.",
-          "Each change reduced the time available for exploring alternatives and refining completed work. Designs were continuously discussed with stakeholders and engineers rather than treated as a final handoff.",
-        ],
-      },
-      {
         kind: "custom",
         heading: "Reflection",
         body: [
-          "This project taught me that product design does not always begin with a stable problem or follow a clean, linear process.",
-          "Our early personas, sitemap, and user flows changed as we learned more, but that did not make them unsuccessful. Their value was in making our assumptions visible and giving stakeholders something concrete to evaluate.",
-          "When the separate desktop requirement became clear late in the project, I learned to focus on the features needed to make the mobile and desktop experiences work together instead of trying to perfect every possible feature. It was more important to design the essential pieces well than to rush through everything and sacrifice quality.",
-          "With more time, I would test the platform directly with sponsors and administrators, focusing on personalized schedules, event wayfinding, and the high-frequency administrative tasks that would shape how the system actually worked during the event.",
+          "This project taught me that early UX artifacts do not need to remain unchanged to be valuable. Our personas, sitemap, and flows exposed assumptions that stakeholders could evaluate as the product became clearer.",
+          "When the desktop requirement emerged late in the process, I learned to prioritize the relationships essential to the system rather than attempting to perfect every possible feature.",
+          "With more time, I would validate the experience directly with sponsors and administrators, focusing on personalized schedules, wayfinding, and the frequent administrative tasks that would shape how the system worked during the event.",
         ],
-        callout:
-          "My biggest takeaway: good product design is not only about designing useful interfaces. It is about making thoughtful design decisions even when the requirements aren’t solidified.",
+      },
+      {
+        kind: "outcome",
+        heading: "Outcome",
+        body: [
+          "The platform and its core workflows were approved for production implementation.",
+          "I presented the final design directly to Wakefern executive leadership and peers at NJIT.",
+          "The project earned second place in its assigned capstone judging group, while the connected implementation using our designs earned first place in a separate judging group.",
+          "The proposed system connected personalized schedules, maps, tournament information, announcements, access controls, and administrative management for an event serving more than 65,000 attendees.",
+        ],
       },
     ],
     featured: true,
@@ -328,14 +321,15 @@ export const projects: Project[] = [
     slug: "lyra",
     index: "02",
     name: "Lyra",
-    subtitle: "Placeholder subtitle",
+    headline: "Lyra",
+    subtitle: "Designing AI to support thinking, not replace it",
     oneLiner:
-      "Placeholder: a project establishing range in interaction design and emerging technology, distinct from Wakefern.",
-    disciplines: ["Interaction Design", "Emerging Tech"],
+      "An AI-supported learning assistant designed to help students work through academic problems instead of receiving answers immediately.",
+    disciplines: ["Product Design", "Research", "AI Interaction"],
     year: 2025,
     status: "prototype",
-    role: "Product Design",
-    demonstrates: "I have range.",
+    role: "Product Designer",
+    demonstrates: "I design AI experiences around learning, reflection, and agency.",
     brand: { accent: "#5b8def" },
     cover: {
       src: "/images/lyra.png",
@@ -346,19 +340,100 @@ export const projects: Project[] = [
     gallery: [],
     sections: [
       {
-        kind: "context",
-        heading: "Context",
-        body: ["Placeholder context for Lyra."],
+        kind: "problem",
+        heading: "The problem",
+        body: [
+          "Students often use AI to save time, especially when balancing deadlines, coursework, and extracurriculars. While it can help them finish assignments faster, relying on it too heavily can allow students to move past material without fully understanding or retaining it.",
+          "Learning often requires repetition, revisiting concepts, practicing them, and working through the reasoning more than once. When AI removes that process, students may finish the assignment without giving themselves enough time to commit the material to memory.",
+          "Our initial research identified a tension between students’ confidence using AI and their reported behavior. Students appreciated receiving immediate, polished responses. This becomes a problem when getting an answer quickly makes students feel like they understand the material, even when they have not fully learned it.",
+          "The educators we interviewed raised a related concern. When submitted work only showed a finished answer, they struggled to determine what students understood, where they were confused, and what support they needed.",
+        ],
+        callout:
+          "How might we design an AI-supported experience that helps students think through problems instead of replacing the thinking process?",
+      },
+      {
+        kind: "system",
+        heading: "Understanding student and educator needs",
+        body: [
+          "We combined three research methods: a survey with 46 student responses collected over one week, two interviews with higher-education instructors, and a literature review of seven academic and educational sources.",
+          "Because the project lasted six weeks, we moved from survey collection into synthesis after one week to preserve time for prototyping and testing. We used these methods because they allowed us to quickly collect data while still providing enough depth.",
+          "The survey revealed a gap between perceived understanding and reported behavior. Although most students said they usually tried to understand AI-generated answers, 16 acknowledged submitting AI-generated work they did not fully understand or explain.",
+          "Around two-thirds also said they did, or possibly did, rely too heavily on AI for schoolwork. At the same time, most respondents were open to a tool that asked questions and encouraged reflection before providing assistance.",
+          "Across the survey, interviews, and literature review, four themes emerged: students prioritized speed, especially under time pressure; a polished response could create confidence without comprehension; students wanted guidance when material became difficult; and reflection needed to feel relevant and manageable rather than like additional work.",
+          "These findings helped us understand that rather than preventing students from using AI, we needed to design a way to use it to support learning. This became especially apparent as we found that students do not want to rely on generative AI and would rather complete work on their own.",
+        ],
+      },
+      {
+        kind: "custom",
+        heading: "Design principles",
+        body: [
+          "Our research and literature review led to three principles that guided the experience and acted as the baseline for our prototype.",
+          "These principles drew on learning-psychology concepts including scaffolding, self-explanation, metacognition, and cognitive-load management.",
+          "Structuring the experience: We mapped the complete flow before moving into high-fidelity design. The challenge was providing enough structure to encourage reflection without making Lyra feel restrictive or inefficient.",
+          "The proposed experience included onboarding that positioned Lyra as a thinking tool rather than an answer engine, flexible preferences for how information could be presented, different modes for approaching different subjects and tasks, guided questions that divided problems into smaller steps, and mind maps that helped students refresh and revisit previous learning.",
+          "After completing the user flow, I moved on to the wireframes. The wireframes helped me quickly imagine how the proposed experience could look without worrying about perfection.",
+        ],
       },
       {
         kind: "design",
-        heading: "Design",
-        body: ["Placeholder design narrative for Lyra."],
+        heading: "Designing for flexible learning preferences",
+        body: [
+          "Lyra allowed students to select how they preferred to engage with information through learning styles. If the student did not know, they were able to take a quiz to find out.",
+          "I understood that learning preferences are not fixed. A student might want a visual explanation for one concept, examples for another, or sequential instructions while completing a technical task.",
+          "The purpose was not to classify students into permanent learning styles or claim that one format would always produce better outcomes. Instead, the feature gave students a voice in how they received support.",
+          "This served both a functional and emotional purpose: guidance could be presented in a more useful format while signaling that different ways of processing information were valid.",
+          "Personalization was not about permanently labeling students. It was about helping them feel recognized.",
+        ],
+      },
+      {
+        kind: "design",
+        heading: "Supporting different ways of thinking",
+        body: [
+          "Lyra also offered four modes for approaching a task: Creative, Analytical, Reflective, and Critical.",
+          "Unlike presentation preferences, which influenced how information could appear, the modes influenced how Lyra would guide the student’s thinking.",
+          "A student could select a mode based on the subject or task and change it as their needs evolved. For example, they might use Creative mode to brainstorm an essay and Critical mode to evaluate its argument.",
+        ],
+      },
+      {
+        kind: "design",
+        heading: "Guiding students through the problem",
+        body: [
+          "The final prototype used a conversational interface to divide complex problems into smaller, more manageable steps.",
+          "Instead of immediately displaying a completed answer, Lyra focused on asking targeted questions, encouraged students to explain their reasoning, and progressively revealed guidance.",
+          "Key interaction decisions included short prompts that focused attention on one step at a time, supportive language that reduced anxiety around being wrong, a clear hierarchy that helped students remain oriented, opportunities to revise or revisit earlier thinking, and optional tools that did not interrupt the main conversation.",
+          "These decisions were intended to make reflection feel like part of receiving help rather than an additional task standing in the student’s way. Lyra was created to be a personal tutor rather than a critic.",
+        ],
+      },
+      {
+        kind: "custom",
+        heading: "Helping students revisit what they learned",
+        body: [
+          "Lyra included mind maps that organized concepts from a learning session into a visual overview.",
+          "Rather than requiring students to reread an entire conversation, the mind map provided a faster way to refresh what they had covered and understand how ideas connected, which was based on schema theory.",
+          "Students could return to an earlier concept, review the reasoning developed during the conversation, and identify areas they wanted to explore further. This allowed Lyra to help beyond the immediate guided interaction.",
+          "The goal was not only to help students move through a problem, but also to make their learning easier to revisit over time. A large part of learning is revisiting concepts and re-trying problems until they are committed to memory.",
+        ],
+      },
+      {
+        kind: "custom",
+        heading: "Testing the prototype",
+        body: [
+          "We tested the high-fidelity prototype with five participants to evaluate its clarity, navigation, pacing, and perceived support.",
+          "Four of five participants completed the guided flow without assistance. Participants understood the purpose of the reflective questions, but some wanted clearer transitions between stages of the conversation.",
+          "Breaking content into smaller prompts made the guidance easier to process. Based on these findings, we strengthened transition language, clarified interaction feedback, and adjusted the visual hierarchy so participants could better understand their progress.",
+          "The testing evaluated the usability of the proposed experience, not the quality of AI-generated responses or Lyra’s effect on learning outcomes.",
+        ],
       },
       {
         kind: "outcome",
-        heading: "Outcome",
-        body: ["Placeholder outcome for Lyra."],
+        heading: "Outcome and reflection",
+        body: [
+          "Over six weeks, our team translated research about student AI use into a high-fidelity, usability-tested concept centered on reflection, personalization, and agency.",
+          "The project reinforced the difference between feeling like you understand something and being able to reason through it independently. Leading the literature review also helped me translate psychological concepts into interaction decisions affecting pacing, language, hierarchy, and user control.",
+          "Lyra changed how I think about AI in UX. Instead of treating AI as a feature to optimize, we treated it as an experience that needed to be carefully mediated through design.",
+          "With more time, I would test Lyra with a larger group, compare it with a conventional answer-first AI experience, and investigate whether students could explain their reasoning more clearly after using it.",
+          "Responsible AI design is not only about what a system can produce. It is also about the behaviors its experience encourages.",
+        ],
       },
     ],
     featured: true,
