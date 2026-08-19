@@ -9,6 +9,10 @@ export type MediaRef = {
   type?: "image" | "video";
   poster?: string;
   caption?: string;
+  /** 0-based: render after this body paragraph. Omit = after all body. */
+  after?: number;
+  /** full = article width; inset = narrower; tight = closer to the reading measure. */
+  scale?: "full" | "inset" | "tight";
 };
 
 export type CaseStudyAnnotation = {
@@ -37,6 +41,7 @@ export type CaseStudySection = {
     | "custom";
   heading?: string;
   body: string[];
+  bodyFormat?: "prose" | "list";
   media?: MediaRef[];
   annotations?: CaseStudyAnnotation[];
   pairing?: CaseStudyPairing;

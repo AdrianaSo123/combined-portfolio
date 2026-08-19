@@ -89,7 +89,8 @@ describe("publishedProject", () => {
         "/images/wakefern/sitemap.png",
         "/images/wakefern/wireframes.jpg",
         "/images/wakefern/moodboard-1.png",
-        "/images/wakefern/moodboard-2.jpg",
+        "/images/wakefern/moodboard-2.png",
+        "/images/wakefern/timeline.png",
       ]),
     );
   });

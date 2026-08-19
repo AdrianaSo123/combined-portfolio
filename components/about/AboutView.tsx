@@ -98,8 +98,7 @@ export function AboutView({ published }: { published: Published }) {
           )}
         </header>
 
-        <div className="mt-14 grid gap-14 lg:grid-cols-12 lg:gap-16">
-          <div className="lg:col-span-7">
+        <div className="mt-14 max-w-[72ch]">
             {snapshot.length > 0 && (
               <Block id="who" label="Who I am">
                 <Prose paragraphs={snapshot} />
@@ -186,80 +185,84 @@ export function AboutView({ published }: { published: Published }) {
                 </div>
               </Block>
             )}
-          </div>
+        </div>
 
-          <aside className="lg:col-span-5 lg:border-l lg:border-line-ink lg:pl-10">
+        <section
+          aria-label="Spec, skills, and links"
+          className="mt-20 grid gap-10 border-t border-line-ink pt-10 sm:grid-cols-2 lg:grid-cols-12 lg:gap-12"
+        >
+          <div className="lg:col-span-3">
             <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
               Spec
             </p>
             <MetaList className="mt-4 text-ink" rows={specRows} />
+          </div>
 
-            <div className="mt-10">
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
-                Skills
-              </p>
-              <div className="mt-4 space-y-6">
-                {skills.map((g) => (
-                  <div key={g.group}>
-                    <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent-dim">
-                      {g.group}
-                    </p>
-                    <ul className="mt-2 space-y-1 text-sm text-ink/80">
-                      {g.items.map((it) => (
-                        <li key={it}>{it}</li>
-                      ))}
-                    </ul>
-                  </div>
-                ))}
-              </div>
+          <div className="sm:col-span-2 lg:col-span-6">
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
+              Skills
+            </p>
+            <div className="mt-4 grid gap-6 sm:grid-cols-3">
+              {skills.map((g) => (
+                <div key={g.group}>
+                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent-dim">
+                    {g.group}
+                  </p>
+                  <ul className="mt-2 space-y-1 text-sm text-ink/80">
+                    {g.items.map((it) => (
+                      <li key={it}>{it}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
             </div>
+          </div>
 
-            <div className="mt-10">
-              <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
-                Links
-              </p>
-              <ul className="mt-3 space-y-2 font-mono text-xs uppercase tracking-[0.18em]">
-                {socials.map((s) => {
-                  const external = isExternal(s.href);
-                  return (
-                    <li key={s.label}>
-                      <Link
-                        href={s.href}
-                        className="text-accent-dim underline-offset-4 hover:underline"
-                        {...(external
-                          ? { target: "_blank", rel: "noopener noreferrer" }
-                          : {})}
-                      >
-                        {s.label}
-                        {external ? " ↗" : ""}
-                      </Link>
-                    </li>
-                  );
-                })}
-                {resumeUrl && (
-                  <li>
+          <div className="lg:col-span-3">
+            <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
+              Links
+            </p>
+            <ul className="mt-3 space-y-2 font-mono text-xs uppercase tracking-[0.18em]">
+              {socials.map((s) => {
+                const external = isExternal(s.href);
+                return (
+                  <li key={s.label}>
                     <Link
-                      href={resumeUrl}
+                      href={s.href}
                       className="text-accent-dim underline-offset-4 hover:underline"
+                      {...(external
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
                     >
-                      Résumé
+                      {s.label}
+                      {external ? " ↗" : ""}
                     </Link>
                   </li>
-                )}
-                {contactEmail && (
-                  <li>
-                    <Link
-                      href={routes.mailto(contactEmail)}
-                      className="text-accent-dim underline-offset-4 hover:underline"
-                    >
-                      Email
-                    </Link>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </aside>
-        </div>
+                );
+              })}
+              {resumeUrl && (
+                <li>
+                  <Link
+                    href={resumeUrl}
+                    className="text-accent-dim underline-offset-4 hover:underline"
+                  >
+                    Résumé
+                  </Link>
+                </li>
+              )}
+              {contactEmail && (
+                <li>
+                  <Link
+                    href={routes.mailto(contactEmail)}
+                    className="text-accent-dim underline-offset-4 hover:underline"
+                  >
+                    Email
+                  </Link>
+                </li>
+              )}
+            </ul>
+          </div>
+        </section>
       </div>
     </article>
   );

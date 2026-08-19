@@ -1,17 +1,54 @@
+import type { ReactNode } from "react";
 import Link from "next/link";
-import { STATUS_LABEL, type CaseStudyAnnotation, type CaseStudySection, type Project } from "@/content/types";
+import {
+  STATUS_LABEL,
+  type CaseStudyAnnotation,
+  type CaseStudySection,
+  type MediaRef,
+  type Project,
+} from "@/content/types";
 import { routes } from "@/lib/routes";
 import { Media } from "./MediaPlaceholder";
 import { MediaCarousel } from "./MediaCarousel";
 import { MetaList } from "@/components/system/MetaList";
 import { PairingTable } from "./PairingTable";
 
+// Centered reading measure. Lines stay left-aligned; the column is what centers.
+function Reading({
+  children,
+  className = "",
+}: {
+  children: ReactNode;
+  className?: string;
+}) {
+  return (
+    <div className={`mx-auto w-full max-w-[72ch] ${className}`}>{children}</div>
+  );
+}
+
 function pad(n: number) {
   return String(n).padStart(2, "0");
 }
 
-function Prose({ paragraphs }: { paragraphs: string[] }) {
+function Prose({
+  paragraphs,
+  asList = false,
+}: {
+  paragraphs: string[];
+  asList?: boolean;
+}) {
   if (paragraphs.length === 0) return null;
+  if (asList) {
+    return (
+      <ul className="list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/90 marker:text-ink/50">
+        {paragraphs.map((p) => (
+          <li key={p} className="pl-1">
+            {p}
+          </li>
+        ))}
+      </ul>
+    );
+  }
   return (
     <div className="space-y-4 text-lg leading-relaxed text-ink/90">
       {paragraphs.map((p) => (
@@ -24,20 +61,21 @@ function Prose({ paragraphs }: { paragraphs: string[] }) {
 function AnnotationMedia({
   annotation,
   accent,
-  wide = false,
+  well,
 }: {
   annotation: CaseStudyAnnotation;
   accent: string;
-  wide?: boolean;
+  well: "phone" | "desktop";
 }) {
   const label = annotation.mediaLabel ?? annotation.heading;
   const shots = annotation.media ?? [];
-  const sizes = wide
-    ? "(max-width: 1100px) 100vw, 1100px"
-    : "(max-width: 1024px) 100vw, 58vw";
+  const sizes =
+    well === "desktop"
+      ? "(max-width: 1024px) 100vw, 66vw"
+      : "(max-width: 1024px) 100vw, 58vw";
 
   if (shots.length > 1) {
-    return <MediaCarousel items={shots} label={label} sizes={sizes} />;
+    return <MediaCarousel items={shots} label={label} sizes={sizes} well={well} />;
   }
 
   const shot = shots[0];
@@ -84,12 +122,12 @@ function AnnotationRow({
 
   if (landscape) {
     return (
-      <div className="space-y-6">
-        <AnnotationMedia annotation={annotation} accent={accent} wide />
-        <div className="grid lg:grid-cols-12">
-          <div className="lg:col-span-7">
-            <AnnotationCopy annotation={annotation} />
-          </div>
+      <div className="grid min-w-0 items-center gap-8 lg:grid-cols-12 lg:gap-10">
+        <div className="min-w-0 lg:col-span-8">
+          <AnnotationMedia annotation={annotation} accent={accent} well="desktop" />
+        </div>
+        <div className="lg:col-span-4">
+          <AnnotationCopy annotation={annotation} />
         </div>
       </div>
     );
@@ -98,12 +136,90 @@ function AnnotationRow({
   return (
     <div className="grid min-w-0 items-center gap-8 lg:grid-cols-12 lg:gap-12">
       <div className={`min-w-0 lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}>
-        <AnnotationMedia annotation={annotation} accent={accent} />
+        <AnnotationMedia annotation={annotation} accent={accent} well="phone" />
       </div>
       <div className={`lg:col-span-5 ${reversed ? "lg:order-1" : ""}`}>
         <AnnotationCopy annotation={annotation} />
       </div>
     </div>
+  );
+}
+
+function mediaScaleClass(scale?: MediaRef["scale"]) {
+  if (scale === "tight") return "mx-auto w-full max-w-[48rem]";
+  if (scale === "inset") return "mx-auto w-full max-w-[64rem]";
+  return "w-full";
+}
+
+function mediaSizes(scale?: MediaRef["scale"]) {
+  if (scale === "tight") return "(max-width: 768px) 100vw, 48rem";
+  if (scale === "inset") return "(max-width: 1024px) 100vw, 64rem";
+  return "(max-width: 1100px) 100vw, 1100px";
+}
+
+type BodyBlock =
+  | { kind: "prose"; paragraphs: string[] }
+  | { kind: "media"; item: MediaRef };
+
+function interleaveBodyMedia(section: CaseStudySection): BodyBlock[] {
+  const blocks: BodyBlock[] = [];
+  const media = section.media ?? [];
+  let prose: string[] = [];
+
+  const flush = () => {
+    if (prose.length === 0) return;
+    blocks.push({ kind: "prose", paragraphs: prose });
+    prose = [];
+  };
+
+  section.body.forEach((p, i) => {
+    prose.push(p);
+    const inserts = media.filter((m) => m.after === i);
+    if (inserts.length > 0) {
+      flush();
+      for (const item of inserts) blocks.push({ kind: "media", item });
+    }
+  });
+  flush();
+
+  for (const item of media.filter((m) => m.after === undefined)) {
+    blocks.push({ kind: "media", item });
+  }
+  return blocks;
+}
+
+function SectionHeading({ index, heading }: { index: number; heading: string }) {
+  return (
+    <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-muted-ink">
+      <span className="text-[color:var(--color-accent-dim)]">{pad(index)}</span> / {heading}
+    </h2>
+  );
+}
+
+function SectionFigure({
+  media,
+  accent,
+  fallbackLabel,
+}: {
+  media: MediaRef;
+  accent: string;
+  fallbackLabel: string;
+}) {
+  return (
+    <figure className={`mt-8 ${mediaScaleClass(media.scale)}`}>
+      <Media
+        media={media}
+        label={media.caption ?? fallbackLabel}
+        accent={accent}
+        ratio={`${media.width} / ${media.height}`}
+        sizes={mediaSizes(media.scale)}
+      />
+      {media.caption ? (
+        <figcaption className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-ink">
+          {media.caption}
+        </figcaption>
+      ) : null}
+    </figure>
   );
 }
 
@@ -116,53 +232,56 @@ function NarrativeSection({
   index: number;
   project: Project;
 }) {
+  const blocks = interleaveBodyMedia(section);
+  const lastProseIndex = blocks.reduce(
+    (acc, block, i) => (block.kind === "prose" ? i : acc),
+    -1,
+  );
+
   return (
     <section className="mx-auto mb-16 max-w-[1100px] px-5 sm:px-8">
-      {section.heading && (
-        <h2 className="mb-6 font-mono text-xs uppercase tracking-[0.2em] text-muted-ink">
-          <span className="text-[color:var(--color-accent-dim)]">{pad(index)}</span> /{" "}
-          {section.heading}
-        </h2>
+      {section.heading && (blocks.length === 0 || blocks[0]?.kind !== "prose") && (
+        <Reading>
+          <SectionHeading index={index} heading={section.heading} />
+        </Reading>
       )}
-      <div className="grid lg:grid-cols-12 lg:gap-12">
-        <div className="lg:col-span-8">
-          <Prose paragraphs={section.body} />
-          {section.callout && (
-            <p className="mt-6 font-display text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl">
-              {section.callout}
-            </p>
-          )}
-        </div>
-      </div>
-      {section.media && section.media.length > 0 && (
-        <div className="mt-8 grid lg:grid-cols-12">
-          <div className="space-y-6 lg:col-span-8">
-            {section.media.map((m) => (
-              <figure key={m.src}>
-                <Media
-                  media={m}
-                  label={m.caption ?? project.name}
-                  accent={project.brand.accent}
-                  ratio={`${m.width} / ${m.height}`}
-                  sizes="(max-width: 1024px) 100vw, 58vw"
-                />
-                {m.caption ? (
-                  <figcaption className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-ink">
-                    {m.caption}
-                  </figcaption>
-                ) : null}
-              </figure>
-            ))}
-          </div>
-        </div>
+      {blocks.map((block, i) => {
+        if (block.kind === "prose") {
+          return (
+            <Reading key={`prose-${i}`} className={i > 0 ? "mt-8" : undefined}>
+              {i === 0 && section.heading ? (
+                <SectionHeading index={index} heading={section.heading} />
+              ) : null}
+              <Prose
+                paragraphs={block.paragraphs}
+                asList={section.bodyFormat === "list"}
+              />
+              {i === lastProseIndex && section.callout ? (
+                <p className="mt-6 font-display text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl">
+                  {section.callout}
+                </p>
+              ) : null}
+            </Reading>
+          );
+        }
+        return (
+          <SectionFigure
+            key={block.item.src}
+            media={block.item}
+            accent={project.brand.accent}
+            fallbackLabel={project.name}
+          />
+        );
+      })}
+      {section.pairing && (
+        <Reading>
+          <PairingTable pairing={section.pairing} />
+        </Reading>
       )}
-      {section.pairing && <PairingTable pairing={section.pairing} />}
       {section.bodyAfter && section.bodyAfter.length > 0 && (
-        <div className="mt-8 grid lg:grid-cols-12 lg:gap-12">
-          <div className="lg:col-span-8">
-            <Prose paragraphs={section.bodyAfter} />
-          </div>
-        </div>
+        <Reading className="mt-8">
+          <Prose paragraphs={section.bodyAfter} />
+        </Reading>
       )}
       {section.annotations && section.annotations.length > 0 && (
         <div className="mt-10 space-y-16">

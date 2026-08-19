@@ -9,18 +9,27 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
+const WELL = {
+  phone: { height: "min(34rem, 72vw)", inset: "absolute inset-[6%]" },
+  // Slightly larger than the phone well, much smaller than a full-bleed 16:10.
+  desktop: { height: "min(36rem, 56vw)", inset: "absolute inset-[3%]" },
+} as const;
+
 export function MediaCarousel({
   items,
   label,
   sizes = "(max-width: 1024px) 100vw, 58vw",
+  well,
 }: {
   items: MediaRef[];
   label: string;
   sizes?: string;
+  well?: keyof typeof WELL;
 }) {
   const scroller = useRef<HTMLDivElement>(null);
   const [index, setIndex] = useState(0);
-  const landscape = items[0].width >= items[0].height;
+  const frame =
+    WELL[well ?? (items[0].width >= items[0].height ? "desktop" : "phone")];
   const caption = items[index]?.caption ?? items[index]?.alt ?? "";
 
   const syncIndex = useCallback(() => {
@@ -66,12 +75,10 @@ export function MediaCarousel({
           <figure
             key={item.src}
             className="relative w-full min-w-full max-w-full shrink-0 grow-0 basis-full overflow-hidden snap-start"
-            style={{
-              height: landscape ? "min(46rem, 78vw)" : "min(34rem, 72vw)",
-            }}
+            style={{ height: frame.height }}
             aria-hidden={i !== index}
           >
-            <div className={landscape ? "absolute inset-[2%]" : "absolute inset-[6%]"}>
+            <div className={frame.inset}>
               <Image
                 src={item.src}
                 alt={item.alt}

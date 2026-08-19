@@ -18,9 +18,9 @@ export const about: About = {
   headline: HEADLINE,
   greeting: "hey there, i'm adriana.",
   portrait: {
-    src: "/images/adriana-pixel.png",
-    alt: "Pixel portrait of Adriana So",
-    width: 931,
+    src: "/images/adriana.png",
+    alt: "Adriana So at a courtyard fountain",
+    width: 768,
     height: 1024,
   },
   bio: [

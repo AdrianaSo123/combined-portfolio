@@ -6,7 +6,12 @@ const WAKEFERN_PHONE = { width: 833, height: 1600 };
 function wakefernScreen(
   file: string,
   caption: string,
-  size: { width: number; height: number } = WAKEFERN_PHONE,
+  size: {
+    width: number;
+    height: number;
+    after?: number;
+    scale?: MediaRef["scale"];
+  } = WAKEFERN_PHONE,
 ): MediaRef {
   return {
     src: `/images/wakefern/${file}`,
@@ -14,6 +19,8 @@ function wakefernScreen(
     caption,
     width: size.width,
     height: size.height,
+    after: size.after,
+    scale: size.scale,
   };
 }
 
@@ -130,10 +137,14 @@ export const projects: Project[] = [
           wakefernScreen("personas.png", "Provisional personas", {
             width: 3200,
             height: 2020,
+            after: 2,
+            scale: "tight",
           }),
           wakefernScreen("sitemap.png", "Initial sitemap", {
-            width: 3200,
-            height: 2019,
+            width: 2400,
+            height: 1514,
+            after: 3,
+            scale: "tight",
           }),
         ],
       },
@@ -146,12 +157,16 @@ export const projects: Project[] = [
         ],
         media: [
           wakefernScreen("moodboard-1.png", "Moodboard 1", {
-            width: 3200,
-            height: 2364,
+            width: 2400,
+            height: 1773,
+            after: 1,
+            scale: "tight",
           }),
-          wakefernScreen("moodboard-2.jpg", "Moodboard 2", {
-            width: 3600,
-            height: 1775,
+          wakefernScreen("moodboard-2.png", "Moodboard 2", {
+            width: 2400,
+            height: 1183,
+            after: 1,
+            scale: "tight",
           }),
         ],
         bodyAfter: [
@@ -183,6 +198,14 @@ export const projects: Project[] = [
           "We knew from the beginning that some form of administrative functionality would be necessary. However, we did not initially understand that our deliverables would include a separate desktop admin platform.",
           "Five weeks before the deadline, the expectation became clear. What we had understood as supporting functionality became a distinct platform with its own navigation, information hierarchy, and workflows. We now had to define the desktop experience while continuing to revise the mobile product.",
           "To work within the remaining time, we prioritized the administrative capabilities most directly connected to the sponsor experience rather than attempting to resolve every possible workflow.",
+        ],
+        media: [
+          wakefernScreen("timeline.png", "Project timeline", {
+            width: 2400,
+            height: 591,
+            after: 4,
+            scale: "inset",
+          }),
         ],
       },
       {
@@ -257,6 +280,7 @@ export const projects: Project[] = [
       {
         kind: "outcome",
         heading: "Outcome",
+        bodyFormat: "list",
         body: [
           "By the end of the internship, the platform and its core workflows were approved for production implementation.",
           "I presented the design work directly to executive leadership and peers at NJIT.",
