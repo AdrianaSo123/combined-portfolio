@@ -95,6 +95,8 @@ export type Experiment = {
   keyDecision?: string;
   outcome?: string;
   proofSystem?: string;
+  highlightsHeading?: string;
+  highlights?: string[];
   links: { demo?: string; github?: string; notes?: string };
   media?: MediaRef;
   diagram?: MediaRef;

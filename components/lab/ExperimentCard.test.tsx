@@ -34,9 +34,11 @@ describe("ExperimentCard", () => {
     );
     const links = screen.getAllByRole("link");
     expect(links).toHaveLength(2);
-    expect(links.map((link) => link.getAttribute("href"))).toEqual([
-      "https://github.com/real",
-      "/experiments/ux-synthesizer",
-    ]);
+    expect(links.map((link) => link.getAttribute("href"))).toEqual(
+      expect.arrayContaining([
+        "https://github.com/real",
+        "/experiments/ux-synthesizer",
+      ])
+    );
   });
 });

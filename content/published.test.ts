@@ -6,15 +6,15 @@ import { featuredProjects, getProject } from "./projects";
 import { siteConfig } from "../lib/site";
 
 describe("publishedAbout", () => {
-  it("strips placeholder bio, experience, and email", () => {
+  it("keeps real narrative sections while stripping placeholder bio and email", () => {
     const published = publishedAbout(about);
     expect(published.bio).toEqual([]);
-    expect(published.snapshot).toEqual([]);
-    expect(published.origin).toEqual([]);
-    expect(published.philosophy).toEqual([]);
+    expect(published.snapshot.length).toBeGreaterThan(0);
+    expect(published.origin.length).toBeGreaterThan(0);
+    expect(published.philosophy.length).toBeGreaterThan(0);
     expect(published.prior).toEqual([]);
-    expect(published.community).toEqual([]);
-    expect(published.offline).toEqual([]);
+    expect(published.community.length).toBeGreaterThan(0);
+    expect(published.offline.length).toBeGreaterThan(0);
     expect(published.experience.map((e) => e.org)).toEqual([
       "Skyscraper Games",
       "Wakefern Food Corp",

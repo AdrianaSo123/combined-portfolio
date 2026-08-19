@@ -22,8 +22,8 @@ export default function ExperimentsPage() {
           selected case studies — evidence that the practice includes building.
         </p>
         <div className="mt-10">
-          {experiments.map((e) => (
-            <ExperimentCard key={e.slug} experiment={e} />
+          {experiments.map((e, i) => (
+            <ExperimentCard key={e.slug} experiment={e} reversed={i % 2 === 1} />
           ))}
         </div>
       </div>
