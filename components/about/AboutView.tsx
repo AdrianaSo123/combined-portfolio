@@ -1,7 +1,6 @@
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { MetaList } from "@/components/system/MetaList";
 import { SectionLabel } from "@/components/system/TechnicalRule";
 import type { publishedAbout } from "@/content/published";
 import { isExternal, routes } from "@/lib/routes";
@@ -51,20 +50,12 @@ export function AboutView({ published }: { published: Published }) {
     prior,
     community,
     offline,
-    focus,
-    skills,
     experience,
     education,
     socials,
     contactEmail,
     resumeUrl,
-    location,
   } = published;
-
-  const specRows = [
-    { label: "Focus", value: focus.join(" · ") },
-    ...(location ? [{ label: "Location", value: location }] : []),
-  ];
   const quickLinks = [
     ...socials,
     ...(resumeUrl ? [{ label: "Resume", href: resumeUrl }] : []),
@@ -236,37 +227,6 @@ export function AboutView({ published }: { published: Published }) {
           )}
         </div>
 
-        <section
-          aria-label="Spec and skills"
-          className="mt-16 grid gap-10 border-t border-line-ink/70 pt-10 sm:grid-cols-2 lg:grid-cols-12"
-        >
-          <div className="lg:col-span-3">
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
-              Spec
-            </p>
-            <MetaList className="mt-4 text-ink" rows={specRows} />
-          </div>
-
-          <div className="sm:col-span-2 lg:col-span-6">
-            <p className="font-mono text-[0.65rem] uppercase tracking-[0.2em] text-muted-ink">
-              Skills
-            </p>
-              <div className="mt-4 grid gap-6 sm:grid-cols-3">
-              {skills.map((g) => (
-                <div key={g.group}>
-                  <p className="font-mono text-[0.7rem] uppercase tracking-[0.16em] text-accent-dim">
-                    {g.group}
-                  </p>
-                  <ul className="mt-2 space-y-1 text-sm text-ink/80">
-                    {g.items.map((it) => (
-                      <li key={it}>{it}</li>
-                    ))}
-                  </ul>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
       </div>
     </article>
   );
