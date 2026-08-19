@@ -9,6 +9,7 @@ export type MediaRef = {
   type?: "image" | "video";
   poster?: string;
   caption?: string;
+  fit?: "cover" | "contain";
   zoom?: number;
   objectPosition?: string;
   /** 0-based: render after this body paragraph. Omit = after all body. */
@@ -48,6 +49,8 @@ export type CaseStudySection = {
   annotations?: CaseStudyAnnotation[];
   pairing?: CaseStudyPairing;
   bodyAfter?: string[];
+  bodyAfterFormat?: "prose" | "list";
+  bodyAfterIndex?: number;
   callout?: string;
 };
 

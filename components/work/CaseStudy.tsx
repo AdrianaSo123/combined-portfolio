@@ -87,7 +87,7 @@ function AnnotationMedia({
       label={label}
       accent={accent}
       ratio={landscape ? "16 / 10" : "4 / 5"}
-      fit={shot ? "contain" : "cover"}
+      fit={shot ? (shot.fit ?? "contain") : "cover"}
       sizes={sizes}
     />
   );
@@ -215,6 +215,7 @@ function SectionFigure({
           label={item.caption ?? fallbackLabel}
           accent={accent}
           ratio={`${item.width} / ${item.height}`}
+          fit={item.fit ?? "cover"}
           sizes={mediaSizes(item.scale)}
         />
         {item.caption ? (
@@ -252,6 +253,8 @@ function NarrativeSection({
     -1,
   );
 
+  const bodyAfterIndex = section.bodyAfterIndex ?? section.body.length;
+
   return (
     <section className="mx-auto mb-16 max-w-[1100px] px-5 sm:px-8">
       {section.heading && (blocks.length === 0 || blocks[0]?.kind !== "prose") && (
@@ -270,6 +273,16 @@ function NarrativeSection({
                 paragraphs={block.paragraphs}
                 asList={section.bodyFormat === "list"}
               />
+              {section.bodyAfter &&
+              i === bodyAfterIndex &&
+              section.bodyAfterFormat !== undefined ? (
+                <div className="mt-6">
+                  <Prose
+                    paragraphs={section.bodyAfter}
+                    asList={section.bodyAfterFormat === "list"}
+                  />
+                </div>
+              ) : null}
               {i === lastProseIndex && section.callout ? (
                 <p className="mt-6 font-display text-xl font-semibold leading-snug tracking-tight text-ink sm:text-2xl">
                   {section.callout}
@@ -290,11 +303,6 @@ function NarrativeSection({
       {section.pairing && (
         <Reading>
           <PairingTable pairing={section.pairing} />
-        </Reading>
-      )}
-      {section.bodyAfter && section.bodyAfter.length > 0 && (
-        <Reading className="mt-8">
-          <Prose paragraphs={section.bodyAfter} />
         </Reading>
       )}
       {section.annotations && section.annotations.length > 0 && (
@@ -394,7 +402,7 @@ export function CaseStudy({ project }: { project: Project }) {
       <div className="py-16">
         {project.sections.map((section, i) => (
           <NarrativeSection
-            key={section.heading ?? section.kind}
+            key={`${section.heading ?? section.kind}-${i}`}
             section={section}
             index={i + 1}
             project={project}

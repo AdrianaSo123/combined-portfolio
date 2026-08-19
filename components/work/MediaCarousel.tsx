@@ -91,7 +91,7 @@ export function MediaCarousel({
                   transform: item.zoom ? `scale(${item.zoom})` : undefined,
                   transformOrigin: item.objectPosition ?? "center center",
                 }}
-                className="object-contain object-center"
+                className={item.fit === "cover" ? "object-cover object-center" : "object-contain object-center"}
               />
             </div>
           </figure>
