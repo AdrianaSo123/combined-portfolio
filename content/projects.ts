@@ -469,8 +469,8 @@ export const projects: Project[] = [
         ],
         media: [
           {
-            src: "/lyra/stakeholder.png",
-            alt: "Lyra site map showing the structure of the proposed experience",
+            src: "/lyra/user flow-lyra.png",
+            alt: "Lyra user flow showing the proposed experience",
             caption: "The site map helped us organize the proposed experience before designing screens.",
             width: 1540,
             height: 980,
