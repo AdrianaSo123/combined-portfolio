@@ -78,6 +78,21 @@ describe("publishedProject", () => {
     expect(published.sections.length).toBeGreaterThan(5);
     expect(published.sections.some((s) => s.heading === "Outcome")).toBe(true);
   });
+
+  it("includes Wakefern process artifacts", () => {
+    const wakefern = getProject("wakefern-lpga");
+    expect(wakefern).toBeDefined();
+    const srcs = wakefern!.sections.flatMap((s) => s.media?.map((m) => m.src) ?? []);
+    expect(srcs).toEqual(
+      expect.arrayContaining([
+        "/images/wakefern/personas.png",
+        "/images/wakefern/sitemap.png",
+        "/images/wakefern/wireframes.jpg",
+        "/images/wakefern/moodboard-1.png",
+        "/images/wakefern/moodboard-2.jpg",
+      ]),
+    );
+  });
 });
 
 describe("featuredProjects", () => {

@@ -51,4 +51,21 @@ describe("MediaCarousel", () => {
     expect(slide?.className).toMatch(/min-w-full/);
     expect(slide?.className).toMatch(/basis-full/);
   });
+
+  it("gives landscape screens a taller well", () => {
+    const landscapeItems: MediaRef[] = [
+      {
+        src: "/images/wakefern/admin-home.png",
+        alt: "Admin home",
+        caption: "Admin home",
+        width: 2185,
+        height: 1457,
+      },
+    ];
+    const { container } = render(
+      <MediaCarousel items={landscapeItems} label="Admin dashboard and sponsor-management screens" />,
+    );
+    const slide = container.querySelector("figure");
+    expect(slide?.getAttribute("style")).toMatch(/46rem/);
+  });
 });

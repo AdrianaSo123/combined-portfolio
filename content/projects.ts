@@ -126,6 +126,16 @@ export const projects: Project[] = [
           "We also created a sitemap to organize the requested features and confirm our understanding of tournament terminology with stakeholders. User journeys and flows helped us explore how each audience might complete important tasks.",
           "These artifacts were useful because they made our assumptions visible. As we continued speaking with stakeholders, several of those assumptions changed.",
         ],
+        media: [
+          wakefernScreen("personas.png", "Provisional personas", {
+            width: 3200,
+            height: 2020,
+          }),
+          wakefernScreen("sitemap.png", "Initial sitemap", {
+            width: 3200,
+            height: 2019,
+          }),
+        ],
       },
       {
         kind: "custom",
@@ -133,6 +143,18 @@ export const projects: Project[] = [
         body: [
           "Our team did not begin with extensive knowledge of golf-event applications, so we reviewed comparable products to understand established conventions.",
           "I examined how golf applications organized schedules, tee times, scoreboards, player profiles, and event updates. I also studied map-based applications to understand patterns for markers, location categories, wayfinding, and location details. Additionally, I studied previous ShopRite apps to ensure our designs matched the company’s previous branding and felt like a seamless part of the ShopRite ecosystem.",
+        ],
+        media: [
+          wakefernScreen("moodboard-1.png", "Moodboard 1", {
+            width: 3200,
+            height: 2364,
+          }),
+          wakefernScreen("moodboard-2.jpg", "Moodboard 2", {
+            width: 3600,
+            height: 1775,
+          }),
+        ],
+        bodyAfter: [
           "This research helped me understand industry-familiar design patterns while identifying what needed to be adapted for the ShopRite LPGA Classic.",
         ],
       },
@@ -143,6 +165,12 @@ export const projects: Project[] = [
           "From the competitive analysis, I began wireframing the experience around the features that would matter most during the event.",
           "My team and I each produced a set of wireframes so we could compare different interpretations of the same product. We reviewed them together and selected the directions closest to the vision: a focused companion for the tournament rather than a dense catalog of information.",
           "Those wireframes became a shared starting point. They helped us align on structure before committing to higher-fidelity screens, and they made it easier to decide what to keep, combine, or leave out as the requirements continued to change.",
+        ],
+        media: [
+          wakefernScreen("wireframes.jpg", "Early wireframes", {
+            width: 3200,
+            height: 2056,
+          }),
         ],
       },
       {

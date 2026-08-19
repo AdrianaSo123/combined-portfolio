@@ -24,15 +24,20 @@ function Prose({ paragraphs }: { paragraphs: string[] }) {
 function AnnotationMedia({
   annotation,
   accent,
+  wide = false,
 }: {
   annotation: CaseStudyAnnotation;
   accent: string;
+  wide?: boolean;
 }) {
   const label = annotation.mediaLabel ?? annotation.heading;
   const shots = annotation.media ?? [];
+  const sizes = wide
+    ? "(max-width: 1100px) 100vw, 1100px"
+    : "(max-width: 1024px) 100vw, 58vw";
 
   if (shots.length > 1) {
-    return <MediaCarousel items={shots} label={label} />;
+    return <MediaCarousel items={shots} label={label} sizes={sizes} />;
   }
 
   const shot = shots[0];
@@ -45,8 +50,23 @@ function AnnotationMedia({
       accent={accent}
       ratio={landscape ? "16 / 10" : "4 / 5"}
       fit={shot ? "contain" : "cover"}
-      sizes="(max-width: 1024px) 100vw, 58vw"
+      sizes={sizes}
     />
+  );
+}
+
+function AnnotationCopy({ annotation }: { annotation: CaseStudyAnnotation }) {
+  return (
+    <>
+      <h3 className="font-display text-2xl leading-snug tracking-tight text-ink sm:text-3xl">
+        {annotation.heading}
+      </h3>
+      <div className="mt-4 space-y-3 text-base leading-relaxed text-ink/80">
+        {annotation.body.map((p) => (
+          <p key={p}>{p}</p>
+        ))}
+      </div>
+    </>
   );
 }
 
@@ -59,20 +79,29 @@ function AnnotationRow({
   reversed: boolean;
   accent: string;
 }) {
+  const landscape =
+    (annotation.media?.[0]?.width ?? 0) >= (annotation.media?.[0]?.height ?? 1);
+
+  if (landscape) {
+    return (
+      <div className="space-y-6">
+        <AnnotationMedia annotation={annotation} accent={accent} wide />
+        <div className="grid lg:grid-cols-12">
+          <div className="lg:col-span-7">
+            <AnnotationCopy annotation={annotation} />
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="grid min-w-0 items-center gap-8 lg:grid-cols-12 lg:gap-12">
       <div className={`min-w-0 lg:col-span-7 ${reversed ? "lg:order-2" : ""}`}>
         <AnnotationMedia annotation={annotation} accent={accent} />
       </div>
       <div className={`lg:col-span-5 ${reversed ? "lg:order-1" : ""}`}>
-        <h3 className="font-display text-2xl leading-snug tracking-tight text-ink sm:text-3xl">
-          {annotation.heading}
-        </h3>
-        <div className="mt-4 space-y-3 text-base leading-relaxed text-ink/80">
-          {annotation.body.map((p) => (
-            <p key={p}>{p}</p>
-          ))}
-        </div>
+        <AnnotationCopy annotation={annotation} />
       </div>
     </div>
   );
@@ -105,6 +134,28 @@ function NarrativeSection({
           )}
         </div>
       </div>
+      {section.media && section.media.length > 0 && (
+        <div className="mt-8 grid lg:grid-cols-12">
+          <div className="space-y-6 lg:col-span-8">
+            {section.media.map((m) => (
+              <figure key={m.src}>
+                <Media
+                  media={m}
+                  label={m.caption ?? project.name}
+                  accent={project.brand.accent}
+                  ratio={`${m.width} / ${m.height}`}
+                  sizes="(max-width: 1024px) 100vw, 58vw"
+                />
+                {m.caption ? (
+                  <figcaption className="mt-3 font-mono text-[0.65rem] uppercase tracking-[0.16em] text-muted-ink">
+                    {m.caption}
+                  </figcaption>
+                ) : null}
+              </figure>
+            ))}
+          </div>
+        </div>
+      )}
       {section.pairing && <PairingTable pairing={section.pairing} />}
       {section.bodyAfter && section.bodyAfter.length > 0 && (
         <div className="mt-8 grid lg:grid-cols-12 lg:gap-12">
@@ -113,11 +164,6 @@ function NarrativeSection({
           </div>
         </div>
       )}
-      {section.media?.map((m) => (
-        <div key={m.src} className="mt-6">
-          <Media media={m} label={project.name} accent={project.brand.accent} />
-        </div>
-      ))}
       {section.annotations && section.annotations.length > 0 && (
         <div className="mt-10 space-y-16">
           {section.annotations.map((note, i) => (

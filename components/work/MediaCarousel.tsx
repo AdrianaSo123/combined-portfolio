@@ -67,11 +67,11 @@ export function MediaCarousel({
             key={item.src}
             className="relative w-full min-w-full max-w-full shrink-0 grow-0 basis-full overflow-hidden snap-start"
             style={{
-              height: landscape ? "min(22rem, 42vw)" : "min(34rem, 72vw)",
+              height: landscape ? "min(46rem, 78vw)" : "min(34rem, 72vw)",
             }}
             aria-hidden={i !== index}
           >
-            <div className="absolute inset-[6%]">
+            <div className={landscape ? "absolute inset-[2%]" : "absolute inset-[6%]"}>
               <Image
                 src={item.src}
                 alt={item.alt}
