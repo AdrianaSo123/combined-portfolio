@@ -21,6 +21,7 @@ describe("ExperimentCard", () => {
     const links = screen.getAllByRole("link");
     expect(links).toHaveLength(1);
     expect(links[0].getAttribute("href")).toBe("/experiments/ux-synthesizer");
+    expect(screen.queryByText("Image pending")).toBeNull();
   });
 
   it("renders real external destinations plus the detail route", () => {

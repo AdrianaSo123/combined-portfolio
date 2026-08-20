@@ -8,10 +8,34 @@ import {
   type Project,
 } from "@/content/types";
 import { routes } from "@/lib/routes";
-import { Media } from "./MediaPlaceholder";
+import { liveMedia, Media } from "./MediaPlaceholder";
 import { MediaCarousel } from "./MediaCarousel";
 import { MetaList } from "@/components/system/MetaList";
 import { PairingTable } from "./PairingTable";
+
+const QUOTED = /“([^”]+)”|"([^"]+)"/g;
+
+function withQuotedEmphasis(text: string): ReactNode {
+  const nodes: ReactNode[] = [];
+  let last = 0;
+
+  for (const match of text.matchAll(QUOTED)) {
+    const index = match.index ?? 0;
+    if (index > last) nodes.push(text.slice(last, index));
+    nodes.push(
+      <strong
+        key={`${index}-${match[0]}`}
+        className="font-display text-[1.15em] font-semibold tracking-tight text-ink"
+      >
+        {match[0]}
+      </strong>,
+    );
+    last = index + match[0].length;
+  }
+
+  if (last < text.length) nodes.push(text.slice(last));
+  return nodes.length === 1 ? nodes[0] : nodes;
+}
 
 // Centered reading measure. Lines stay left-aligned; the column is what centers.
 function Reading({
@@ -43,7 +67,7 @@ function Prose({
       <ul className="list-disc space-y-3 pl-5 text-lg leading-relaxed text-ink/90 marker:text-ink/50">
         {paragraphs.map((p) => (
           <li key={p} className="pl-1">
-            {p}
+            {withQuotedEmphasis(p)}
           </li>
         ))}
       </ul>
@@ -52,7 +76,7 @@ function Prose({
   return (
     <div className="space-y-4 text-lg leading-relaxed text-ink/90">
       {paragraphs.map((p) => (
-        <p key={p}>{p}</p>
+        <p key={p}>{withQuotedEmphasis(p)}</p>
       ))}
     </div>
   );
@@ -68,18 +92,20 @@ function AnnotationMedia({
   well: "phone" | "desktop";
 }) {
   const label = annotation.mediaLabel ?? annotation.heading;
-  const shots = annotation.media ?? [];
+  const shots = liveMedia(annotation.media);
   const sizes =
     well === "desktop"
       ? "(max-width: 1024px) 100vw, 66vw"
       : "(max-width: 1024px) 100vw, 58vw";
+
+  if (shots.length === 0) return null;
 
   if (shots.length > 1) {
     return <MediaCarousel items={shots} label={label} sizes={sizes} well={well} />;
   }
 
   const shot = shots[0];
-  const landscape = shot ? shot.width >= shot.height : false;
+  const landscape = shot.width >= shot.height;
 
   return (
     <Media
@@ -87,7 +113,7 @@ function AnnotationMedia({
       label={label}
       accent={accent}
       ratio={landscape ? "16 / 10" : "4 / 5"}
-      fit={shot ? (shot.fit ?? "contain") : "cover"}
+      fit={shot.fit ?? "contain"}
       sizes={sizes}
     />
   );
@@ -101,7 +127,7 @@ function AnnotationCopy({ annotation }: { annotation: CaseStudyAnnotation }) {
       </h3>
       <div className="mt-4 space-y-3 text-base leading-relaxed text-ink/80">
         {annotation.body.map((p) => (
-          <p key={p}>{p}</p>
+          <p key={p}>{withQuotedEmphasis(p)}</p>
         ))}
       </div>
     </>
@@ -117,8 +143,16 @@ function AnnotationRow({
   reversed: boolean;
   accent: string;
 }) {
-  const landscape =
-    (annotation.media?.[0]?.width ?? 0) >= (annotation.media?.[0]?.height ?? 1);
+  const shots = liveMedia(annotation.media);
+  if (shots.length === 0) {
+    return (
+      <Reading>
+        <AnnotationCopy annotation={annotation} />
+      </Reading>
+    );
+  }
+
+  const landscape = shots[0].width >= shots[0].height;
 
   if (landscape) {
     return (
@@ -163,7 +197,7 @@ type BodyBlock =
 
 function interleaveBodyMedia(section: CaseStudySection): BodyBlock[] {
   const blocks: BodyBlock[] = [];
-  const media = section.media ?? [];
+  const media = liveMedia(section.media);
   let prose: string[] = [];
 
   const flush = () => {
@@ -172,7 +206,7 @@ function interleaveBodyMedia(section: CaseStudySection): BodyBlock[] {
     prose = [];
   };
 
-  section.body.forEach((p, i) => {
+  (section.body ?? []).forEach((p, i) => {
     prose.push(p);
     const inserts = media.filter((m) => m.after === i);
     if (inserts.length > 0) {
@@ -253,7 +287,7 @@ function NarrativeSection({
     -1,
   );
 
-  const bodyAfterIndex = section.bodyAfterIndex ?? section.body.length;
+  const bodyAfterIndex = section.bodyAfterIndex ?? (section.body ?? []).length;
 
   return (
     <section className="mx-auto mb-16 max-w-[1100px] px-5 sm:px-8">
@@ -374,15 +408,17 @@ export function CaseStudy({ project }: { project: Project }) {
         </div>
       </header>
 
-      <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
-        <Media
-          media={project.cover}
-          label={project.name}
-          accent={project.brand.accent}
-          ratio="16 / 9"
-          priority
-        />
-      </div>
+      {project.cover?.src ? (
+        <div className="mx-auto max-w-[1100px] px-5 sm:px-8">
+          <Media
+            media={project.cover}
+            label={project.name}
+            accent={project.brand.accent}
+            ratio="16 / 9"
+            priority
+          />
+        </div>
+      ) : null}
 
       {project.metrics && project.metrics.length > 0 && (
         <div className="mx-auto mt-12 grid max-w-[1100px] gap-6 px-5 sm:grid-cols-3 sm:px-8">

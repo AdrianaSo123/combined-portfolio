@@ -57,7 +57,7 @@ export function publishedProject(project: Project): Project {
   const sections = project.sections
     .map((section) => ({
       ...section,
-      body: liveParagraphs(section.body),
+      body: liveParagraphs(section.body ?? []),
       bodyAfter: section.bodyAfter ? liveParagraphs(section.bodyAfter) : undefined,
       callout:
         section.callout && !isPlaceholderText(section.callout)

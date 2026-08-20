@@ -16,7 +16,7 @@ export function ProjectFeature({
   return (
     <article className="grid items-center gap-6 border-t border-line-ink py-10 sm:py-12 lg:grid-cols-12 lg:gap-10">
       <div
-        className={`lg:col-span-5 ${reversed ? "lg:order-2 lg:col-start-8" : ""}`}
+        className={`${project.cover?.src ? "lg:col-span-5" : "lg:col-span-8"} ${reversed && project.cover?.src ? "lg:order-2 lg:col-start-8" : ""}`}
       >
         <h3 className="font-display text-3xl leading-none tracking-tight text-ink sm:text-4xl">
           {project.name}
@@ -40,21 +40,23 @@ export function ProjectFeature({
         </Link>
       </div>
 
-      <div className={`lg:col-span-6 ${reversed ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
-        <Link
-          href={routes.work(project.slug)}
-          aria-label={`View ${project.name} case study`}
-          className="block max-w-xl lg:max-w-none"
-        >
-          <Media
-            media={project.cover}
-            label={project.name}
-            accent={project.brand.accent}
-            ratio="3 / 2"
-            sizes="(max-width: 768px) 100vw, 42vw"
-          />
-        </Link>
-      </div>
+      {project.cover?.src ? (
+        <div className={`lg:col-span-6 ${reversed ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
+          <Link
+            href={routes.work(project.slug)}
+            aria-label={`View ${project.name} case study`}
+            className="block max-w-xl lg:max-w-none"
+          >
+            <Media
+              media={project.cover}
+              label={project.name}
+              accent={project.brand.accent}
+              ratio="3 / 2"
+              sizes="(max-width: 768px) 100vw, 42vw"
+            />
+          </Link>
+        </div>
+      ) : null}
     </article>
   );
 }

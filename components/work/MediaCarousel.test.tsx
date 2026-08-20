@@ -148,4 +148,41 @@ describe("MediaCarousel", () => {
       }),
     ).toBeDefined();
   });
+
+  it("does not render labeled image placeholders when media is missing", () => {
+    const project: Project = {
+      slug: "ai-chat-research",
+      index: "03",
+      name: "AI + Chat Research",
+      subtitle: "Human–AI interaction study",
+      oneLiner: "A qualitative study.",
+      disciplines: ["Research"],
+      year: 2026,
+      status: "research",
+      role: "Lead UX Researcher",
+      demonstrates: "I research how people actually experience AI.",
+      brand: { accent: "#c8102e" },
+      cover: { src: "", alt: "cover", width: 1800, height: 1200 },
+      gallery: [],
+      featured: true,
+      sections: [
+        {
+          kind: "custom",
+          heading: "What we learned",
+          body: [],
+          annotations: [
+            {
+              heading: "Understanding did not create motivation",
+              body: ["The participant understood most responses."],
+            },
+          ],
+        },
+      ],
+    };
+
+    render(<CaseStudy project={project} />);
+
+    expect(screen.queryByText("IMAGE")).toBeNull();
+    expect(screen.getByRole("heading", { name: "Understanding did not create motivation" })).toBeDefined();
+  });
 });

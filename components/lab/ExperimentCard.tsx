@@ -19,7 +19,7 @@ export function ExperimentCard({
   return (
     <article className="grid items-center gap-6 border-t border-line-ink py-10 sm:py-12 lg:grid-cols-12 lg:gap-10">
       <div
-        className={`lg:col-span-5 ${reversed ? "lg:order-2 lg:col-start-8" : ""}`}
+        className={`${experiment.media?.src ? "lg:col-span-5" : "lg:col-span-8"} ${reversed && experiment.media?.src ? "lg:order-2 lg:col-start-8" : ""}`}
       >
         <p className="font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-ink">
           LAB / {experiment.index}
@@ -56,8 +56,8 @@ export function ExperimentCard({
         </div>
       </div>
 
-      <div className={`lg:col-span-6 ${reversed ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
-        {experiment.media && experiment.media.src ? (
+      {experiment.media?.src ? (
+        <div className={`lg:col-span-6 ${reversed ? "lg:order-1 lg:col-start-1" : "lg:col-start-7"}`}>
           <Link
             href={detailHref}
             aria-label={`View ${experiment.name} details`}
@@ -72,12 +72,8 @@ export function ExperimentCard({
               sizes="(max-width: 768px) 100vw, 42vw"
             />
           </Link>
-        ) : (
-          <div className="flex aspect-[3/2] w-full max-w-xl items-center justify-center bg-cream-deep font-mono text-[0.7rem] uppercase tracking-[0.2em] text-muted-ink lg:max-w-none">
-            Image pending
-          </div>
-        )}
-      </div>
+        </div>
+      ) : null}
     </article>
   );
 }

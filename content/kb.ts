@@ -33,7 +33,7 @@ export const knowledgeBase: KBEntry[] = [
     id: "ai-research-1",
     topic: "ai-research",
     kind: "project",
-    text: "Adriana researches conversational AI and human-AI interaction patterns, and what they imply for AI product design.",
+    text: "Adriana led a qualitative ChatGPT study with one older adult, finding that understanding responses did not create motivation to return. Barriers included knowing what to ask, unclear voice interaction states, and trust gaps around language capability and AI accuracy warnings.",
     destinations: [
       { label: "AI + CHAT RESEARCH", href: routes.work("ai-chat-research"), kind: "work" },
     ],
